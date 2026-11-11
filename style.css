@@ -788,6 +788,9 @@ body.page-about footer .legal a,body.page-case .site-foot .legal a{display:inlin
 
 body.page-home header nav .sound:hover{text-decoration:none;color:var(--color-text)}
 
+/* Nach einem Seitenwechsel bekommt der Inhalt den Fokus (für Tastatur und Screenreader), ohne sichtbaren Rahmen */
+[data-softfocus]:focus{outline:none}
+
 /* ---------- Ton-Schalter in der Navigation: Text wie die anderen Punkte, „an“ in voller Textfarbe ---------- */
 html body header nav .sound[aria-checked="true"],html body .h3-top nav .sound[aria-checked="true"]{color:var(--color-text)}
 

@@ -93,7 +93,7 @@
       if (target) target.scrollIntoView(); else window.scrollTo(0, 0);
       // Fokus auf den Inhalt, damit Tastatur und Screenreader auf der neuen Seite beginnen
       const main = document.getElementById('inhalt') || document.getElementById('case') || document.querySelector('main');
-      if (main) { if (!main.hasAttribute('tabindex')) main.setAttribute('tabindex', '-1'); main.focus({ preventScroll: true }); }
+      if (main) { if (!main.hasAttribute('tabindex')) main.setAttribute('tabindex', '-1'); main.setAttribute('data-softfocus', ''); main.focus({ preventScroll: true }); }
     } catch (e) {
       console.warn('Seitenwechsel ohne Neuladen nicht möglich, lade normal:', e);
       location.href = url;
