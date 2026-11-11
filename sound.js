@@ -16,6 +16,7 @@
    läuft einmal durch und blendet beim Seitenwechsel weich in die Musik der nächsten Seite über. */
 (function () {
   let ctx = null, on = false, noise = null, bedGain = null, bedFilter = null;
+  let musicBus = null, analyser = null, freq = null;   // Musik läuft über einen Bus mit „Zuhörer“ für den Beat
   let labels = [];
   let gestured = false;    // gab es in dieser Sitzung schon einen Klick, Tipp oder Tastendruck?
   // Safari meldet manchmal „running“, spielt aber vor dem ersten Klick nichts ab: deshalb zählt erst die Geste
@@ -40,6 +41,9 @@
     bedFilter = ctx.createBiquadFilter(); bedFilter.type = 'bandpass'; bedFilter.frequency.value = 2600; bedFilter.Q.value = 0.9;
     bedGain = ctx.createGain(); bedGain.gain.value = 0;
     src.connect(bedFilter).connect(bedGain).connect(ctx.destination); src.start();
+    musicBus = ctx.createGain(); musicBus.connect(ctx.destination);
+    analyser = ctx.createAnalyser(); analyser.fftSize = 1024; analyser.smoothingTimeConstant = 0.35;
+    musicBus.connect(analyser); freq = new Uint8Array(analyser.frequencyBinCount);
   }
 
   function burst(freq, vol, len, q) {
@@ -102,7 +106,7 @@
     const node = ctx.createBufferSource(); node.buffer = buf;
     const gain = ctx.createGain(); const t = ctx.currentTime;
     gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(MUSIC_VOL, t + FADE);
-    node.connect(gain).connect(ctx.destination); node.start(t);
+    node.connect(gain).connect(musicBus || ctx.destination); node.start(t);
     const m = { src, node, gain, stopping: false }; music = m; playing.add(m);
     node.onended = () => { playing.delete(m); if (music === m) { music = null; if (!m.stopping) finishedSrc = m.src; } };
   }
@@ -111,6 +115,14 @@
     get on() { return on; },
     get musicSrc() { return music ? music.src : ''; },   // welche Seitenmusik gerade läuft (zum Prüfen)
     get musicOn() { return musicOn; },
+    // Bass-Lautstärke der laufenden Musik, 0 … 1 (für Elemente, die im Beat pulsieren)
+    level() {
+      if (!analyser || !music || !ctx || ctx.state !== 'running') return 0;
+      analyser.getByteFrequencyData(freq);
+      const hz = ctx.sampleRate / analyser.fftSize, a = Math.max(1, Math.round(40 / hz)), b = Math.max(a + 1, Math.round(160 / hz));
+      let s = 0; for (let i = a; i <= b; i++) s += freq[i];
+      return s / ((b - a + 1) * 255);
+    },
     // Effekt-Klänge (Startseite, Zahlen, Klicks) an/aus
     set(v) {
       on = !!v;

@@ -761,6 +761,35 @@ body.page-case .h3-top nav a,body.page-case .h3-top nav .sound{white-space:nowra
 body.page-case .h3-top nav{gap:0;font-size:.68rem}
 body.page-case .h3-top nav a,body.page-case .h3-top nav .sound{padding:0 1px}
 }
+body.page-case .demo-btn{display:inline-flex;align-items:center;gap:.45em;min-height:44px;padding:0 4px;border:0;border-radius:0;background:none;color:var(--rs-ink);font-family:var(--font-mono);font-size:.9rem;cursor:pointer}
+body.page-case .demo-btn:hover{background:none;color:var(--rs-ink)}
+body.page-case .demo-btn i{width:0;height:0;border-left:8px solid currentColor;border-top:5px solid transparent;border-bottom:5px solid transparent;transition:border-left-color .2s}
+body.page-case .demo-btn:hover i{border-left-color:var(--rs-glow)}
+body.page-case .feat-img,body.page-case .fv-dev,body.page-case .c-ic,body.page-case .cp-ic{scale:calc(1 + var(--beat, 0) * .035)}
+body.page-case .feat-img,body.page-case .fv-dev,body.page-case .ba-list img,body.page-case .vi-photo{transition:transform .5s var(--ease)}
+@media (hover:hover){
+body.page-case .feat:hover .feat-img,body.page-case .flowvid:hover .fv-dev,body.page-case .ba-list figure:hover img,body.page-case .vi-img:hover .vi-photo{transform:scale(1.03)}
+}
+body.page-case .feat-img:active,body.page-case .ba-list img:active{transform:scale(1.03)}
+body.page-case .rail{position:fixed;z-index:30;left:14px;top:50%;translate:0 -50%;display:flex;flex-direction:column;gap:2px;padding:8px 6px;border-radius:14px;box-shadow:var(--shadow-float);background:rgba(201,202,205,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-family:var(--font-mono);font-size:.78rem;opacity:0;pointer-events:none;transition:opacity .3s}
+body.page-case .rail.on{opacity:1;pointer-events:auto}
+body.page-case .rail a{display:flex;align-items:center;gap:10px;min-height:32px;padding:0 6px;color:var(--rs-ink);text-decoration:none;border-radius:8px}
+body.page-case .rail i{flex:none;width:8px;height:8px;border-radius:50%;background:var(--rs-ink);opacity:.35}
+body.page-case .rail span{max-width:0;overflow:hidden;white-space:nowrap;transition:max-width .3s var(--ease)}
+body.page-case .rail:hover span,body.page-case .rail:focus-within span,body.page-case .rail a[aria-current] span{max-width:14em}
+body.page-case .rail a[aria-current]{color:var(--rs-ink)}
+body.page-case .rail a[aria-current] i{opacity:1;background:var(--rs-glow);scale:calc(1 + var(--beat, 0) * .9)}
+body.page-case .rail a:hover{color:var(--rs-ink)}
+body.page-case .rail a:focus-visible{outline:2px solid var(--color-focus);outline-offset:2px}
+@media (max-width:900px){
+body.page-case .rail{left:0;right:0;top:0;translate:none;flex-direction:row;justify-content:center;gap:0;padding:4px 8px;border-radius:0}
+body.page-case .rail a{min-height:36px;padding:0 6px}
+body.page-case .rail span{max-width:0}
+body.page-case .rail a[aria-current] span{max-width:9em}
+}
+@media (prefers-reduced-motion:reduce){
+body.page-case .feat-img,body.page-case .fv-dev,body.page-case .ba-list img,body.page-case .vi-photo,body.page-case .rail,body.page-case .rail span{transition:none}
+}
 
 /* ---------- 6 · Impressum und Datenschutz (dunkel wie die Startseite) ---------- */
 html:has(> body.page-legal){background:var(--surface-dark)}
