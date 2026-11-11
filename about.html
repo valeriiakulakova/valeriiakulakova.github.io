@@ -159,7 +159,7 @@
     const {cells,width}=PixelFont.cellsFor(activeYear);
     const area=narrow?W*0.8:W*0.4;
     const cs=Math.min(area/width,H*0.2/7);
-    const x0=(narrow?W/2:W*0.26)-width*cs/2, y0=H*0.42-3.5*cs;
+    const x0=(narrow?W/2:W*0.26)-width*cs/2, y0=(narrow?H*0.3:H*0.42)-3.5*cs;
     movers.forEach((i,k)=>{
       const c=cells[k%cells.length];
       targets[k]=[x0+(c[0]+jx[i]*0.8)*cs, y0+(c[1]+jy[i]*0.8)*cs];
@@ -187,7 +187,7 @@
     const ca=Math.cos(a), sa=Math.sin(a);
     pickYear();
     ctx.clearRect(0,0,W,H);
-    const fadeAll=narrow?1-0.65*clamp(scrollY/(H*0.8)):1;
+    const fadeAll=narrow?0.5-0.3*clamp(scrollY/(H*0.8)):1;   // Handy: Porträt liegt hinter dem Text, deshalb heller
     for(let pass=0;pass<2;pass++){
       ctx.fillStyle=pass?orange:ink;
       for(let i=0;i<N;i++){
@@ -204,7 +204,8 @@
         else{cx[i]+=(tx-cx[i])*(flying?0.08:0.06); cy[i]+=(ty-cy[i])*(flying?0.08:0.06);}
         const fade=(!flying&&hy[i]>CH*0.82)?Math.max(0,(CH-hy[i])/(CH*0.18)):1;
         if(fade<=0) continue;
-        ctx.globalAlpha=0.9*fade*fadeAll*(0.75+0.25*persp);
+        // Handy: Porträt tritt hinter dem Text zurück, die orange Jahreszahl bleibt kräftig
+        ctx.globalAlpha=0.9*fade*(flying?1:fadeAll)*(0.75+0.25*persp);
         ctx.fillRect(cx[i],cy[i],dot,dot);
       }
     }

@@ -1,5 +1,5 @@
 /* Klänge, im Browser erzeugt (Web Audio), keine Audiodateien.
-   Standard: aus. Die Wahl „an/aus“ merkt sich der Browser für die anderen Seiten.
+   Standard: an. Die Wahl „an/aus“ merkt sich der Browser für die anderen Seiten.
    Browser erlauben Ton auf jeder Seite erst nach einem Klick, Tipp oder Tastendruck
    (Scrollen zählt nicht). Ist der Ton an, aber noch gesperrt, zeigt der Schalter
    „( tap for sound )“; der erste Klick irgendwo auf der Seite startet ihn.
@@ -107,7 +107,8 @@
   window.addEventListener('pageshow', () => Sound.resume());
 
   // Gemerkte Wahl aus einer anderen Seite. Der Ton selbst startet erst mit dem ersten Klick oder Tipp.
-  try { if (localStorage.getItem('sound') === '1') on = true; } catch (e) {}
+  // Standard: an. Nur wer selbst „off“ gewählt hat, bleibt stumm.
+  try { on = localStorage.getItem('sound') !== '0'; } catch (e) { on = true; }
 
   // Schalter „( sound off / on )“; „( tap for sound )“, solange der Browser den Ton noch sperrt
   document.querySelectorAll('[data-sound-toggle]').forEach(btn => {
