@@ -43,6 +43,7 @@ body.page-home{
   --color-live:#4ade80;
   --color-panel:#1b1b20;
   --color-panel-line:#3a3b43;
+  --color-claim-bg:rgba(37,37,43,.86);
   --shadow-panel:0 24px 60px rgba(0,0,0,.35);
   --color-key:#9fc3ff;
   --color-string:#f4b07a;
@@ -147,6 +148,10 @@ body.page-home .intro{position:absolute;left:var(--gutter);right:var(--gutter);t
 body.page-home .intro p{max-width:28rem;font-size:clamp(1rem,1.2vw,1.2rem);line-height:1.45;color:var(--color-text)}
 body.page-home .intro h1{margin:0;font-size:1rem;width:100%;display:flex;justify-content:space-between;align-items:center}
 body.page-home .intro [data-pixel]{display:block;height:clamp(14px,1.5vw,22px)}
+body.page-home .intro{flex-direction:column;align-items:stretch}
+body.page-home .claim{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;margin-top:clamp(14px,2vh,22px)}
+body.page-home .intro .claim-txt{max-width:21ch;font-size:clamp(1rem,1.25vw,1.2rem);line-height:1.4;color:var(--color-text)}
+body.page-home .intro .claim-role{font-family:var(--font-mono);font-size:.85rem;color:var(--color-muted);text-align:right;white-space:nowrap}
 body.page-home .hint{position:absolute;right:var(--gutter);bottom:clamp(24px,5vh,48px);z-index:3;font-size:.95rem;color:var(--color-text);display:flex;align-items:center;gap:.7rem;font-family:var(--font-mono);text-transform:lowercase;transition:opacity .2s linear}
 body.page-home .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 body.page-home .typed{font-size:clamp(1.05rem,1.35vw,1.35rem)!important;max-width:30rem!important}
@@ -167,6 +172,9 @@ body.page-home .stage.leaving header,body.page-home .stage.leaving canvas{opacit
 body.page-home header{grid-template-columns:1fr auto}
 body.page-home .intro{top:auto;bottom:clamp(64px,11vh,96px);transform:none}
 body.page-home .intro [data-pixel]{height:14px}
+body.page-home .claim{flex-direction:column;gap:8px;margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--color-claim-bg)}
+body.page-home .intro .claim-txt{font-size:.95rem;max-width:32ch}
+body.page-home .claim-role{text-align:left}
 body.page-home .hint{display:none}
 }
 @media (prefers-reduced-motion:reduce){
