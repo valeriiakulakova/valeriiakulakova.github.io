@@ -14,7 +14,7 @@
 <a class="skip" href="#inhalt">Zum Inhalt springen</a>
 
 <header>
-  <nav aria-label="Hauptnavigation"><a href="index.html">( home )</a><a href="case-resway.html">( projects )</a><a href="about.html">( about )</a><a href="contact.html" aria-current="page">( contact )</a></nav>
+  <nav aria-label="Hauptnavigation"><a href="index.html">( start )</a><a href="case-resway.html">( projekte )</a><a href="about.html">( über mich )</a><a href="contact.html" aria-current="page">( kontakt )</a></nav>
 </header>
 
 <main id="inhalt" class="map">
@@ -24,7 +24,7 @@
   <div class="hub">
     <h1 class="sr">Kontakt: Hire me</h1>
     <canvas id="hireDots" aria-hidden="true"></canvas>
-    <p class="hub-status"><i aria-hidden="true"></i>open to roles · munich</p>
+    <p class="hub-status"><i aria-hidden="true"></i>offen für neue Stellen · München / remote</p>
   </div>
 
   <ul class="nodes" aria-label="Kontaktwege">
@@ -36,7 +36,7 @@
       </a>
       <button type="button" class="node-copy" data-copy="valeriikulakova@gmail.com">
         <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
-        <span class="copy-txt">( copy )</span>
+        <span class="copy-txt">( kopieren )</span>
       </button>
     </li>
     <li class="node n-in" data-side="l">
@@ -48,14 +48,14 @@
       </a>
     </li>
     <li class="node n-cv" data-side="r">
-      <span class="node-cap">résumé (pdf)</span>
+      <span class="node-cap">lebenslauf (pdf)</span>
       <a class="node-main" href="media/valeriia-kulakova-cv.pdf" download>
         <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg>
         <span>Lebenslauf herunterladen</span>
       </a>
     </li>
     <li class="node n-case" data-side="r">
-      <span class="node-cap">projects</span>
+      <span class="node-cap">projekte</span>
       <a class="node-main" href="case-resway.html">
         <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>
         <span>Case ReSway ansehen</span>
@@ -78,12 +78,12 @@
   btn.addEventListener('click', async () => {
     let ok=false;
     try { await navigator.clipboard.writeText(btn.dataset.copy); ok=true; } catch(e) {}
-    txt.textContent = ok ? '( copied ✓ )' : '( copy )';
+    txt.textContent = ok ? '( kopiert ✓ )' : '( kopieren )';
     btn.classList.toggle('done', ok);
     msg.textContent = ok ? 'E-Mail-Adresse kopiert.' : 'Kopieren ging nicht. Bitte die Adresse markieren.';
     if (ok && window.Sound) Sound.tick();
     clearTimeout(btn._t);
-    btn._t = setTimeout(() => { txt.textContent='( copy )'; btn.classList.remove('done'); msg.textContent=''; }, 2400);
+    btn._t = setTimeout(() => { txt.textContent='( kopieren )'; btn.classList.remove('done'); msg.textContent=''; }, 2400);
   });
 })();
 

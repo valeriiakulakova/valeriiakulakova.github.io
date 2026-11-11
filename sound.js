@@ -2,7 +2,7 @@
    Standard: an. Die Wahl „an/aus“ merkt sich der Browser für die anderen Seiten.
    Browser erlauben Ton auf jeder Seite erst nach einem Klick, Tipp oder Tastendruck
    (Scrollen zählt nicht). Ist der Ton an, aber noch gesperrt, zeigt der Schalter
-   „( tap for sound )“; der erste Klick irgendwo auf der Seite startet ihn.
+   „ton an“; der erste Klick irgendwo auf der Seite startet ihn.
    Nutzung:
      Sound.key()        kurzer Tastenklick beim Tippen
      Sound.tick()       kleiner Ton für Buttons
@@ -195,7 +195,7 @@
     if (document.hidden) { if (ctx.state === 'running') ctx.suspend().catch(() => {}); }
     else Sound.resume();
   });
-  // „sound on/off“ gilt für alle offenen Tabs dieser Website gleichzeitig
+  // „ton an/aus“ gilt für alle offenen Tabs dieser Website gleichzeitig
   listen(window, 'storage', e => {
     if (e.key !== 'sound') return;
     const v = e.newValue !== '0';
@@ -212,7 +212,7 @@
 
   // Ton-Schalter als kleine Pille unten links, auf allen Seiten gleich.
   // Wird einmal gebaut und nach einem Seitenwechsel nur in die neue Seite umgehängt (bindToggles).
-  // Balken bewegen sich, wenn der Ton an ist; aus: ruhige Punkte und „sound off“ (zwei Merkmale, nicht nur Farbe).
+  // Balken bewegen sich, wenn der Ton an ist; aus: ruhige Punkte und „ton aus“ (zwei Merkmale, nicht nur Farbe).
   let pill = null, pillText = null;
   function buildPill() {
     pill = document.createElement('button');
@@ -227,7 +227,7 @@
     });
     listen(window, 'click', () => { later(() => { firstGesture = false; }, 0); }, { passive: true });
     labels.push(() => {
-      const txt = on ? 'sound on' : 'sound off';
+      const txt = on ? 'ton an' : 'ton aus';
       if (pillText.textContent !== txt) pillText.textContent = txt;   // nur ändern, wenn nötig (Safari verwirft sonst Klicks)
       pill.setAttribute('aria-checked', on);
       pill.classList.toggle('on', on);
