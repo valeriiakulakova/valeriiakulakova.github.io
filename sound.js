@@ -69,7 +69,7 @@
   const buffers = {};            // geladene Musik, je Datei einmal
   let music = null;              // { src, node, gain } – das Stück der aktuellen Seite
   const playing = new Set();     // alle gestarteten Musikstücke, damit beim Wechsel sicher jedes endet
-  let musicOn = false;          // Musik eingeschaltet? Gilt für alle Seiten, bis man sie wieder ausschaltet
+  let musicOn = true;           // Seitenmusik: Standard an, gilt für alle Seiten, bis man sie ausschaltet
   let musicGen = 0;              // jede Seite bekommt eine Nummer; ältere Ladevorgänge werden verworfen
   const later = (fn, ms) => (window.SoftNav ? SoftNav.later(fn, ms) : setTimeout(fn, ms));
   async function loadBuffer(src) {
@@ -118,6 +118,7 @@
     // Musik der aktuellen Seite an/aus (Schalter auf About, Case, Kontakt)
     music(v) {
       musicOn = !!v;
+      try { localStorage.setItem('music', musicOn ? '1' : '0'); } catch (e) {}
       if (musicOn) Sound.resume(true);
       syncMusic(); refresh();
     },
@@ -131,7 +132,8 @@
           try { const b = ctx.createBuffer(1, 1, 22050), s = ctx.createBufferSource(); s.buffer = b; s.connect(ctx.destination); s.start(0); } catch (e) {}
         }
       }
-      if (gestured && ctx && ctx.state !== 'running') ctx.resume().then(refresh).catch(() => {});
+      if (gestured && ctx && ctx.state !== 'running') ctx.resume().then(() => { refresh(); if (!music) syncMusic(); }).catch(() => {});
+      else if (fromGesture && ctx && !music) syncMusic();   // erster Klick auf einer Musik-Seite: Stück starten
       refresh();
     },
     // Nach einem Seitenwechsel ohne Neuladen: altes Stück aus, Stück der neuen Seite an (wenn Musik eingeschaltet)
@@ -171,12 +173,12 @@
   listen(window, 'pageshow', () => Sound.resume());
 
   // Gemerkte Wahl aus einer anderen Seite. Standard: an. Nur wer selbst „off“ gewählt hat, bleibt stumm.
-  try { on = localStorage.getItem('sound') !== '0'; } catch (e) { on = true; }
+  try { on = localStorage.getItem('sound') !== '0'; musicOn = localStorage.getItem('music') !== '0'; } catch (e) { on = true; musicOn = true; }
 
   // Schalter oben in der Navigation
   // - Seite ohne Musik (Startseite): Effekt-Klänge, „( sound on )“ / „( sound off )“, Standard an
-  // - Seite mit Musik (About, Case, Kontakt): „( tap for sound )“ schaltet Musik ein, danach spielt jede Seite ihr Stück;
-  //   „( sound on )“ antippen schaltet die Musik überall aus
+  // - Seite mit Musik (About, Case, Kontakt): Standard an, jede Seite spielt ihr eigenes Stück (immer nur eins);
+  //   „( sound on )“ antippen schaltet die Musik überall aus, „( sound off )“ wieder an
   // Nach einem Seitenwechsel ohne Neuladen ruft nav.js das erneut für die neuen Schalter auf.
   Sound.bindToggles = function () {
     labels = [];
@@ -185,9 +187,7 @@
         const short = window.matchMedia('(max-width:700px)').matches;
         const hasMusic = !!(document.body && document.body.dataset.music);
         const active = hasMusic ? musicOn : on;
-        btn.textContent = active ? (short ? '( ♪ on )' : '( sound on )')
-          : hasMusic ? (short ? '( ♪ tap )' : '( tap for sound )')
-          : (short ? '( ♪ off )' : '( sound off )');
+        btn.textContent = active ? (short ? '( ♪ on )' : '( sound on )') : (short ? '( ♪ off )' : '( sound off )');
         btn.setAttribute('aria-pressed', active);
         btn.setAttribute('aria-label', hasMusic ? (active ? 'Musik dieser Seite stoppen' : 'Musik dieser Seite abspielen') : (active ? 'Ton ausschalten' : 'Ton einschalten'));
       };
