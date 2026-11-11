@@ -236,24 +236,6 @@
   </ol>
 </section>
 
-<!-- Figur-Band -->
-<section class="fig-band" aria-label="Die ReSway-Figur">
-  <div class="fb-marquee" aria-hidden="true"><span>restart, not reset · klein anfangen · du warst da · zurückkommen zählt · </span><span>restart, not reset · klein anfangen · du warst da · zurückkommen zählt · </span></div>
-  <div class="panel" id="panel" role="img" aria-label="Die ReSway-Figur: eine Linie mit Kopf. Sie kommt aus der Ecke, schläft, wacht auf und folgt der Maus.">
-        <svg id="stage" aria-hidden="true">
-          <path id="figBody" fill="none" stroke="#303030" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
-          <g id="head">
-            <circle r="24" fill="#edff8c" stroke="#303030" stroke-width="5"/>
-            <g id="eClosed"><rect x="-11" y="-2" width="8" height="2.5" rx="1.25" fill="#303030"/><rect x="3" y="-2" width="8" height="2.5" rx="1.25" fill="#303030"/></g>
-            <g id="eOpen"><circle cx="-7" cy="-3" r="3" fill="#303030"/><circle cx="7" cy="-3" r="3" fill="#303030"/></g>
-            <path id="mouth" d="M -8 5 c 5.33 4.67 10.67 4.67 16 0" fill="none" stroke="#303030" stroke-width="2.5" stroke-linecap="round"/>
-          </g>
-        </svg>
-      </div>
-  <p class="fb-cap label">Die Figur folgt der Maus.</p>
-</section>
-
-<!-- Kontakt -->
 </main>
 
 <script>
@@ -303,114 +285,6 @@
 </script>
 
 <script src="sound.js"></script>
-<script>
-(function(){
-  const $=id=>document.getElementById(id);
-  const panel=$('panel'), svg=$('stage'), body=$('figBody'), head=$('head');
-  const eOpen=$('eOpen'), eClosed=$('eClosed'), mouth=$('mouth');
-  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let W=0,H=0,GROUND=0,L=300;
-  function size(){W=panel.clientWidth;H=panel.clientHeight;svg.setAttribute('viewBox',`0 0 ${W} ${H}`);GROUND=H*.74;L=Math.min(320,W*.55);}
-  size(); addEventListener('resize',size);
-  if(window.ResizeObserver) new ResizeObserver(size).observe(panel);
-
-  /* Wie eine Schlange: Der Kopf lenkt, der Körper liegt auf seiner Spur.
-     Damit sie sich nicht verknotet, kann der Kopf nur in Bögen lenken (kleinster Kreis R),
-     nie auf der Stelle umkehren. Kleine Kreise der Maus werden so zu runden Schleifen. */
-  const N=30, R=62;
-  const Hd={x:0,y:0,a:Math.PI,v:0}; let trail=[], wig=0, wigAmp=0;
-  function resetTrail(){trail=[];for(let i=0;i<=60;i++)trail.push({x:Hd.x-Math.cos(Hd.a)*i*L/50,y:Hd.y-Math.sin(Hd.a)*i*L/50});}
-  function pushTrail(){const t=trail[0];if(Math.hypot(Hd.x-t.x,Hd.y-t.y)>1.5)trail.unshift({x:Hd.x,y:Hd.y});
-    let len=0;for(let i=1;i<trail.length;i++){len+=Math.hypot(trail[i].x-trail[i-1].x,trail[i].y-trail[i-1].y);if(len>L+30){trail.length=i+1;break;}}}
-  function bodyPoints(){
-    const sp=L/(N-1), out=[{x:Hd.x,y:Hd.y}]; let i=0, need=sp, prev=out[0];
-    while(out.length<N&&i<trail.length){const c=trail[i];const d=Math.hypot(c.x-prev.x,c.y-prev.y);
-      if(d>=need&&d>0){const k=need/d;prev={x:prev.x+(c.x-prev.x)*k,y:prev.y+(c.y-prev.y)*k};out.push(prev);need=sp;}
-      else{need-=d;prev=c;i++;}}
-    while(out.length<N){const a=out[out.length-1],b=out[out.length-2]||a;out.push({x:a.x+(a.x-b.x),y:a.y+(a.y-b.y)});}
-    return out;
-  }
-  function pathOf(p){
-    let d=`M${p[0].x.toFixed(1)},${p[0].y.toFixed(1)}`;
-    for(let i=0;i<p.length-1;i++){const a=p[i-1]||p[i],b=p[i],c=p[i+1],e=p[i+2]||c;
-      d+=` C${(b.x+(c.x-a.x)/6).toFixed(1)},${(b.y+(c.y-a.y)/6).toFixed(1)} ${(c.x-(e.x-b.x)/6).toFixed(1)},${(c.y-(e.y-b.y)/6).toFixed(1)} ${c.x.toFixed(1)},${c.y.toFixed(1)}`;}
-    return d;
-  }
-  const wrap=a=>Math.atan2(Math.sin(a),Math.cos(a));
-
-  // Lenken zum Ziel: Tempo bremst vor dem Ziel, Drehung ist durch R begrenzt, dazu Schlängeln
-  function steer(tx,ty,vmax,wiggle,dt,stopDist=26){
-    const dx=tx-Hd.x, dy=ty-Hd.y, dist=Math.hypot(dx,dy);
-    const want=dist<stopDist?0:Math.min(vmax,(dist-stopDist)*3+20);
-    Hd.v+=(want-Hd.v)*Math.min(1,dt*(want<Hd.v?7:4));
-    const delta=dist<1?0:wrap(Math.atan2(dy,dx)-Hd.a);
-    const maxTurn=(Hd.v/R)*dt;          // drehen geht nur in Bewegung → keine Kehrtwende auf der Stelle
-    Hd.a+=Math.max(-maxTurn,Math.min(maxTurn,delta));
-    wigAmp+=((wiggle*Math.min(1,Hd.v/120)*Math.min(1,dist/140))-wigAmp)*Math.min(1,dt*4);
-    wig+=Hd.v*dt/34;
-    const a=Hd.a+Math.sin(wig)*wigAmp;
-    Hd.x+=Math.cos(a)*Hd.v*dt; Hd.y+=Math.sin(a)*Hd.v*dt;
-    return dist<stopDist+4&&Hd.v<15;
-  }
-
-  /* Ohne Maus: aus der Ecke schauen → reinkriechen → schlafen → aufwachen → weiter und raus */
-  let state='', t=0, face='open', look={x:0,y:0}, lookT={x:0,y:0}, mouse=null, gone=0, side=1;
-  function go(s){state=s;t=0;}
-  function start(){
-    side=Math.random()<.5?1:-1;                       // 1 = kommt von rechts
-    Hd.x=side>0?W+30:-30; Hd.y=GROUND; Hd.a=side>0?Math.PI:0; Hd.v=0; wigAmp=0;
-    resetTrail(); face='open'; go('peek');
-  }
-  panel.addEventListener('pointermove',e=>{const r=panel.getBoundingClientRect();mouse={x:e.clientX-r.left,y:e.clientY-r.top};});
-  panel.addEventListener('pointerleave',()=>{mouse=null;});
-  let blinkAt=2, blinkT=-1;
-
-  function update(dt){
-    t+=dt;
-    if(mouse&&!['follow','startle','wait'].includes(state)) go(state==='sleep'?'startle':'follow');
-    const fx=Math.cos(Hd.a), fy=Math.sin(Hd.a);
-    switch(state){
-      case 'peek': if(steer(side>0?W-60:60,GROUND,70,0,dt,4)) go('look'); lookT={x:fx,y:fy}; break;
-      case 'look': steer(Hd.x,Hd.y,0,0,dt); lookT={x:Math.sin(t*4)>0?fx:-fx*.5,y:-.5}; if(t>1.1) go('in'); break;
-      case 'in':   if(steer(W/2-side*L/2,GROUND,160,.55,dt,6)){face='closed';go('sleep');} lookT={x:fx,y:fy}; break;
-      case 'sleep':steer(Hd.x,Hd.y,0,0,dt); face='closed'; if(t>2.8){face='open';go('wake');} break;
-      case 'startle': face='open'; steer(Hd.x,Hd.y,0,0,dt); if(t>.25) go('follow'); break;
-      case 'wake': steer(Hd.x+fx*40,GROUND-70,60,0,dt,4); lookT={x:fx*.5,y:-.6}; if(t>1) go('look2'); break;
-      case 'look2':steer(Hd.x,Hd.y,0,0,dt); lookT={x:Math.sin(t*5)>0?1:-1,y:-.3}; if(t>1) go('out'); break;
-      case 'out':{ const ex=fx<0?-L-80:W+L+80; if(steer(ex,GROUND,180,.55,dt,6)||Hd.x<-L-40||Hd.x>W+L+40) go('wait'); lookT={x:fx,y:fy}; break;}
-      case 'wait': if(t>.9) start(); break;
-      case 'follow':{
-        if(!mouse){gone+=dt; steer(Hd.x+fx*10,Hd.y+fy*10,0,0,dt); if(gone>1.2){gone=0;go('out');} break;}
-        gone=0;
-        const tx=Math.max(30,Math.min(W-30,mouse.x)), ty=Math.max(30,Math.min(H-30,mouse.y));
-        steer(tx,ty,460,.45,dt,30);
-        // weiche Wand: der Kopf bleibt in der Fläche
-        const m0=28; if(Hd.x<m0||Hd.x>W-m0||Hd.y<m0||Hd.y>H-m0){Hd.x=Math.max(m0,Math.min(W-m0,Hd.x));Hd.y=Math.max(m0,Math.min(H-m0,Hd.y));Hd.v*=.9;}
-        const dx=mouse.x-Hd.x, dy=mouse.y-Hd.y, m=Math.hypot(dx,dy)||1; lookT={x:dx/m,y:dy/m}; break;}
-    }
-    if(state==='sleep') Hd.y+=Math.sin(t*2.4)*.03;
-    pushTrail();
-    blinkAt-=dt; if(blinkAt<=0){blinkT=0;blinkAt=2+Math.random()*3;} if(blinkT>=0){blinkT+=dt;if(blinkT>.12)blinkT=-1;}
-    look.x+=(lookT.x-look.x)*Math.min(1,dt*10); look.y+=(lookT.y-look.y)*Math.min(1,dt*10);
-  }
-
-  function draw(){
-    const p=bodyPoints();
-    body.setAttribute('d',pathOf(p));
-    // Kopf sitzt vorn am Hals
-    head.setAttribute('transform',`translate(${Hd.x.toFixed(1)} ${Hd.y.toFixed(1)})`);
-    const closed=face==='closed';
-    eClosed.style.display=closed?'':'none'; eOpen.style.display=closed?'none':'';
-    mouth.style.display=(!closed&&['follow','wake','look2','startle'].includes(state))?'':'none';
-    eOpen.setAttribute('transform',`translate(${(look.x*2.6).toFixed(2)} ${(look.y*2.6).toFixed(2)}) scale(1 ${blinkT>=0?.15:1})`);
-  }
-
-  if(reduce){Hd.x=W/2-L/2;Hd.y=GROUND;Hd.a=Math.PI;resetTrail();face='open';draw();return;}
-  start();
-  let last=performance.now();
-  (function frame(now){const dt=Math.min(.05,(now-last)/1000);last=now;update(dt);draw();requestAnimationFrame(frame);})(last);
-})();
-</script>
 <script>
 /* Showreel an drei Stellen: Karte unten rechts (bewegt sich beim Überfahren), große Version im Fenster,
    und „App in Bewegung“ (läuft, solange sie zu sehen ist). Bei „weniger Bewegung“ Standbild. */
