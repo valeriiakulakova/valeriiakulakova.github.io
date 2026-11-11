@@ -19,6 +19,7 @@
   let musicBus = null, analyser = null, freq = null;   // Musik läuft über einen Bus mit „Zuhörer“ für den Beat
   let labels = [];
   let gestured = false;    // gab es in dieser Sitzung schon einen Klick, Tipp oder Tastendruck?
+  let firstGesture = false; // ist die gerade laufende Geste die erste (Ton war bis eben gesperrt)?
   // Safari meldet manchmal „running“, spielt aber vor dem ersten Klick nichts ab: deshalb zählt erst die Geste
   const ready = () => gestured && !!ctx && ctx.state === 'running';
   const refresh = () => labels.forEach(f => f());
@@ -125,9 +126,14 @@
     set(v) {
       on = musicOn = !!v;
       try { localStorage.setItem('sound', on ? '1' : '0'); } catch (e) {}
-      if (on) Sound.resume(true);
-      else if (bedGain) bedGain.gain.setTargetAtTime(0, ctx.currentTime, 0.05);
-      syncMusic(); refresh();
+      if (on) { Sound.resume(true); syncMusic(); }
+      else {
+        if (bedGain && ctx) bedGain.gain.setTargetAtTime(0, ctx.currentTime, 0.05);
+        musicGen++; stopMusic();
+        // Aus heißt aus: den ganzen Ton anhalten. Safari stoppt laufende Stücke sonst nicht immer zuverlässig.
+        if (ctx && ctx.state === 'running') later(() => { if (!on && ctx.state === 'running') ctx.suspend().catch(() => {}); }, 250);
+      }
+      refresh();
     },
     // Startet oder weckt den Ton. Freischalten geht nur innerhalb eines Klicks, Tipps oder Tastendrucks (fromGesture).
     resume(fromGesture) {
@@ -139,7 +145,7 @@
           try { const b = ctx.createBuffer(1, 1, 22050), s = ctx.createBufferSource(); s.buffer = b; s.connect(ctx.destination); s.start(0); } catch (e) {}
         }
       }
-      if (gestured && ctx && ctx.state !== 'running') ctx.resume().then(() => { refresh(); if (!music) syncMusic(); }).catch(() => {});
+      if (on && gestured && ctx && ctx.state !== 'running') ctx.resume().then(() => { refresh(); if (!music) syncMusic(); }).catch(() => {});
       else if (fromGesture && ctx && !music) syncMusic();   // erster Klick auf einer Musik-Seite: Stück starten
       refresh();
     },
@@ -175,7 +181,10 @@
   };
   window.Sound = Sound;
   // Jede echte Nutzer-Geste darf den Ton freischalten (Scrollen und Mausrad zählen beim Browser nicht)
-  ['pointerdown', 'pointerup', 'mousedown', 'click', 'keydown', 'touchend'].forEach(ev => listen(window, ev, () => Sound.resume(true), { passive: true, capture: true }));
+  ['pointerdown', 'pointerup', 'mousedown', 'click', 'keydown', 'touchend'].forEach(ev => listen(window, ev, () => {
+    if (!gestured && (ev === 'pointerdown' || ev === 'mousedown' || ev === 'keydown' || ev === 'touchend')) firstGesture = true;
+    Sound.resume(true);
+  }, { passive: true, capture: true }));
   listen(document, 'visibilitychange', () => { if (!document.hidden) Sound.resume(); });
   listen(window, 'pageshow', () => Sound.resume());
 
@@ -191,7 +200,13 @@
     pill.type = 'button'; pill.className = 'snd'; pill.setAttribute('role', 'switch'); pill.setAttribute('aria-label', 'Ton');
     pill.innerHTML = '<span class="snd-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="snd-t"></span>';
     pillText = pill.querySelector('.snd-t');
-    pill.addEventListener('click', () => { Sound.set(!on); if (on) Sound.tick(); });
+    pill.addEventListener('click', () => {
+      // Erster Klick überhaupt und Ton steht auf „an“: Ton starten statt ausschalten (vorher war ja noch nichts zu hören)
+      if (firstGesture && on) { firstGesture = false; Sound.set(true); return; }
+      firstGesture = false;
+      Sound.set(!on); if (on) Sound.tick();
+    });
+    listen(window, 'click', () => { later(() => { firstGesture = false; }, 0); }, { passive: true });
     labels.push(() => {
       const txt = on ? 'sound on' : 'sound off';
       if (pillText.textContent !== txt) pillText.textContent = txt;   // nur ändern, wenn nötig (Safari verwirft sonst Klicks)
