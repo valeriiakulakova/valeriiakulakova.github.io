@@ -360,9 +360,19 @@
   document.querySelectorAll('.pauseline path,.path4 path').forEach(p=>p.style.setProperty('--len',Math.ceil(p.getTotalLength())));
   io(document.querySelectorAll('.pauseline,.path4'),el=>el.classList.add('in'),.4);
   // Ruhiges Erscheinen
-  const rv=document.querySelectorAll('.sh,.about2,.stat,.proc-rows li,.bt,.at,.turns li,.ba,.cols4 li,.learn li,.bigquote,.voices');
+  // Nacheinander erscheinen: Überschrift, dann Text, dann Karten und Bilder; was gleichzeitig ins Bild kommt, erscheint versetzt
   io(document.querySelectorAll('.mk-anim'),el=>el.classList.add('in'),.4);
-  rv.forEach(el=>el.classList.add('rv')); io(rv,el=>el.classList.add('in'),.15);
+  const rv=[...document.querySelectorAll('.sh h2,.sh .sh-txt,.vi-txt,.vi-img,.pv-row > *,.facts > div,.stat,.quote-row > *,.dec4 > *,.voices,.bigquote,.flowvid .fv-dev,.flowvid figcaption,.feat-txt,.feat-img,.ba,.result li,.cols4 li,.learn li')];
+  document.querySelectorAll('.feat').forEach((f,i)=>{const img=f.querySelector('.feat-img'); if(img) img.classList.add(i%2?'rv-l':'rv-r');});
+  rv.forEach(el=>el.classList.add('rv'));
+  if(!reduce){
+    const ro=new IntersectionObserver(es=>{
+      es.filter(e=>e.isIntersecting).map(e=>e.target)
+        .sort((a,b)=>a.compareDocumentPosition(b)&Node.DOCUMENT_POSITION_FOLLOWING?-1:1)
+        .forEach((el,i)=>{el.style.transitionDelay=Math.min(i,5)*110+'ms'; el.classList.add('in'); ro.unobserve(el); el.addEventListener('transitionend',()=>{el.style.transitionDelay='';},{once:true});});
+    },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+    rv.forEach(el=>ro.observe(el));
+  } else rv.forEach(el=>el.classList.add('in'));
   // Stufenwahl
   const S=[{n:'1',t:'1 km',l:'Mini-Version · der kleinste Schritt'},{n:'2,5',t:'2,5 km',l:'Halbe Version · die Hälfte von sonst'},{n:'5',t:'5 km',l:'Ganze Version · wie vor der Pause'}];
   const card=document.getElementById('uiStufe');

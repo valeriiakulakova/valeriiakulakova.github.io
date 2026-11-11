@@ -484,8 +484,10 @@ body.page-case .about-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:var(--
 body.page-case .about-cta a{display:inline-flex;align-items:center;min-height:44px;font-family:var(--font-mono);font-size:var(--text-label);border:1px solid var(--rs-ink);border-radius:999px;padding:0 14px;text-decoration:none}
 body.page-case .about-cta a:hover{background:var(--rs-ink);color:var(--rs-paper)}
 body.page-case .site-foot{padding:var(--space-3) var(--gutter);padding-right:calc(var(--gutter) + 250px);font-family:var(--font-mono);font-size:var(--text-label);color:var(--rs-muted);background:var(--rs-page);display:flex;justify-content:space-between;gap:var(--space-2);flex-wrap:wrap;border-top:1px solid var(--rs-line)}
-.js body.page-case .rv{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-.js body.page-case .rv.in{opacity:1;transform:none}
+.js body.page-case .rv{opacity:0;translate:0 22px;transition:opacity .8s var(--ease),translate .8s var(--ease),transform .5s var(--ease)}
+.js body.page-case .rv.rv-l{translate:-40px 0}
+.js body.page-case .rv.rv-r{translate:40px 0}
+.js body.page-case .rv.in{opacity:1;translate:none}
 body.page-case .sh h2{font-family:var(--font-sans);font-weight:500;letter-spacing:-.045em;line-height:.95}
 body.page-case .sh-txt,body.page-case .stat-txt,body.page-case .proc-rows p,body.page-case .turns p,body.page-case .ba p,body.page-case .cols4 p,body.page-case .learn p,body.page-case .at figcaption,body.page-case .offset p,body.page-case .proto .shot p{font-family:var(--font-mono);font-size:.92rem;line-height:1.55;letter-spacing:0}
 body.page-case .at figcaption b,body.page-case .proc-rows h3,body.page-case .turns h3,body.page-case .learn h3,body.page-case .ba h3,body.page-case .proto .shot h3,body.page-case .bigquote p,body.page-case .voices p{font-family:var(--font-sans);font-weight:500;letter-spacing:-.025em}
@@ -517,7 +519,7 @@ body.page-case .site-foot{padding-right:var(--gutter);padding-bottom:120px}
 @media (prefers-reduced-motion:reduce){
 html:has(> body.page-case){scroll-behavior:auto}
 body.page-case .scene{transition:none}
-.js body.page-case .rv{opacity:1;transform:none;transition:none}
+.js body.page-case .rv{opacity:1;transform:none;translate:none;transition:none}
 .js body.page-case .pauseline .pl-run,.js body.page-case .pauseline .pl-back,.js body.page-case .path4 path{stroke-dashoffset:0;transition:none}
 .js body.page-case .mk-anim path{clip-path:none;transition:none}
 .js body.page-case .pauseline .pl-dot,.js body.page-case .mk-anim circle{transform:none;transition:none}
