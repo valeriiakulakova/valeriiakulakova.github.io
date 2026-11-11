@@ -5,7 +5,7 @@
 <meta name="tdm-reservation" content="1">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kontakt · Valeriia Kulakova</title>
-<meta name="description" content="Kontakt zu Valeriia Kulakova, product builder aus München: E-Mail, LinkedIn und Lebenslauf.">
+<meta name="description" content="Kontakt zu Valeriia Kulakova, product builder aus München: E-Mail, LinkedIn, Lebenslauf und Case ReSway.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="page-about page-contact">
@@ -15,202 +15,202 @@
   <nav aria-label="Hauptnavigation"><button class="sound" type="button" data-sound-toggle aria-pressed="false">( sound off )</button><a href="index.html">( home )</a><a href="case-resway.html">( projects )</a><a href="about.html">( about )</a><a href="contact.html" aria-current="page">( contact )</a></nav>
 </header>
 
-<main id="inhalt" class="ct">
-  <figure class="ct-stage">
-    <canvas id="phoneDots" aria-hidden="true"></canvas>
-    <figcaption class="sr">Grafik: Punkte formen ein Handy. Auf dem Bildschirm steht „Hire me“, unten leuchtet ein oranger Anruf-Knopf.</figcaption>
-  </figure>
+<main id="inhalt" class="map">
+  <!-- Linien von „HIRE ME“ zu den Kontaktwegen, werden per Skript gezeichnet -->
+  <svg class="map-lines" aria-hidden="true"><g class="ml-paths"></g><circle class="ml-dot" r="5" cx="-20" cy="-20"/></svg>
 
-  <div class="ct-txt">
-    <p class="ct-status"><i aria-hidden="true"></i>open to roles · munich</p>
-    <h1>Ich suche eine Festanstellung als Product Owner mit UX/UI-Skills.</h1>
-    <p class="ct-lead">Am schnellsten erreichen Sie mich per E-Mail oder über LinkedIn.</p>
-
-    <ul class="ct-list">
-      <li>
-        <span>e-mail</span>
-        <span class="ct-mail">
-          <a href="mailto:valeriikulakova@gmail.com">valeriikulakova@gmail.com</a>
-          <button type="button" class="ct-copy" data-copy="valeriikulakova@gmail.com">( copy )</button>
-        </span>
-      </li>
-      <li><span>linkedin</span><a href="https://www.linkedin.com/in/valeriia-kulakova-74657b150" rel="noopener">valeriia-kulakova</a></li>
-      <li><span>résumé (pdf)</span><a href="media/valeriia-kulakova-cv.pdf" download>valeriia-kulakova-cv.pdf</a></li>
-      <li><span>ort</span><span>München</span></li>
-    </ul>
-    <p class="ct-msg" role="status" aria-live="polite"></p>
+  <div class="hub">
+    <h1 class="sr">Kontakt: Hire me</h1>
+    <canvas id="hireDots" aria-hidden="true"></canvas>
+    <p class="hub-status"><i aria-hidden="true"></i>open to roles · munich</p>
+    <p class="hub-role">Ich suche eine Festanstellung als Product Owner mit UX/UI-Skills.</p>
   </div>
-</main>
 
-<footer>
-  <span>© 2026 Valeriia Kulakova</span>
-  <span class="legal"><a href="impressum.html">( impressum )</a><a href="datenschutz.html">( datenschutz )</a></span>
-  <a href="index.html">( home )</a>
-</footer>
+  <ul class="nodes" aria-label="Kontaktwege">
+    <li class="node n-mail" data-side="l">
+      <span class="node-cap">e-mail</span>
+      <a class="node-main" href="mailto:valeriikulakova@gmail.com">
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+        <span>valeriikulakova@gmail.com</span>
+      </a>
+      <button type="button" class="node-copy" data-copy="valeriikulakova@gmail.com">
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+        <span class="copy-txt">( copy )</span>
+      </button>
+    </li>
+    <li class="node n-in" data-side="l">
+      <span class="node-cap">linkedin</span>
+      <a class="node-main" href="https://www.linkedin.com/in/valeriia-kulakova-74657b150" rel="noopener">
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg>
+        <span>valeriia-kulakova</span>
+        <svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
+    </li>
+    <li class="node n-cv" data-side="r">
+      <span class="node-cap">résumé (pdf)</span>
+      <a class="node-main" href="media/valeriia-kulakova-cv.pdf" download>
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg>
+        <span>Lebenslauf herunterladen</span>
+      </a>
+    </li>
+    <li class="node n-case" data-side="r">
+      <span class="node-cap">projects</span>
+      <a class="node-main" href="case-resway.html">
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>
+        <span>Case ReSway ansehen</span>
+        <svg class="ic ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+      </a>
+    </li>
+  </ul>
+
+  <p class="map-msg" role="status" aria-live="polite"></p>
+  <p class="map-legal"><a href="impressum.html">( impressum )</a><a href="datenschutz.html">( datenschutz )</a></p>
+</main>
 
 <script src="pixel.js"></script>
 <script src="sound.js"></script>
 <script>
-/* E-Mail kopieren: Rückmeldung über Text im Knopf und eine Statuszeile (zwei Merkmale, nicht nur Farbe) */
+/* E-Mail kopieren: Rückmeldung über Text am Knopf und eine Statuszeile (zwei Merkmale, nicht nur Farbe) */
 (function(){
-  const btn=document.querySelector('.ct-copy'), msg=document.querySelector('.ct-msg');
+  const btn=document.querySelector('.node-copy'), txt=btn&&btn.querySelector('.copy-txt'), msg=document.querySelector('.map-msg');
   if(!btn) return;
   btn.addEventListener('click', async () => {
     let ok=false;
     try { await navigator.clipboard.writeText(btn.dataset.copy); ok=true; } catch(e) {}
-    btn.textContent = ok ? '( copied ✓ )' : '( copy )';
+    txt.textContent = ok ? '( copied ✓ )' : '( copy )';
     btn.classList.toggle('done', ok);
     msg.textContent = ok ? 'E-Mail-Adresse kopiert.' : 'Kopieren ging nicht. Bitte die Adresse markieren.';
     if (ok && window.Sound) Sound.tick();
     clearTimeout(btn._t);
-    btn._t = setTimeout(() => { btn.textContent='( copy )'; btn.classList.remove('done'); msg.textContent=''; }, 2400);
+    btn._t = setTimeout(() => { txt.textContent='( copy )'; btn.classList.remove('done'); msg.textContent=''; }, 2400);
   });
 })();
 
-/* Punkt-Handy
-   - Punkte fliegen beim Laden zusammen und formen ein Handy mit „HIRE ME“ und einem orangen Anruf-Knopf
-   - Desktop: das Handy neigt sich zur Maus, Punkte weichen dem Zeiger aus
-   - Handy: es neigt sich mit dem Gerät (Bewegungssensor, nur im Browser verarbeitet)
-   - Tippen oder Klicken auf das Handy: Punkte springen auseinander und setzen sich neu zusammen
-   - Weniger Bewegung gewünscht: Handy steht sofort und still da */
+/* Kontakt-Karte
+   1. Punkte fliegen zusammen und bilden „HIRE ME“ in der eigenen Pixel-Schrift
+   2. Danach wachsen Linien von dort zu den vier Kontaktwegen, die Wege erscheinen nacheinander
+   3. Ein oranger Punkt läuft die Linien entlang; beim Überfahren oder Fokussieren eines Wegs läuft er dorthin und bleibt
+   Weniger Bewegung gewünscht: alles steht sofort da, kein laufender Punkt */
 (function(){
-  const cv=document.getElementById('phoneDots'); if(!cv) return;
-  const ctx=cv.getContext('2d');
+  document.documentElement.classList.add('map-js');
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const map=document.querySelector('.map'), svg=map.querySelector('.map-lines'), g=svg.querySelector('.ml-paths'), dotEl=svg.querySelector('.ml-dot');
+  const hub=map.querySelector('.hub'), cv=document.getElementById('hireDots'), ctx=cv.getContext('2d');
+  const nodes=[...map.querySelectorAll('.node')];
   const css=getComputedStyle(document.body);
   const ink=css.getPropertyValue('--color-portrait').trim()||'#2a2c31';
-  const orange=css.getPropertyValue('--color-orange').trim()||'#ff5a1f';
+  const NS='http://www.w3.org/2000/svg';
 
-  let W=0,H=0,dpr=1,P=[],dot=2;
-  // Neigung: Ziel (tx,ty) und aktueller Wert (ax,ay), in Radiant
-  let tx=0,ty=0,ax=0,ay=0, mx=-9999,my=-9999;
-
-  function build(){
+  /* --- 1 · Punkte „HIRE ME“ --- */
+  let W=0,H=0,P=[],mx=-9999,my=-9999,assembled=reduce;
+  function buildDots(){
+    const dpr=Math.min(devicePixelRatio||1,2);
+    W=cv.clientWidth; H=cv.clientHeight; cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    if(!window.PixelFont) return;
+    const lines=['HIRE','ME'].map(t=>PixelFont.cellsFor(t));
+    const maxW=Math.max(...lines.map(l=>l.width));
+    const rows=7*2+3, cs=Math.min(W*0.92/maxW,H*0.96/rows), sub=cs/3;
     const pts=[];
-    // Handy-Maße im Modellraum (Mittelpunkt 0,0), Seitenverhältnis wie ein iPhone
-    const pw=Math.min(W*0.62,H*0.44), ph=pw*2.05, r=pw*0.17, step=Math.max(3.2,pw/70);
-    const add=(x,y,z,kind,sz)=>pts.push({x,y,z,kind,sz});
-    // Rahmen: zwei Linien entlang des abgerundeten Rechtecks
-    for(let ring=0;ring<2;ring++){
-      const inset=ring*step*1.1, w=pw-2*inset, h=ph-2*inset, rr=Math.max(4,r-inset);
-      const straightW=w-2*rr, straightH=h-2*rr, per=2*(straightW+straightH)+2*Math.PI*rr;
-      const n=Math.round(per/step);
-      for(let i=0;i<n;i++){
-        let d=i/n*per, x,y;
-        const seg=[straightW,Math.PI*rr/2,straightH,Math.PI*rr/2,straightW,Math.PI*rr/2,straightH,Math.PI*rr/2];
-        let k=0; while(d>seg[k]){d-=seg[k];k++;}
-        const cx=w/2-rr, cy=h/2-rr;
-        switch(k){
-          case 0: x=-cx+d; y=-h/2; break;
-          case 1: {const a=-Math.PI/2+d/rr; x=cx+Math.cos(a)*rr; y=-cy+Math.sin(a)*rr; break;}
-          case 2: x=w/2; y=-cy+d; break;
-          case 3: {const a=d/rr; x=cx+Math.cos(a)*rr; y=cy+Math.sin(a)*rr; break;}
-          case 4: x=cx-d; y=h/2; break;
-          case 5: {const a=Math.PI/2+d/rr; x=-cx+Math.cos(a)*rr; y=cy+Math.sin(a)*rr; break;}
-          case 6: x=-w/2; y=cy-d; break;
-          default:{const a=Math.PI+d/rr; x=-cx+Math.cos(a)*rr; y=-cy+Math.sin(a)*rr;}
-        }
-        add(x,y,0,'rim');
-      }
-    }
-    // Dynamic Island: kleine Pille oben
-    const iw=pw*0.3, ih=step*2.2, iy=-ph/2+step*4.2;
-    for(let x=-iw/2;x<=iw/2;x+=step*0.8) for(let y=-ih/2;y<=ih/2;y+=step*0.8) add(x,iy+y,-4,'rim');
-    // Bildschirm: „HIRE“ und „ME“ in der eigenen Pixel-Schrift
-    if(window.PixelFont){
-      const lines=['HIRE','ME'].map(t=>PixelFont.cellsFor(t));
-      const maxW=Math.max(...lines.map(l=>l.width));
-      const cs=(pw*0.72)/maxW, sub=cs/3, gap=cs*3, total=7*cs*2+gap;
-      lines.forEach((l,li)=>{
-        const x0=-l.width*cs/2, y0=-ph*0.12-total/2+li*(7*cs+gap);
-        l.cells.forEach(([cx,cy])=>{for(let a=0;a<3;a++)for(let b=0;b<3;b++) add(x0+cx*cs+a*sub+sub/2, y0+cy*cs+b*sub+sub/2, -14,'text',sub*0.72);});
-      });
-    }
-    // Anruf-Knopf: oranger Kreis unten auf dem Bildschirm
-    const br=pw*0.13, by=ph/2-pw*0.36;
-    for(let rr=br*0.15;rr<=br;rr+=step*0.75){const n=Math.max(6,Math.round(2*Math.PI*rr/(step*0.75)));for(let i=0;i<n;i++){const a=i/n*Math.PI*2;add(Math.cos(a)*rr,by+Math.sin(a)*rr,-10,'call');}}
-    dot=Math.max(1.4,step*0.42);
-    // Bestehende Punkte behalten ihre Position, neue starten verstreut
-    P=pts.map((p,i)=>{
-      const old=P[i];
-      const sx=old?old.cx:(Math.random()-0.5)*W*1.4, sy=old?old.cy:(Math.random()-0.5)*H*1.4;
-      return {...p, cx:reduce?p.x:sx, cy:reduce?p.y:sy, vx:0, vy:0, ph:Math.random()*6.28};
+    lines.forEach((l,li)=>{
+      const x0=(W-l.width*cs)/2, y0=(H-rows*cs)/2+li*10*cs;
+      l.cells.forEach(([cx,cy])=>{for(let a=0;a<3;a++)for(let b=0;b<3;b++)pts.push([x0+cx*cs+a*sub+sub/2,y0+cy*cs+b*sub+sub/2]);});
     });
+    P=pts.map(([x,y],i)=>{const o=P[i];return{x,y,sz:sub*0.7,cx:o?o.cx:(reduce?x:Math.random()*W),cy:o?o.cy:(reduce?y:Math.random()*H),vx:0,vy:0};});
   }
-
-  function resize(){
-    dpr=Math.min(devicePixelRatio||1,2);
-    W=cv.clientWidth; H=cv.clientHeight;
-    cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
-    build(); if(reduce) draw(0);
-  }
-
-  function burst(){
-    if(reduce) return;
-    P.forEach(p=>{const a=Math.random()*6.28,s=6+Math.random()*14; p.vx+=Math.cos(a)*s; p.vy+=Math.sin(a)*s;});
-    if(window.Sound) Sound.pop();
-  }
-
-  function draw(t){
-    ctx.clearRect(0,0,W,H);
-    ax+=(tx-ax)*0.08; ay+=(ty-ay)*0.08;
-    const ca=Math.cos(ax), sa=Math.sin(ax), cb=Math.cos(ay), sb=Math.sin(ay);
-    const ox=W/2, oy=H/2, f=W*2.2;
+  function drawDots(){
+    ctx.clearRect(0,0,W,H); ctx.fillStyle=ink;
+    let err=0;
     for(const p of P){
-      // 3D-Neigung um y (links/rechts) und x (vor/zurück), leichte Perspektive
-      let x=p.x*ca+p.z*sa, z=-p.x*sa+p.z*ca;
-      let y=p.y*cb-z*sb; z=p.y*sb+z*cb;
-      const s=f/(f-z);
-      let gx=ox+x*s, gy=oy+y*s;
-      if(!reduce&&p.kind!=='text'){ gx+=Math.sin(t*0.0011+p.ph)*0.6; gy+=Math.cos(t*0.0009+p.ph)*0.6; }
-      if(reduce){ p.cx=gx-ox; p.cy=gy-oy; }
-      else{
-        // Feder zur Zielposition, dazu Ausweichen vor dem Zeiger
-        const dx=(ox+p.cx)-mx, dy=(oy+p.cy)-my, d2=dx*dx+dy*dy, R=70;
-        if(d2<R*R){const d=Math.sqrt(d2)||1,k=(1-d/R)*2.4; p.vx+=dx/d*k; p.vy+=dy/d*k;}
-        p.vx+=((gx-ox)-p.cx)*0.08; p.vy+=((gy-oy)-p.cy)*0.08;
-        p.vx*=0.78; p.vy*=0.78; p.cx+=p.vx; p.cy+=p.vy;
+      if(!reduce){
+        const dx=p.cx-mx, dy=p.cy-my, d2=dx*dx+dy*dy, R=46;
+        if(d2<R*R){const d=Math.sqrt(d2)||1,k=(1-d/R)*2.2;p.vx+=dx/d*k;p.vy+=dy/d*k;}
+        p.vx+=(p.x-p.cx)*0.08; p.vy+=(p.y-p.cy)*0.08; p.vx*=0.78; p.vy*=0.78; p.cx+=p.vx; p.cy+=p.vy;
+        err+=Math.abs(p.x-p.cx)+Math.abs(p.y-p.cy);
       }
-      ctx.fillStyle=p.kind==='call'?orange:ink;
-      ctx.globalAlpha=p.kind==='text'?0.95:0.8;
-      const sz=(p.sz||dot)*s;
-      ctx.fillRect(ox+p.cx-sz/2,oy+p.cy-sz/2,sz,sz);
+      ctx.fillRect(p.cx-p.sz/2,p.cy-p.sz/2,p.sz,p.sz);
     }
-    ctx.globalAlpha=1;
-    if(!reduce) requestAnimationFrame(draw);
+    if(!assembled && P.length && err/P.length<1.2){assembled=true; startLines();}
   }
-
-  // Maus: Neigung zur Maus, Ausweichen nur über der Grafik
-  addEventListener('pointermove',e=>{
-    if(e.pointerType==='touch') return;
-    const r=cv.getBoundingClientRect();
-    tx=((e.clientX-(r.left+r.width/2))/innerWidth)*0.9;
-    ty=-((e.clientY-(r.top+r.height/2))/innerHeight)*0.7;
-    mx=e.clientX-r.left; my=e.clientY-r.top;
-  },{passive:true});
+  cv.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;});
   cv.addEventListener('pointerleave',()=>{mx=my=-9999;});
+  cv.addEventListener('click',()=>{ if(reduce) return; P.forEach(p=>{const a=Math.random()*6.28,s=5+Math.random()*12;p.vx+=Math.cos(a)*s;p.vy+=Math.sin(a)*s;}); if(window.Sound) Sound.pop(); });
 
-  // Handy: Neigung über den Bewegungssensor; iOS fragt einmal nach Erlaubnis (nur nach einem Tipp möglich)
-  let sensor=false;
-  function onTilt(e){
-    if(e.gamma==null) return; sensor=true;
-    tx=Math.max(-0.6,Math.min(0.6,e.gamma/45))*0.9;
-    ty=Math.max(-0.6,Math.min(0.6,((e.beta||0)-45)/45))*-0.7;
+  /* --- 2 · Linien --- */
+  let paths=[], grown=reduce, t0=0;
+  function layoutLines(){
+    const m=map.getBoundingClientRect(), h=hub.getBoundingClientRect();
+    svg.setAttribute('width',m.width); svg.setAttribute('height',m.height); svg.setAttribute('viewBox',`0 0 ${m.width} ${m.height}`);
+    const hx=h.left-m.left, hy=h.top-m.top, hw=h.width, hh=h.height;
+    const stacked=getComputedStyle(map).getPropertyValue('--stacked').trim()==='1';
+    g.innerHTML=''; paths=[];
+    nodes.forEach((n,i)=>{
+      const r=n.getBoundingClientRect(), a=n.querySelector('.node-main').getBoundingClientRect(), nx=r.left-m.left, ty=new DOMMatrix(getComputedStyle(n).transform).m42, cy=a.top-m.top+a.height/2-ty;   // Versatz vom Einblenden herausrechnen
+      let d, x1, y1;
+      if(stacked){
+        // Handy: Linie vom unteren Rand von HIRE ME am linken Rand entlang zu jedem Weg
+        // gemeinsame senkrechte Linie links, von dort ein kurzer Bogen zu jedem Weg
+        const sx=hx+hw/2, sy=hy+hh+12, spine=nx-30, top=sy+56; x1=nx-8; y1=cy;
+        d=`M${sx},${sy} C${sx},${sy+40} ${spine},${sy+16} ${spine},${top} L${spine},${y1-14} Q${spine},${y1} ${spine+14},${y1} L${x1},${y1}`;
+      } else if(n.dataset.side==='l'){
+        const sx=hx-10, sy=hy+hh*(i===0?0.36:0.64); x1=r.right-m.left+14; y1=cy;
+        const k=(sx-x1)*0.5; d=`M${sx},${sy} C${sx-k},${sy} ${x1+k},${y1} ${x1},${y1}`;
+      } else {
+        const sx=hx+hw+10, sy=hy+hh*(i===2?0.36:0.64); x1=nx-14; y1=cy;
+        const k=(x1-sx)*0.5; d=`M${sx},${sy} C${sx+k},${sy} ${x1-k},${y1} ${x1},${y1}`;
+      }
+      const p=document.createElementNS(NS,'path'); p.setAttribute('d',d); p.setAttribute('class','ml-path');
+      const end=document.createElementNS(NS,'circle'); end.setAttribute('r','3'); end.setAttribute('cx',x1); end.setAttribute('cy',y1); end.setAttribute('class','ml-end');
+      g.append(p,end);
+      const len=p.getTotalLength(); p.style.strokeDasharray=len; p.style.strokeDashoffset=grown?0:len;
+      paths.push({p,end,len,n});
+    });
+    if(grown) nodes.forEach(n=>n.classList.add('in'));
   }
-  function startSensor(){
-    if(reduce||sensor) return;
-    const D=window.DeviceOrientationEvent;
-    if(!D) return;
-    if(typeof D.requestPermission==='function'){
-      D.requestPermission().then(s=>{if(s==='granted') addEventListener('deviceorientation',onTilt);}).catch(()=>{});
-    } else addEventListener('deviceorientation',onTilt);
+  function startLines(){
+    t0=performance.now();
+    if(window.Sound) Sound.chime();
   }
-  if(!(window.DeviceOrientationEvent&&typeof DeviceOrientationEvent.requestPermission==='function')) startSensor();
-  cv.parentElement.addEventListener('click',()=>{startSensor(); burst();});
 
-  new ResizeObserver(resize).observe(cv);
-  resize();
-  if(!reduce) requestAnimationFrame(draw);
+  /* --- 3 · laufender oranger Punkt --- */
+  let target=-1, run={i:0,t:0}, pinned=-1;
+  nodes.forEach((n,i)=>{
+    const on=()=>{pinned=i; paths.forEach((q,k)=>q.p.classList.toggle('hot',k===i));};
+    const off=()=>{pinned=-1; paths.forEach(q=>q.p.classList.remove('hot'));};
+    n.addEventListener('pointerenter',on); n.addEventListener('pointerleave',off);
+    n.addEventListener('focusin',on); n.addEventListener('focusout',off);
+  });
+
+  let last=0;
+  function frame(t){
+    drawDots();
+    const dt=Math.min(64,t-(last||t)); last=t;
+    if(assembled && !grown){
+      // Linien wachsen nacheinander, je 700 ms, versetzt um 220 ms
+      let done=true;
+      paths.forEach((q,i)=>{
+        const k=Math.max(0,Math.min(1,(t-t0-i*220)/700)), e=1-Math.pow(1-k,3);
+        q.p.style.strokeDashoffset=q.len*(1-e);
+        if(k>=1) q.n.classList.add('in'); else done=false;
+      });
+      if(done){ grown=true; layoutLines(); }
+    }
+    if(grown && !reduce && paths.length){
+      // Punkt läuft vom „HIRE ME“ zum Weg; gepinnt: bleibt am Ende des gewählten Wegs
+      if(pinned>=0){ if(run.i!==pinned){run.i=pinned; run.t=0;} run.t=Math.min(1,run.t+dt/700); }
+      else { run.t+=dt/1600; if(run.t>1.35){run.t=0; run.i=(run.i+1)%paths.length;} }
+      const q=paths[run.i], k=Math.min(1,run.t), e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+      const pt=q.p.getPointAtLength(q.len*e);
+      dotEl.setAttribute('cx',pt.x); dotEl.setAttribute('cy',pt.y);
+      dotEl.style.opacity = pinned>=0 ? 1 : (run.t>1 ? Math.max(0,1-(run.t-1)/0.3) : 1);
+    }
+    if(!reduce) requestAnimationFrame(frame);
+  }
+
+  function relayout(){ buildDots(); layoutLines(); drawDots(); }   // sofort neu zeichnen, sonst ist die Fläche bis zum nächsten Bild leer
+  new ResizeObserver(relayout).observe(map);
+  relayout();
+  if(reduce){ nodes.forEach(n=>n.classList.add('in')); dotEl.style.opacity=0; }
+  else requestAnimationFrame(frame);
 })();
 </script>
 </body>
