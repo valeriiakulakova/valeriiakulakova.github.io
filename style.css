@@ -277,8 +277,34 @@ body.page-about header nav{flex-wrap:wrap;justify-content:flex-end}
 body.page-about header nav a,body.page-about header nav .sound{white-space:nowrap}
 @media (max-width:760px){
 body.page-about header{background:var(--color-bg);padding:6px var(--gutter)}
-body.page-about header nav{gap:2px;font-size:.82rem}
+body.page-about header nav{gap:0;font-size:.68rem}
+body.page-about header nav a,body.page-about header nav .sound{padding:0 1px}
 body.page-about .cv,body.page-about .contact{background:none}
+}
+
+/* ---------- 4b · Kontakt (nutzt die About-Fläche, eigene Anordnung) ---------- */
+body.page-contact main.ct{min-height:100svh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(24px,5vw,80px);max-width:1320px;margin:0 auto;padding:clamp(88px,12vh,128px) var(--gutter) clamp(40px,8vh,80px)}
+body.page-contact .ct-stage{order:2;margin:0;position:relative;height:min(78svh,760px);cursor:pointer;-webkit-tap-highlight-color:transparent}
+body.page-contact .ct-stage canvas{display:block;width:100%;height:100%}
+body.page-contact .ct-txt{max-width:34rem}
+body.page-contact .ct-status{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:.85rem;color:var(--color-muted)}
+body.page-contact .ct-status i{width:8px;height:8px;border-radius:50%;background:var(--color-orange)}
+body.page-contact h1{margin:.5em 0 .5em;font-weight:500;font-size:clamp(1.8rem,3.2vw,3rem);line-height:1.1;letter-spacing:-.02em;max-width:18ch}
+body.page-contact .ct-lead{font-family:var(--font-mono);font-size:.95rem;line-height:1.6;color:var(--color-muted);margin-bottom:clamp(24px,4vh,40px)}
+body.page-contact .ct-list{list-style:none;padding:0;font-size:1.1rem}
+body.page-contact .ct-list li{min-height:56px;padding:.4em 0;border-top:1px solid var(--color-line);display:flex;justify-content:space-between;align-items:center;gap:8px 16px;flex-wrap:wrap}
+body.page-contact .ct-list li:last-child{border-bottom:1px solid var(--color-line)}
+body.page-contact .ct-list li>span:first-child{font-family:var(--font-mono);font-size:.9rem;color:var(--color-muted)}
+body.page-contact .ct-list a{color:inherit;text-underline-offset:4px}
+body.page-contact .ct-list a:focus-visible,body.page-contact .ct-copy:focus-visible{outline:2px solid var(--color-focus);outline-offset:3px;border-radius:3px}
+body.page-contact .ct-mail{display:inline-flex;align-items:center;flex-wrap:wrap;gap:4px 12px;min-width:0;overflow-wrap:anywhere}
+body.page-contact .ct-copy{min-height:44px;padding:0 4px;border:0;background:none;font-family:var(--font-mono);font-size:.85rem;color:var(--color-muted);cursor:pointer}
+body.page-contact .ct-copy:hover,body.page-contact .ct-copy.done{color:var(--color-text)}
+body.page-contact .ct-msg{min-height:1.5em;margin-top:12px;font-family:var(--font-mono);font-size:.85rem;color:var(--color-muted)}
+@media (max-width:760px){
+body.page-contact main.ct{grid-template-columns:1fr;gap:8px;padding-top:64px;min-height:0}
+body.page-contact .ct-stage{order:0;height:min(56svh,460px)}
+body.page-contact .ct-list{font-size:1rem}
 }
 
 /* ---------- 5 · Case ReSway ---------- */
@@ -715,7 +741,8 @@ body.page-case .feats{gap:var(--space-5)}
 body.page-case .h3-top nav{flex-wrap:wrap}
 body.page-case .h3-top nav a,body.page-case .h3-top nav .sound{white-space:nowrap}
 @media (max-width:420px){
-body.page-case .h3-top nav{gap:2px;font-size:.82rem}
+body.page-case .h3-top nav{gap:0;font-size:.68rem}
+body.page-case .h3-top nav a,body.page-case .h3-top nav .sound{padding:0 1px}
 }
 
 /* ---------- 6 · Impressum und Datenschutz (dunkel wie die Startseite) ---------- */
