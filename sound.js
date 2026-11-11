@@ -21,6 +21,8 @@
   // Safari meldet manchmal „running“, spielt aber vor dem ersten Klick nichts ab: deshalb zählt erst die Geste
   const ready = () => gestured && !!ctx && ctx.state === 'running';
   const refresh = () => labels.forEach(f => f());
+  // Effekt-Klänge nur auf Seiten ohne eigene Musik (Startseite); About, Case, Kontakt haben nur ihre Musik
+  const fx = () => on && !(document.body && document.body.dataset.music);
   // Dauerhafte Listener: bleiben beim Seitenwechsel ohne Neuladen (nav.js) erhalten
   const listen = (tg, type, fn, opt) => window.SoftNav ? SoftNav.on(tg, type, fn, opt) : tg.addEventListener(type, fn, opt);
 
@@ -41,7 +43,7 @@
   }
 
   function burst(freq, vol, len, q) {
-    if (!on || !ctx) return;
+    if (!fx() || !ctx) return;
     const t = ctx.currentTime;
     const s = ctx.createBufferSource(); s.buffer = noise;
     const f = ctx.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = freq; f.Q.value = q;
@@ -52,7 +54,7 @@
   }
 
   function tone(freq, vol, len) {
-    if (!on || !ctx) return;
+    if (!fx() || !ctx) return;
     const t = ctx.currentTime;
     const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.setValueAtTime(freq, t);
     o.frequency.exponentialRampToValueAtTime(freq * 1.5, t + len);
@@ -67,7 +69,7 @@
   const buffers = {};            // geladene Musik, je Datei einmal
   let music = null;              // { src, node, gain } – das Stück der aktuellen Seite
   const playing = new Set();     // alle gestarteten Musikstücke, damit beim Wechsel sicher jedes endet
-  let musicOn = false;          // Musik dieser Seite angetippt? Startet jede Seite wieder mit „aus“
+  let musicOn = false;          // Musik eingeschaltet? Gilt für alle Seiten, bis man sie wieder ausschaltet
   let musicGen = 0;              // jede Seite bekommt eine Nummer; ältere Ladevorgänge werden verworfen
   const later = (fn, ms) => (window.SoftNav ? SoftNav.later(fn, ms) : setTimeout(fn, ms));
   async function loadBuffer(src) {
@@ -132,13 +134,13 @@
       if (gestured && ctx && ctx.state !== 'running') ctx.resume().then(refresh).catch(() => {});
       refresh();
     },
-    // Nach einem Seitenwechsel ohne Neuladen: Musik der alten Seite stoppen, neue Seite beginnt still
-    pageChanged() { musicOn = false; syncMusic(); refresh(); },
+    // Nach einem Seitenwechsel ohne Neuladen: altes Stück aus, Stück der neuen Seite an (wenn Musik eingeschaltet)
+    pageChanged() { if (bedGain && ctx) bedGain.gain.setTargetAtTime(0, ctx.currentTime, 0.05); syncMusic(); refresh(); },
     key() { burst(1800 + Math.random() * 1400, 0.09, 0.035, 6); },
     tick() { tone(880, 0.06, 0.09); },
     hover() { burst(3200, 0.03, 0.03, 8); },
     whoosh() {
-      if (!on || !ctx) return;
+      if (!fx() || !ctx) return;
       const t = ctx.currentTime;
       const s = ctx.createBufferSource(); s.buffer = noise;
       const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.Q.value = 2;
@@ -151,12 +153,12 @@
     count(k) { tone(420 + Math.max(0, Math.min(1, k)) * 760, 0.035, 0.05); },
     pop() { tone(520, 0.05, 0.12); burst(900, 0.025, 0.06, 3); },
     chime() {
-      if (!on || !ctx) return;
+      if (!fx() || !ctx) return;
       tone(660, 0.04, 0.18);
       setTimeout(() => tone(990, 0.03, 0.22), 90);
     },
     motion(x) {
-      if (!on || !bedGain) return;
+      if (!fx() || !bedGain) return;
       const v = Math.max(0, Math.min(1, x));
       bedGain.gain.setTargetAtTime(v * 0.07, ctx.currentTime, 0.08);
       bedFilter.frequency.setTargetAtTime(1800 + v * 2400, ctx.currentTime, 0.1);
@@ -173,7 +175,8 @@
 
   // Schalter oben in der Navigation
   // - Seite ohne Musik (Startseite): Effekt-Klänge, „( sound on )“ / „( sound off )“, Standard an
-  // - Seite mit Musik (About, Case, Kontakt): „( tap for sound )“ startet die Musik, „( sound on )“ stoppt sie wieder
+  // - Seite mit Musik (About, Case, Kontakt): „( tap for sound )“ schaltet Musik ein, danach spielt jede Seite ihr Stück;
+  //   „( sound on )“ antippen schaltet die Musik überall aus
   // Nach einem Seitenwechsel ohne Neuladen ruft nav.js das erneut für die neuen Schalter auf.
   Sound.bindToggles = function () {
     labels = [];
