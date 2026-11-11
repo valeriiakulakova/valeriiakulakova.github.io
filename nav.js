@@ -87,6 +87,7 @@
       // Kopf-Skripte der neuen Seite (z. B. die Klasse „js“) zuerst, dann die im Körper
       headScripts.forEach(h => { const s = document.createElement('script'); s.textContent = h.textContent; document.head.appendChild(s); s.remove(); });
       runScripts([...body.querySelectorAll('script')]);
+      if (window.Sound && Sound.pageChanged) Sound.pageChanged();
       const hash = new URL(url, location.href).hash;
       const target = hash && document.getElementById(decodeURIComponent(hash.slice(1)));
       if (target) target.scrollIntoView(); else window.scrollTo(0, 0);

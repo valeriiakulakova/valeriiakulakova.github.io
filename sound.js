@@ -11,7 +11,9 @@
      Sound.motion(x)    leises Rauschen, dessen Lautstärke der Bewegung folgt (0 … 1)
      Sound.count(k)     kurzer Ton beim Hochzählen, steigt mit k (0 … 1)
      Sound.pop()        weicher Ton beim Wechsel eines Screens im Showreel
-     Sound.chime()      zwei helle Töne, wenn eine neue Jahreszahl erscheint */
+     Sound.chime()      zwei helle Töne, wenn eine neue Jahreszahl erscheint
+   Seitenmusik: <body data-music="media/sounds/….mp3"> startet leise, sobald der Ton frei ist,
+   läuft einmal durch und blendet beim Seitenwechsel weich in die Musik der nächsten Seite über. */
 (function () {
   let ctx = null, on = false, noise = null, bedGain = null, bedFilter = null;
   let labels = [];
@@ -61,12 +63,45 @@
     o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + len + 0.02);
   }
 
+  // ---- Seitenmusik (Dateien von Pixabay, lokal in media/sounds) ----
+  const MUSIC_VOL = 0.22, FADE = 0.8;
+  const buffers = {};            // geladene Musik, je Datei einmal
+  let music = null;              // { src, node, gain }
+  async function loadBuffer(src) {
+    if (!buffers[src]) buffers[src] = fetch(src).then(r => r.arrayBuffer()).then(b => new Promise((ok, no) => ctx.decodeAudioData(b, ok, no)));
+    return buffers[src];
+  }
+  function stopMusic() {
+    if (!music || !ctx) { music = null; return; }
+    const m = music, t = ctx.currentTime; music = null;
+    m.gain.gain.cancelScheduledValues(t); m.gain.gain.setValueAtTime(m.gain.gain.value, t);
+    m.gain.gain.linearRampToValueAtTime(0, t + FADE);
+    try { m.node.stop(t + FADE + 0.05); } catch (e) {}
+  }
+  async function syncMusic() {
+    const src = (document.body && document.body.dataset.music) || '';
+    if (!on || !ready() || !src) { stopMusic(); return; }
+    if (music && music.src === src) return;          // läuft schon für diese Seite
+    stopMusic();
+    const want = src; let buf;
+    try { buf = await loadBuffer(src); } catch (e) { return; }
+    if (!on || !ready() || ((document.body && document.body.dataset.music) || '') !== want || (music && music.src === want)) return;
+    const node = ctx.createBufferSource(); node.buffer = buf;
+    const gain = ctx.createGain(); const t = ctx.currentTime;
+    gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(MUSIC_VOL, t + FADE);
+    node.connect(gain).connect(ctx.destination); node.start(t);
+    const m = { src, node, gain }; music = m;
+    node.onended = () => { if (music === m) music = null; };
+  }
+
   const Sound = {
     get on() { return on; },
+    get musicSrc() { return music ? music.src : ''; },   // welche Seitenmusik gerade läuft (zum Prüfen)
     set(v) {
       on = !!v;
       if (on) Sound.resume();
       else if (bedGain) bedGain.gain.setTargetAtTime(0, ctx.currentTime, 0.05);
+      syncMusic();
     },
     // Startet oder weckt den Ton. Freischalten geht nur innerhalb eines Klicks, Tipps oder Tastendrucks (fromGesture).
     resume(fromGesture) {
@@ -79,9 +114,12 @@
           try { const b = ctx.createBuffer(1, 1, 22050), s = ctx.createBufferSource(); s.buffer = b; s.connect(ctx.destination); s.start(0); } catch (e) {}
         }
       }
-      if (gestured && ctx && ctx.state !== 'running') ctx.resume().then(refresh).catch(() => {});
+      if (gestured && ctx && ctx.state !== 'running') ctx.resume().then(() => { refresh(); syncMusic(); }).catch(() => {});
       refresh();
+      if (ready() && !music) syncMusic();
     },
+    // Nach einem Seitenwechsel ohne Neuladen: Musik der neuen Seite starten
+    pageChanged() { syncMusic(); },
     key() { burst(1800 + Math.random() * 1400, 0.09, 0.035, 6); },
     tick() { tone(880, 0.06, 0.09); },
     hover() { burst(3200, 0.03, 0.03, 8); },
