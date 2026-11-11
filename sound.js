@@ -75,7 +75,6 @@
   const playing = new Set();     // alle gestarteten Musikstücke, damit beim Wechsel sicher jedes endet
   let musicOn = true;           // Seitenmusik: Standard an, gilt für alle Seiten, bis man sie ausschaltet
   let musicGen = 0;
-  let finishedSrc = '';          // Stück dieser Seite ist zu Ende gespielt: nicht bei jedem Klick neu starten              // jede Seite bekommt eine Nummer; ältere Ladevorgänge werden verworfen
   const later = (fn, ms) => (window.SoftNav ? SoftNav.later(fn, ms) : setTimeout(fn, ms));
   async function loadBuffer(src) {
     if (!buffers[src]) buffers[src] = fetch(src).then(r => r.arrayBuffer()).then(b => new Promise((ok, no) => ctx.decodeAudioData(b, ok, no)));
@@ -97,18 +96,17 @@
     const src = (document.body && document.body.dataset.music) || '';
     if (!musicOn || !src || !ctx) { musicGen++; stopMusic(); return; }
     if (music && music.src === src && !music.stopping) return;      // läuft schon für diese Seite
-    if (src === finishedSrc) return;                                 // schon einmal ganz gehört
     const my = ++musicGen;
     stopMusic();
     let buf;
     try { buf = await loadBuffer(src); } catch (e) { return; }
     if (my !== musicGen || !musicOn) return;                         // inzwischen andere Seite oder wieder aus
-    const node = ctx.createBufferSource(); node.buffer = buf;
+    const node = ctx.createBufferSource(); node.buffer = buf; node.loop = true;   // läuft in Schleife, bis man den Ton ausschaltet
     const gain = ctx.createGain(); const t = ctx.currentTime;
     gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(MUSIC_VOL, t + FADE);
     node.connect(gain).connect(musicBus || ctx.destination); node.start(t);
     const m = { src, node, gain, stopping: false }; music = m; playing.add(m);
-    node.onended = () => { playing.delete(m); if (music === m) { music = null; if (!m.stopping) finishedSrc = m.src; } };
+    node.onended = () => { playing.delete(m); if (music === m) music = null; };
   }
 
   const Sound = {
@@ -123,17 +121,12 @@
       let s = 0; for (let i = a; i <= b; i++) s += freq[i];
       return s / ((b - a + 1) * 255);
     },
-    // Effekt-Klänge (Startseite, Zahlen, Klicks) an/aus
+    // Ein Schalter für alles: Effekt-Klänge (Startseite) und Seitenmusik (About, Case, Kontakt)
     set(v) {
-      on = !!v;
-      if (on) Sound.resume();
+      on = musicOn = !!v;
+      try { localStorage.setItem('sound', on ? '1' : '0'); } catch (e) {}
+      if (on) Sound.resume(true);
       else if (bedGain) bedGain.gain.setTargetAtTime(0, ctx.currentTime, 0.05);
-    },
-    // Musik der aktuellen Seite an/aus (Schalter auf About, Case, Kontakt)
-    music(v) {
-      musicOn = !!v; finishedSrc = '';
-      try { localStorage.setItem('music', musicOn ? '1' : '0'); } catch (e) {}
-      if (musicOn) Sound.resume(true);
       syncMusic(); refresh();
     },
     // Startet oder weckt den Ton. Freischalten geht nur innerhalb eines Klicks, Tipps oder Tastendrucks (fromGesture).
@@ -151,7 +144,7 @@
       refresh();
     },
     // Nach einem Seitenwechsel ohne Neuladen: altes Stück aus, Stück der neuen Seite an (wenn Musik eingeschaltet)
-    pageChanged() { finishedSrc = ''; if (bedGain && ctx) bedGain.gain.setTargetAtTime(0, ctx.currentTime, 0.05); syncMusic(); refresh(); },
+    pageChanged() { if (bedGain && ctx) bedGain.gain.setTargetAtTime(0, ctx.currentTime, 0.05); syncMusic(); refresh(); },
     key() { burst(1800 + Math.random() * 1400, 0.09, 0.035, 6); },
     tick() { tone(880, 0.06, 0.09); },
     hover() { burst(3200, 0.03, 0.03, 8); },
@@ -187,37 +180,32 @@
   listen(window, 'pageshow', () => Sound.resume());
 
   // Gemerkte Wahl aus einer anderen Seite. Standard: an. Nur wer selbst „off“ gewählt hat, bleibt stumm.
-  try { on = localStorage.getItem('sound') !== '0'; musicOn = localStorage.getItem('music') !== '0'; } catch (e) { on = true; musicOn = true; }
+  try { on = musicOn = localStorage.getItem('sound') !== '0'; } catch (e) { on = musicOn = true; }
 
-  // Schalter oben in der Navigation
-  // - Seite ohne Musik (Startseite): Effekt-Klänge, „( sound on )“ / „( sound off )“, Standard an
-  // - Seite mit Musik (About, Case, Kontakt): Standard an, jede Seite spielt ihr eigenes Stück (immer nur eins);
-  //   „( sound on )“ antippen schaltet die Musik überall aus, „( sound off )“ wieder an
-  // Nach einem Seitenwechsel ohne Neuladen ruft nav.js das erneut für die neuen Schalter auf.
-  Sound.bindToggles = function () {
-    labels = [];
-    document.querySelectorAll('[data-sound-toggle]').forEach(btn => {
-      const label = () => {
-        const short = window.matchMedia('(max-width:700px)').matches;
-        const hasMusic = !!(document.body && document.body.dataset.music);
-        const active = hasMusic ? musicOn : on;
-        // Nur Text wie die anderen Navigationspunkte; nur ändern, wenn nötig.
-        // (Wird der Inhalt während eines Klicks neu gebaut, verwirft Safari den Klick.)
-        const txt = short ? (active ? '( ♪ on )' : '( ♪ off )') : (active ? '( sound on )' : '( sound off )');
-        if (btn.textContent !== txt) btn.textContent = txt;
-        btn.setAttribute('role', 'switch');
-        btn.removeAttribute('aria-pressed');
-        btn.setAttribute('aria-checked', active);
-        btn.setAttribute('aria-label', hasMusic ? 'Musik' : 'Ton');
-      };
-      labels.push(label);
-      label();
-      btn.addEventListener('click', () => {
-        if (document.body && document.body.dataset.music) { Sound.music(!musicOn); return; }
-        Sound.set(!on); label(); Sound.tick();
-        try { localStorage.setItem('sound', on ? '1' : '0'); } catch (e) {}
-      });
+  // Ton-Schalter als kleine Pille unten links, auf allen Seiten gleich.
+  // Wird einmal gebaut und nach einem Seitenwechsel nur in die neue Seite umgehängt (bindToggles).
+  // Balken bewegen sich, wenn der Ton an ist; aus: ruhige Punkte und „sound off“ (zwei Merkmale, nicht nur Farbe).
+  let pill = null, pillText = null;
+  function buildPill() {
+    pill = document.createElement('button');
+    pill.type = 'button'; pill.className = 'snd'; pill.setAttribute('role', 'switch'); pill.setAttribute('aria-label', 'Ton');
+    pill.innerHTML = '<span class="snd-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="snd-t"></span>';
+    pillText = pill.querySelector('.snd-t');
+    pill.addEventListener('click', () => { Sound.set(!on); if (on) Sound.tick(); });
+    labels.push(() => {
+      const txt = on ? 'sound on' : 'sound off';
+      if (pillText.textContent !== txt) pillText.textContent = txt;   // nur ändern, wenn nötig (Safari verwirft sonst Klicks)
+      pill.setAttribute('aria-checked', on);
+      pill.classList.toggle('on', on);
     });
+  }
+  Sound.bindToggles = function () {
+    if (!document.body) return;
+    if (!pill) buildPill();
+    if (pill.parentNode !== document.body) document.body.appendChild(pill);
+    // alte Schalter oben in der Navigation, falls eine Seite sie noch hat, ausblenden
+    document.querySelectorAll('[data-sound-toggle]').forEach(b => b.remove());
+    refresh();
   };
   Sound.bindToggles();
 })();

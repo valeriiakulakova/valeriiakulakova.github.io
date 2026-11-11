@@ -51,11 +51,11 @@
     for (let i = intervals.length - 1; i >= 0; i--) if (intervals[i][1] === old) { raw.clearInterval(intervals[i][0]); intervals.splice(i, 1); }
   }
 
-  const SKIP = /(^|\/)(nav|sound|pixel)\.js(\?|$)/;
+  const SKIP = /(^|\/)(nav|sound|pixel|cursor)\.js(\?|$)/;
   function runScripts(scripts) {
     for (const old of scripts) {
       const src = old.getAttribute('src');
-      const loaded = src && ((/sound\.js/.test(src) && window.Sound) || (/pixel\.js/.test(src) && window.PixelFont) || /nav\.js/.test(src));
+      const loaded = src && ((/sound\.js/.test(src) && window.Sound) || (/pixel\.js/.test(src) && window.PixelFont) || /nav\.js/.test(src) || (/cursor\.js/.test(src) && window.Cursor));
       if (src && SKIP.test(src) && loaded) {
         if (/pixel\.js/.test(src) && window.PixelFont) document.querySelectorAll('[data-pixel]').forEach(el => { if (!el.querySelector('svg')) PixelFont.render(el); });
         if (/sound\.js/.test(src) && window.Sound && Sound.bindToggles) Sound.bindToggles();
@@ -88,6 +88,7 @@
       headScripts.forEach(h => { const s = document.createElement('script'); s.textContent = h.textContent; document.head.appendChild(s); s.remove(); });
       runScripts([...body.querySelectorAll('script')]);
       if (window.Sound && Sound.pageChanged) Sound.pageChanged();
+      if (window.Cursor) Cursor.attach();
       const hash = new URL(url, location.href).hash;
       const target = hash && document.getElementById(decodeURIComponent(hash.slice(1)));
       if (target) target.scrollIntoView(); else window.scrollTo(0, 0);
@@ -128,6 +129,7 @@
     go: url => enabled ? go(new URL(url, location.href).href, true) : (location.href = url),
     // Timer, die einen Seitenwechsel überdauern (für Ton und Tests)
     later: (fn, ms) => raw.setTimeout(fn, ms),
+    raf: cb => raw.raf(cb),
     // Für dauerhafte Dinge (Ton), die beim Seitenwechsel bleiben sollen
     on: (t, type, fn, opt) => (t === document ? raw.docAdd : raw.winAdd)(type, fn, opt)
   };
