@@ -843,6 +843,9 @@ html.has-cursor.cursor-on input,html.has-cursor.cursor-on textarea{cursor:text!i
 .cur-ring.hover{width:58px;height:58px;margin:-29px 0 0 -29px}
 .cur-ring.down{width:26px;height:26px;margin:-13px 0 0 -13px}
 .cur-dot{width:6px;height:6px;margin:-3px 0 0 -3px;background:var(--color-accent-dot)}
+html.has-cursor.cursor-on.cursor-native,html.has-cursor.cursor-on.cursor-native *{cursor:auto!important}
+html.has-cursor.cursor-on.cursor-native a,html.has-cursor.cursor-on.cursor-native button{cursor:pointer!important}
+.cursor-native .cur-ring,.cursor-native .cur-dot{opacity:0!important}
 
 /* ---------- Ton-Schalter in der Navigation: Text wie die anderen Punkte, „an“ in voller Textfarbe ---------- */
 html body header nav .sound[aria-checked="true"],html body .h3-top nav .sound[aria-checked="true"]{color:var(--color-text)}

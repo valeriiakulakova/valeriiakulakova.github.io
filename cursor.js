@@ -27,6 +27,7 @@
     on(window, 'pointermove', e => {
       if (e.pointerType && e.pointerType !== 'mouse' && e.pointerType !== 'pen') return;
       x = e.clientX; y = e.clientY;
+      document.documentElement.classList.toggle('cursor-native', !!document.querySelector('dialog[open]'));
       if (!seen) { seen = true; rx = x; ry = y; document.documentElement.classList.add('cursor-on'); }
       const t = e.target && e.target.closest ? e.target.closest(HOVER) : null;
       if (ring) ring.classList.toggle('hover', !!t);
@@ -38,6 +39,8 @@
       const k = reduce ? 1 : 0.22;
       rx += (x - rx) * k; ry += (y - ry) * k;
       if (ring) { ring.style.transform = `translate(${rx}px,${ry}px)`; dot.style.transform = `translate(${x}px,${y}px)`; }
+      // Offenes Fenster (Video, Showreel) liegt immer über allem, auch über diesem Zeiger: dann normaler Mauszeiger
+      document.documentElement.classList.toggle('cursor-native', !!document.querySelector('dialog[open]'));
       raf(loop);
     })();
     if (document.body) attach(); else on(document, 'DOMContentLoaded', attach);
