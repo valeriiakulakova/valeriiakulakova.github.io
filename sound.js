@@ -17,7 +17,6 @@
 (function () {
   let ctx = null, on = false, noise = null, bedGain = null, bedFilter = null;
   let labels = [];
-  let unlockedAt = -1e9;   // Zeitpunkt, zu dem eine Geste den wartenden Ton freigeschaltet hat
   let gestured = false;    // gab es in dieser Sitzung schon einen Klick, Tipp oder Tastendruck?
   // Safari meldet manchmal „running“, spielt aber vor dem ersten Klick nichts ab: deshalb zählt erst die Geste
   const ready = () => gestured && !!ctx && ctx.state === 'running';
@@ -66,46 +65,62 @@
   // ---- Seitenmusik (Dateien von Pixabay, lokal in media/sounds) ----
   const MUSIC_VOL = 0.22, FADE = 0.8;
   const buffers = {};            // geladene Musik, je Datei einmal
-  let music = null;              // { src, node, gain }
+  let music = null;              // { src, node, gain } – das Stück der aktuellen Seite
+  const playing = new Set();     // alle gestarteten Musikstücke, damit beim Wechsel sicher jedes endet
+  let musicOn = false;          // Musik dieser Seite angetippt? Startet jede Seite wieder mit „aus“
+  let musicGen = 0;              // jede Seite bekommt eine Nummer; ältere Ladevorgänge werden verworfen
+  const later = (fn, ms) => (window.SoftNav ? SoftNav.later(fn, ms) : setTimeout(fn, ms));
   async function loadBuffer(src) {
     if (!buffers[src]) buffers[src] = fetch(src).then(r => r.arrayBuffer()).then(b => new Promise((ok, no) => ctx.decodeAudioData(b, ok, no)));
     return buffers[src];
   }
   function stopMusic() {
-    if (!music || !ctx) { music = null; return; }
-    const m = music, t = ctx.currentTime; music = null;
-    m.gain.gain.cancelScheduledValues(t); m.gain.gain.setValueAtTime(m.gain.gain.value, t);
-    m.gain.gain.linearRampToValueAtTime(0, t + FADE);
-    try { m.node.stop(t + FADE + 0.05); } catch (e) {}
+    music = null;
+    if (!ctx) { playing.clear(); return; }
+    const t = ctx.currentTime;
+    playing.forEach(m => {
+      if (m.stopping) return; m.stopping = true;
+      try { m.gain.gain.cancelScheduledValues(t); m.gain.gain.setTargetAtTime(0, t, FADE / 4); } catch (e) {}
+      try { m.node.stop(t + FADE + 0.1); } catch (e) {}
+      // Sicherheitsnetz: nach dem Ausblenden auf jeden Fall trennen
+      later(() => { try { m.node.disconnect(); m.gain.disconnect(); } catch (e) {} playing.delete(m); }, (FADE + 0.2) * 1000);
+    });
   }
   async function syncMusic() {
     const src = (document.body && document.body.dataset.music) || '';
-    if (!on || !ready() || !src) { stopMusic(); return; }
-    if (music && music.src === src) return;          // läuft schon für diese Seite
+    if (!musicOn || !src || !ctx) { musicGen++; stopMusic(); return; }
+    if (music && music.src === src && !music.stopping) return;      // läuft schon für diese Seite
+    const my = ++musicGen;
     stopMusic();
-    const want = src; let buf;
+    let buf;
     try { buf = await loadBuffer(src); } catch (e) { return; }
-    if (!on || !ready() || ((document.body && document.body.dataset.music) || '') !== want || (music && music.src === want)) return;
+    if (my !== musicGen || !musicOn) return;                         // inzwischen andere Seite oder wieder aus
     const node = ctx.createBufferSource(); node.buffer = buf;
     const gain = ctx.createGain(); const t = ctx.currentTime;
     gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(MUSIC_VOL, t + FADE);
     node.connect(gain).connect(ctx.destination); node.start(t);
-    const m = { src, node, gain }; music = m;
-    node.onended = () => { if (music === m) music = null; };
+    const m = { src, node, gain, stopping: false }; music = m; playing.add(m);
+    node.onended = () => { playing.delete(m); if (music === m) music = null; };
   }
 
   const Sound = {
     get on() { return on; },
     get musicSrc() { return music ? music.src : ''; },   // welche Seitenmusik gerade läuft (zum Prüfen)
+    get musicOn() { return musicOn; },
+    // Effekt-Klänge (Startseite, Zahlen, Klicks) an/aus
     set(v) {
       on = !!v;
       if (on) Sound.resume();
       else if (bedGain) bedGain.gain.setTargetAtTime(0, ctx.currentTime, 0.05);
-      syncMusic();
+    },
+    // Musik der aktuellen Seite an/aus (Schalter auf About, Case, Kontakt)
+    music(v) {
+      musicOn = !!v;
+      if (musicOn) Sound.resume(true);
+      syncMusic(); refresh();
     },
     // Startet oder weckt den Ton. Freischalten geht nur innerhalb eines Klicks, Tipps oder Tastendrucks (fromGesture).
     resume(fromGesture) {
-      if (!on) return;
       if (fromGesture) {
         gestured = true;
         init();
@@ -114,12 +129,11 @@
           try { const b = ctx.createBuffer(1, 1, 22050), s = ctx.createBufferSource(); s.buffer = b; s.connect(ctx.destination); s.start(0); } catch (e) {}
         }
       }
-      if (gestured && ctx && ctx.state !== 'running') ctx.resume().then(() => { refresh(); syncMusic(); }).catch(() => {});
+      if (gestured && ctx && ctx.state !== 'running') ctx.resume().then(refresh).catch(() => {});
       refresh();
-      if (ready() && !music) syncMusic();
     },
-    // Nach einem Seitenwechsel ohne Neuladen: Musik der neuen Seite starten
-    pageChanged() { syncMusic(); },
+    // Nach einem Seitenwechsel ohne Neuladen: Musik der alten Seite stoppen, neue Seite beginnt still
+    pageChanged() { musicOn = false; syncMusic(); refresh(); },
     key() { burst(1800 + Math.random() * 1400, 0.09, 0.035, 6); },
     tick() { tone(880, 0.06, 0.09); },
     hover() { burst(3200, 0.03, 0.03, 8); },
@@ -150,35 +164,34 @@
   };
   window.Sound = Sound;
   // Jede echte Nutzer-Geste darf den Ton freischalten (Scrollen und Mausrad zählen beim Browser nicht)
-  ['pointerdown', 'pointerup', 'mousedown', 'click', 'keydown', 'touchend'].forEach(ev => listen(window, ev, () => {
-    if (on && !ready()) unlockedAt = performance.now();
-    Sound.resume(true);
-  }, { passive: true, capture: true }));
+  ['pointerdown', 'pointerup', 'mousedown', 'click', 'keydown', 'touchend'].forEach(ev => listen(window, ev, () => Sound.resume(true), { passive: true, capture: true }));
   listen(document, 'visibilitychange', () => { if (!document.hidden) Sound.resume(); });
   listen(window, 'pageshow', () => Sound.resume());
 
   // Gemerkte Wahl aus einer anderen Seite. Standard: an. Nur wer selbst „off“ gewählt hat, bleibt stumm.
   try { on = localStorage.getItem('sound') !== '0'; } catch (e) { on = true; }
 
-  // Schalter „( sound off / on )“; „( tap for sound )“, solange der Browser den Ton noch sperrt.
+  // Schalter oben in der Navigation
+  // - Seite ohne Musik (Startseite): Effekt-Klänge, „( sound on )“ / „( sound off )“, Standard an
+  // - Seite mit Musik (About, Case, Kontakt): „( tap for sound )“ startet die Musik, „( sound on )“ stoppt sie wieder
   // Nach einem Seitenwechsel ohne Neuladen ruft nav.js das erneut für die neuen Schalter auf.
   Sound.bindToggles = function () {
     labels = [];
     document.querySelectorAll('[data-sound-toggle]').forEach(btn => {
       const label = () => {
         const short = window.matchMedia('(max-width:700px)').matches;
-        const waiting = on && !ready();
-        btn.textContent = !on ? (short ? '( ♪ off )' : '( sound off )')
-          : waiting ? (short ? '( ♪ tap )' : '( tap for sound )')
-          : (short ? '( ♪ on )' : '( sound on )');
-        btn.setAttribute('aria-pressed', on);
-        btn.setAttribute('aria-label', !on ? 'Ton aus' : waiting ? 'Ton an, startet mit dem nächsten Klick' : 'Ton an');
+        const hasMusic = !!(document.body && document.body.dataset.music);
+        const active = hasMusic ? musicOn : on;
+        btn.textContent = active ? (short ? '( ♪ on )' : '( sound on )')
+          : hasMusic ? (short ? '( ♪ tap )' : '( tap for sound )')
+          : (short ? '( ♪ off )' : '( sound off )');
+        btn.setAttribute('aria-pressed', active);
+        btn.setAttribute('aria-label', hasMusic ? (active ? 'Musik dieser Seite stoppen' : 'Musik dieser Seite abspielen') : (active ? 'Ton ausschalten' : 'Ton einschalten'));
       };
       labels.push(label);
       label();
       btn.addEventListener('click', () => {
-        // Wartet der Ton nur auf einen Klick, startet dieser Klick ihn, statt ihn auszuschalten
-        if (on && (!ready() || performance.now() - unlockedAt < 1000)) { Sound.resume(true); label(); return; }
+        if (document.body && document.body.dataset.music) { Sound.music(!musicOn); return; }
         Sound.set(!on); label(); Sound.tick();
         try { localStorage.setItem('sound', on ? '1' : '0'); } catch (e) {}
       });
