@@ -189,8 +189,10 @@
         const short = window.matchMedia('(max-width:700px)').matches;
         const hasMusic = !!(document.body && document.body.dataset.music);
         const active = hasMusic ? musicOn : on;
-        // Schalter + Text: Zustand über Knopf-Position, Farbe und Wort (nicht nur Farbe)
-        btn.innerHTML = '<span class="sw" aria-hidden="true"><i></i></span><span>' + (short ? (active ? 'on' : 'off') : (active ? 'sound on' : 'sound off')) + '</span>';
+        // Nur Text wie die anderen Navigationspunkte; nur ändern, wenn nötig.
+        // (Wird der Inhalt während eines Klicks neu gebaut, verwirft Safari den Klick.)
+        const txt = short ? (active ? '( ♪ on )' : '( ♪ off )') : (active ? '( sound on )' : '( sound off )');
+        if (btn.textContent !== txt) btn.textContent = txt;
         btn.setAttribute('role', 'switch');
         btn.removeAttribute('aria-pressed');
         btn.setAttribute('aria-checked', active);
