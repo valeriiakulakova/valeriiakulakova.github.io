@@ -145,7 +145,7 @@
           try { const b = ctx.createBuffer(1, 1, 22050), s = ctx.createBufferSource(); s.buffer = b; s.connect(ctx.destination); s.start(0); } catch (e) {}
         }
       }
-      if (on && gestured && ctx && ctx.state !== 'running') ctx.resume().then(() => { refresh(); if (!music) syncMusic(); }).catch(() => {});
+      if (on && gestured && !document.hidden && ctx && ctx.state !== 'running') ctx.resume().then(() => { refresh(); if (!music) syncMusic(); }).catch(() => {});
       else if (fromGesture && ctx && !music) syncMusic();   // erster Klick auf einer Musik-Seite: Stück starten
       refresh();
     },
@@ -185,7 +185,23 @@
     if (!gestured && (ev === 'pointerdown' || ev === 'mousedown' || ev === 'keydown' || ev === 'touchend')) firstGesture = true;
     Sound.resume(true);
   }, { passive: true, capture: true }));
-  listen(document, 'visibilitychange', () => { if (!document.hidden) Sound.resume(); });
+  // Nur der sichtbare Tab spielt: verdeckter Tab oder minimiertes Fenster pausiert den Ton, Zurückkommen setzt ihn fort.
+  // So vermischen sich mehrere offene Tabs nicht.
+  listen(document, 'visibilitychange', () => {
+    if (!ctx) return;
+    if (document.hidden) { if (ctx.state === 'running') ctx.suspend().catch(() => {}); }
+    else Sound.resume();
+  });
+  // „sound on/off“ gilt für alle offenen Tabs dieser Website gleichzeitig
+  listen(window, 'storage', e => {
+    if (e.key !== 'sound') return;
+    const v = e.newValue !== '0';
+    if (v === on) return;
+    on = musicOn = v;
+    if (!v) { if (bedGain && ctx) bedGain.gain.setTargetAtTime(0, ctx.currentTime, 0.05); musicGen++; stopMusic(); if (ctx && ctx.state === 'running') ctx.suspend().catch(() => {}); }
+    else if (!document.hidden) { Sound.resume(); syncMusic(); }
+    refresh();
+  });
   listen(window, 'pageshow', () => Sound.resume());
 
   // Gemerkte Wahl aus einer anderen Seite. Standard: an. Nur wer selbst „off“ gewählt hat, bleibt stumm.
