@@ -76,6 +76,7 @@
   const playing = new Set();     // alle gestarteten Musikstücke, damit beim Wechsel sicher jedes endet
   let musicOn = true;           // Seitenmusik: Standard an, gilt für alle Seiten, bis man sie ausschaltet
   let musicGen = 0;
+  let finishedSrc = '';          // Stück einer Seite ohne Schleife ist zu Ende: bis zum Seitenwechsel still bleiben
   const later = (fn, ms) => (window.SoftNav ? SoftNav.later(fn, ms) : setTimeout(fn, ms));
   async function loadBuffer(src) {
     if (!buffers[src]) buffers[src] = fetch(src).then(r => r.arrayBuffer()).then(b => new Promise((ok, no) => ctx.decodeAudioData(b, ok, no)));
@@ -97,17 +98,19 @@
     const src = (document.body && document.body.dataset.music) || '';
     if (!musicOn || !src || !ctx) { musicGen++; stopMusic(); return; }
     if (music && music.src === src && !music.stopping) return;      // läuft schon für diese Seite
+    if (src === finishedSrc) return;                                 // einmal gespielt, jetzt still
     const my = ++musicGen;
     stopMusic();
     let buf;
     try { buf = await loadBuffer(src); } catch (e) { return; }
     if (my !== musicGen || !musicOn) return;                         // inzwischen andere Seite oder wieder aus
-    const node = ctx.createBufferSource(); node.buffer = buf; node.loop = true;   // läuft in Schleife, bis man den Ton ausschaltet
+    const node = ctx.createBufferSource(); node.buffer = buf;
+    node.loop = 'musicLoop' in document.body.dataset;   // Schleife nur, wo die Seite es will (Projekt-Seite), sonst einmal
     const gain = ctx.createGain(); const t = ctx.currentTime;
     gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(MUSIC_VOL, t + FADE);
     node.connect(gain).connect(musicBus || ctx.destination); node.start(t);
     const m = { src, node, gain, stopping: false }; music = m; playing.add(m);
-    node.onended = () => { playing.delete(m); if (music === m) music = null; };
+    node.onended = () => { playing.delete(m); if (music === m) { music = null; if (!m.stopping) finishedSrc = m.src; } };
   }
 
   const Sound = {
@@ -126,7 +129,7 @@
     set(v) {
       on = musicOn = !!v;
       try { localStorage.setItem('sound', on ? '1' : '0'); } catch (e) {}
-      if (on) { Sound.resume(true); syncMusic(); }
+      if (on) { finishedSrc = ''; Sound.resume(true); syncMusic(); }
       else {
         if (bedGain && ctx) bedGain.gain.setTargetAtTime(0, ctx.currentTime, 0.05);
         musicGen++; stopMusic();
@@ -150,7 +153,7 @@
       refresh();
     },
     // Nach einem Seitenwechsel ohne Neuladen: altes Stück aus, Stück der neuen Seite an (wenn Musik eingeschaltet)
-    pageChanged() { if (bedGain && ctx) bedGain.gain.setTargetAtTime(0, ctx.currentTime, 0.05); syncMusic(); refresh(); },
+    pageChanged() { finishedSrc = ''; if (bedGain && ctx) bedGain.gain.setTargetAtTime(0, ctx.currentTime, 0.05); syncMusic(); refresh(); },
     key() { burst(1800 + Math.random() * 1400, 0.09, 0.035, 6); },
     tick() { tone(880, 0.06, 0.09); },
     hover() { burst(3200, 0.03, 0.03, 8); },
