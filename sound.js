@@ -70,7 +70,8 @@
   let music = null;              // { src, node, gain } – das Stück der aktuellen Seite
   const playing = new Set();     // alle gestarteten Musikstücke, damit beim Wechsel sicher jedes endet
   let musicOn = true;           // Seitenmusik: Standard an, gilt für alle Seiten, bis man sie ausschaltet
-  let musicGen = 0;              // jede Seite bekommt eine Nummer; ältere Ladevorgänge werden verworfen
+  let musicGen = 0;
+  let finishedSrc = '';          // Stück dieser Seite ist zu Ende gespielt: nicht bei jedem Klick neu starten              // jede Seite bekommt eine Nummer; ältere Ladevorgänge werden verworfen
   const later = (fn, ms) => (window.SoftNav ? SoftNav.later(fn, ms) : setTimeout(fn, ms));
   async function loadBuffer(src) {
     if (!buffers[src]) buffers[src] = fetch(src).then(r => r.arrayBuffer()).then(b => new Promise((ok, no) => ctx.decodeAudioData(b, ok, no)));
@@ -92,6 +93,7 @@
     const src = (document.body && document.body.dataset.music) || '';
     if (!musicOn || !src || !ctx) { musicGen++; stopMusic(); return; }
     if (music && music.src === src && !music.stopping) return;      // läuft schon für diese Seite
+    if (src === finishedSrc) return;                                 // schon einmal ganz gehört
     const my = ++musicGen;
     stopMusic();
     let buf;
@@ -102,7 +104,7 @@
     gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(MUSIC_VOL, t + FADE);
     node.connect(gain).connect(ctx.destination); node.start(t);
     const m = { src, node, gain, stopping: false }; music = m; playing.add(m);
-    node.onended = () => { playing.delete(m); if (music === m) music = null; };
+    node.onended = () => { playing.delete(m); if (music === m) { music = null; if (!m.stopping) finishedSrc = m.src; } };
   }
 
   const Sound = {
@@ -117,7 +119,7 @@
     },
     // Musik der aktuellen Seite an/aus (Schalter auf About, Case, Kontakt)
     music(v) {
-      musicOn = !!v;
+      musicOn = !!v; finishedSrc = '';
       try { localStorage.setItem('music', musicOn ? '1' : '0'); } catch (e) {}
       if (musicOn) Sound.resume(true);
       syncMusic(); refresh();
@@ -137,7 +139,7 @@
       refresh();
     },
     // Nach einem Seitenwechsel ohne Neuladen: altes Stück aus, Stück der neuen Seite an (wenn Musik eingeschaltet)
-    pageChanged() { if (bedGain && ctx) bedGain.gain.setTargetAtTime(0, ctx.currentTime, 0.05); syncMusic(); refresh(); },
+    pageChanged() { finishedSrc = ''; if (bedGain && ctx) bedGain.gain.setTargetAtTime(0, ctx.currentTime, 0.05); syncMusic(); refresh(); },
     key() { burst(1800 + Math.random() * 1400, 0.09, 0.035, 6); },
     tick() { tone(880, 0.06, 0.09); },
     hover() { burst(3200, 0.03, 0.03, 8); },
@@ -187,9 +189,12 @@
         const short = window.matchMedia('(max-width:700px)').matches;
         const hasMusic = !!(document.body && document.body.dataset.music);
         const active = hasMusic ? musicOn : on;
-        btn.textContent = active ? (short ? '( ♪ on )' : '( sound on )') : (short ? '( ♪ off )' : '( sound off )');
-        btn.setAttribute('aria-pressed', active);
-        btn.setAttribute('aria-label', hasMusic ? (active ? 'Musik dieser Seite stoppen' : 'Musik dieser Seite abspielen') : (active ? 'Ton ausschalten' : 'Ton einschalten'));
+        // Schalter + Text: Zustand über Knopf-Position, Farbe und Wort (nicht nur Farbe)
+        btn.innerHTML = '<span class="sw" aria-hidden="true"><i></i></span><span>' + (short ? (active ? 'on' : 'off') : (active ? 'sound on' : 'sound off')) + '</span>';
+        btn.setAttribute('role', 'switch');
+        btn.removeAttribute('aria-pressed');
+        btn.setAttribute('aria-checked', active);
+        btn.setAttribute('aria-label', hasMusic ? 'Musik' : 'Ton');
       };
       labels.push(label);
       label();
