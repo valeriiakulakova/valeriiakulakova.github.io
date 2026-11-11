@@ -67,6 +67,8 @@
     const { cells: rects, width: x } = cellsFor(text);
     const svg = document.createElementNS(NS, 'svg');
     svg.setAttribute('viewBox', '0 0 ' + x + ' 7');
+    // Eigene Größe angeben: sonst setzt Safari für die Grafik 300 px Breite ein und verschiebt das Layout
+    svg.setAttribute('width', x); svg.setAttribute('height', 7);
     svg.setAttribute('aria-hidden', 'true');
     svg.setAttribute('focusable', 'false');
     svg.setAttribute('shape-rendering', 'crispEdges');
