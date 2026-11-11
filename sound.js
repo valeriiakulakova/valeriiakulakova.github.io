@@ -14,16 +14,21 @@
      Sound.chime()      zwei helle Töne, wenn eine neue Jahreszahl erscheint */
 (function () {
   let ctx = null, on = false, noise = null, bedGain = null, bedFilter = null;
-  const labels = [];
+  let labels = [];
   let unlockedAt = -1e9;   // Zeitpunkt, zu dem eine Geste den wartenden Ton freigeschaltet hat
-  const ready = () => !!ctx && ctx.state === 'running';
+  let gestured = false;    // gab es in dieser Sitzung schon einen Klick, Tipp oder Tastendruck?
+  // Safari meldet manchmal „running“, spielt aber vor dem ersten Klick nichts ab: deshalb zählt erst die Geste
+  const ready = () => gestured && !!ctx && ctx.state === 'running';
+  const refresh = () => labels.forEach(f => f());
+  // Dauerhafte Listener: bleiben beim Seitenwechsel ohne Neuladen (nav.js) erhalten
+  const listen = (tg, type, fn, opt) => window.SoftNav ? SoftNav.on(tg, type, fn, opt) : tg.addEventListener(type, fn, opt);
 
   function init() {
     if (ctx) return;
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return;
     ctx = new AC();
-    ctx.onstatechange = () => labels.forEach(f => f());
+    ctx.onstatechange = refresh;
     noise = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
     const d = noise.getChannelData(0);
     for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
@@ -63,11 +68,19 @@
       if (on) Sound.resume();
       else if (bedGain) bedGain.gain.setTargetAtTime(0, ctx.currentTime, 0.05);
     },
-    // Startet oder weckt den Ton. Wirkt nur innerhalb eines Klicks, Tipps oder Tastendrucks.
-    resume() {
+    // Startet oder weckt den Ton. Freischalten geht nur innerhalb eines Klicks, Tipps oder Tastendrucks (fromGesture).
+    resume(fromGesture) {
       if (!on) return;
-      init();
-      if (ctx && ctx.state !== 'running') ctx.resume().then(() => labels.forEach(f => f())).catch(() => {});
+      if (fromGesture) {
+        gestured = true;
+        init();
+        if (ctx) {
+          // stummer Mini-Ton im Klick: so gibt auch Safari die Ausgabe frei
+          try { const b = ctx.createBuffer(1, 1, 22050), s = ctx.createBufferSource(); s.buffer = b; s.connect(ctx.destination); s.start(0); } catch (e) {}
+        }
+      }
+      if (gestured && ctx && ctx.state !== 'running') ctx.resume().then(refresh).catch(() => {});
+      refresh();
     },
     key() { burst(1800 + Math.random() * 1400, 0.09, 0.035, 6); },
     tick() { tone(880, 0.06, 0.09); },
@@ -99,35 +112,39 @@
   };
   window.Sound = Sound;
   // Jede echte Nutzer-Geste darf den Ton freischalten (Scrollen und Mausrad zählen beim Browser nicht)
-  ['pointerdown', 'pointerup', 'mousedown', 'click', 'keydown', 'touchend'].forEach(ev => window.addEventListener(ev, () => {
+  ['pointerdown', 'pointerup', 'mousedown', 'click', 'keydown', 'touchend'].forEach(ev => listen(window, ev, () => {
     if (on && !ready()) unlockedAt = performance.now();
-    Sound.resume();
+    Sound.resume(true);
   }, { passive: true, capture: true }));
-  document.addEventListener('visibilitychange', () => { if (!document.hidden) Sound.resume(); });
-  window.addEventListener('pageshow', () => Sound.resume());
+  listen(document, 'visibilitychange', () => { if (!document.hidden) Sound.resume(); });
+  listen(window, 'pageshow', () => Sound.resume());
 
-  // Gemerkte Wahl aus einer anderen Seite. Der Ton selbst startet erst mit dem ersten Klick oder Tipp.
-  // Standard: an. Nur wer selbst „off“ gewählt hat, bleibt stumm.
+  // Gemerkte Wahl aus einer anderen Seite. Standard: an. Nur wer selbst „off“ gewählt hat, bleibt stumm.
   try { on = localStorage.getItem('sound') !== '0'; } catch (e) { on = true; }
 
-  // Schalter „( sound off / on )“; „( tap for sound )“, solange der Browser den Ton noch sperrt
-  document.querySelectorAll('[data-sound-toggle]').forEach(btn => {
-    const label = () => {
-      const short = window.matchMedia('(max-width:700px)').matches;
-      const waiting = on && !ready();
-      btn.textContent = !on ? (short ? '( ♪ off )' : '( sound off )')
-        : waiting ? (short ? '( ♪ tap )' : '( tap for sound )')
-        : (short ? '( ♪ on )' : '( sound on )');
-      btn.setAttribute('aria-pressed', on);
-      btn.setAttribute('aria-label', !on ? 'Ton aus' : waiting ? 'Ton an, startet mit dem nächsten Klick' : 'Ton an');
-    };
-    labels.push(label);
-    label();
-    btn.addEventListener('click', () => {
-      // Wartet der Ton nur auf einen Klick, startet dieser Klick ihn, statt ihn auszuschalten
-      if (on && (!ready() || performance.now() - unlockedAt < 1000)) { Sound.resume(); label(); return; }
-      Sound.set(!on); label(); Sound.tick();
-      try { localStorage.setItem('sound', on ? '1' : '0'); } catch (e) {}
+  // Schalter „( sound off / on )“; „( tap for sound )“, solange der Browser den Ton noch sperrt.
+  // Nach einem Seitenwechsel ohne Neuladen ruft nav.js das erneut für die neuen Schalter auf.
+  Sound.bindToggles = function () {
+    labels = [];
+    document.querySelectorAll('[data-sound-toggle]').forEach(btn => {
+      const label = () => {
+        const short = window.matchMedia('(max-width:700px)').matches;
+        const waiting = on && !ready();
+        btn.textContent = !on ? (short ? '( ♪ off )' : '( sound off )')
+          : waiting ? (short ? '( ♪ tap )' : '( tap for sound )')
+          : (short ? '( ♪ on )' : '( sound on )');
+        btn.setAttribute('aria-pressed', on);
+        btn.setAttribute('aria-label', !on ? 'Ton aus' : waiting ? 'Ton an, startet mit dem nächsten Klick' : 'Ton an');
+      };
+      labels.push(label);
+      label();
+      btn.addEventListener('click', () => {
+        // Wartet der Ton nur auf einen Klick, startet dieser Klick ihn, statt ihn auszuschalten
+        if (on && (!ready() || performance.now() - unlockedAt < 1000)) { Sound.resume(true); label(); return; }
+        Sound.set(!on); label(); Sound.tick();
+        try { localStorage.setItem('sound', on ? '1' : '0'); } catch (e) {}
+      });
     });
-  });
+  };
+  Sound.bindToggles();
 })();

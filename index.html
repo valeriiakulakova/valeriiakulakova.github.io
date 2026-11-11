@@ -7,6 +7,7 @@
 <title>Valeriia Kulakova · product builder</title>
 <meta name="description" content="Valeriia Kulakova, Product Designerin aus München.">
 <link rel="stylesheet" href="style.css">
+<script src="nav.js"></script>
 </head>
 <body class="page-home">
 <a class="skip" href="#ordner">Zu den Ordnern springen</a>
@@ -244,7 +245,7 @@
     Sound.whoosh();
     if(reduce||e.metaKey||e.ctrlKey) return;
     e.preventDefault(); a.classList.add('zoom'); a.closest('.stage').classList.add('leaving');
-    setTimeout(()=>{location.href=a.getAttribute('href')},650);
+    setTimeout(()=>{window.SoftNav?SoftNav.go(a.getAttribute('href')):(location.href=a.getAttribute('href'))},650);
   }));
   if('scrollRestoration' in history) history.scrollRestoration='manual';
   window.addEventListener('pageshow',()=>{
