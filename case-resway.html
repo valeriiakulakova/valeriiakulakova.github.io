@@ -6,7 +6,7 @@
 <meta name="tdm-reservation" content="1">
 <title>ReSway · Case Study · Valeriia Kulakova</title>
 <meta name="description" content="ReSway: eine App, die Menschen mit ADHS beim Wiedereinstieg in ihre Routinen hilft. Case Study von Valeriia Kulakova.">
-<link rel="stylesheet" href="style.css?v=0f10962f">
+<link rel="stylesheet" href="style.css?v=3808c1bf">
 <script src="nav.js?v=99ee467f"></script>
 <script src="cursor.js?v=5340a399"></script>
 <script>document.documentElement.classList.add('js');</script>
@@ -214,19 +214,19 @@
   <ol class="feats">
     <li class="feat">
       <div class="feat-txt"><span class="feat-n">01</span><h3>Stufe wählen</h3><p>Nach einer Pause startet man eine Stufe kleiner, nicht bei null.</p></div>
-      <img class="feat-img" src="media/resway/frei/2-stufe.png" width="1600" height="1000" loading="lazy" decoding="async" alt="Screen „Wie steigst du ein?“ und daneben groß die Stufen-Karte mit 2,5 km.">
+      <div class="feat-vis"><img class="feat-img" src="media/resway/frei/2-stufe.png" width="1600" height="1000" loading="lazy" decoding="async" alt="Screen „Wie steigst du ein?“ und daneben groß die Stufen-Karte mit 2,5 km."><figure class="pop pop-br"><span class="pop-l">4 Schritte</span><img src="media/resway/details/stufe-schritte.png" width="730" height="126" loading="lazy" decoding="async" alt="Schritt-Leiste: Schritt 1 von 4, Version, danach Zeit, Tage und Erinnerung."></figure></div>
     </li>
     <li class="feat">
       <div class="feat-txt"><span class="feat-n">02</span><h3>Menge einstellen</h3><p>Am Regler lässt sich die Menge besser schätzen als in einem Zahlenfeld. Und er macht Spaß: Als ADHSlerin weiß ich, wie schnell nüchterne Listen abschrecken.</p></div>
-      <img class="feat-img" src="media/resway/frei/3-menge.png" width="1600" height="1000" loading="lazy" decoding="async" alt="groß der Mengen-Regler mit 10 Minuten, daneben der Screen „Neue Routine“.">
+      <div class="feat-vis"><img class="feat-img" src="media/resway/frei/3-menge.png" width="1600" height="1000" loading="lazy" decoding="async" alt="groß der Mengen-Regler mit 10 Minuten, daneben der Screen „Neue Routine“."><figure class="pop pop-bl"><span class="pop-l">Zeit</span><img src="media/resway/details/zeit-chips.jpg" width="572" height="96" loading="lazy" decoding="async" alt="Auswahl der Tageszeit: Morgens, Mittags, Abends."></figure></div>
     </li>
     <li class="feat">
       <div class="feat-txt"><span class="feat-n">03</span><h3>Eine Sache im Fokus</h3><p>Statt einer langen Liste zeigt ReSway nur, was jetzt dran ist. So muss man nicht erst entscheiden, womit man anfängt.</p><p class="hex"><span>Hex</span><i style="--c:#EDFF8C"></i>EDFF8C<span>Lime nur dort, wo jemand zurückkommt</span></p></div>
-      <img class="feat-img" src="media/resway/frei/4-fokus.png" width="1600" height="1000" loading="lazy" decoding="async" alt="Screen „Heute“ und daneben groß die Restart-Karte Laufen im Stapel.">
+      <div class="feat-vis"><img class="feat-img" src="media/resway/frei/4-fokus.png" width="1600" height="1000" loading="lazy" decoding="async" alt="Screen „Heute“ und daneben groß die Restart-Karte Laufen im Stapel."><figure class="pop pop-br pop-sq"><span class="pop-l">Abhaken</span><img src="media/resway/details/fokus-haken.png" width="124" height="124" loading="lazy" decoding="async" alt="Runder Knopf mit Haken auf der Restart-Karte."></figure></div>
     </li>
     <li class="feat">
       <div class="feat-txt"><span class="feat-n">04</span><h3>Zurückkommen feiern</h3><p>Gefeiert wird der Wiedereinstieg, nicht eine Serie. Das setzt etwas gegen das Gefühl, versagt zu haben.</p></div>
-      <img class="feat-img" src="media/resway/frei/5-feiern.png" width="1600" height="1000" loading="lazy" decoding="async" alt="Screen „Du warst da.“ und daneben groß die Wochen-Karte mit dem ersten Haken.">
+      <div class="feat-vis"><img class="feat-img" src="media/resway/frei/5-feiern.png" width="1600" height="1000" loading="lazy" decoding="async" alt="Screen „Du warst da.“ und daneben groß die Wochen-Karte mit dem ersten Haken."><figure class="pop pop-br"><span class="pop-l">Figur</span><img src="media/resway/details/figur.png" width="1556" height="454" loading="lazy" decoding="async" alt="Die ReSway-Figur flach liegend und als w geformt."></figure></div>
     </li>
   </ol>
 </section>
@@ -448,7 +448,7 @@
   // Ruhiges Erscheinen
   // Nacheinander erscheinen: Überschrift, dann Text, dann Karten und Bilder; was gleichzeitig ins Bild kommt, erscheint versetzt
   io(document.querySelectorAll('.mk-anim'),el=>el.classList.add('in'),.4);
-  const rv=[...document.querySelectorAll('.sh h2,.sh .sh-txt,.vi-txt,.vi-img,.pv-row > *,.facts > div,.stat,.quote-row > *,.dec4 > *,.voices,.bigquote,.flowvid .fv-dev,.flowvid figcaption,.feat-txt,.feat-img,.ba,.result li,.cols4 li,.learn li,.af-c,.af-ins,.ba3-item')];
+  const rv=[...document.querySelectorAll('.sh h2,.sh .sh-txt,.vi-txt,.vi-img,.pv-row > *,.facts > div,.stat,.quote-row > *,.dec4 > *,.voices,.bigquote,.flowvid .fv-dev,.flowvid figcaption,.feat-txt,.feat-img,.ba,.result li,.cols4 li,.learn li,.af-c,.af-ins,.ba3-item,.pop')];
   document.querySelectorAll('.feat').forEach((f,i)=>{const img=f.querySelector('.feat-img'); if(img) img.classList.add(i%2?'rv-l':'rv-r');});
   rv.forEach(el=>el.classList.add('rv'));
   if(!reduce){
