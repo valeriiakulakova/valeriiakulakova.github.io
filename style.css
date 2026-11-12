@@ -1059,6 +1059,20 @@ body.page-case .task-list a{min-height:32px;padding:0 10px;font-size:.72rem}
 @media (prefers-reduced-motion:reduce){
 body.page-case .task-list a{transition:none}
 }
+body.page-case .scene{perspective:1300px;perspective-origin:calc(50% + var(--px,0) * 60%) calc(42% + var(--py,0) * 50%);transition:opacity .35s,perspective-origin .5s cubic-bezier(.2,.7,.2,1)}
+body.page-case .ph3{position:relative;height:82%;aspect-ratio:786/1704;transform-style:preserve-3d}
+body.page-case .ph3 .phone{position:absolute;inset:0;height:auto;transform:translateZ(0)}
+body.page-case .ph-back{position:absolute;inset:0;border-radius:5.4cqh;background:#0b0c0e;box-shadow:0 0 0 1.1cqh #0b0c0e;transform:translateZ(-1.6cqh);transform-style:preserve-3d}
+body.page-case .ph-back::before,body.page-case .ph-back::after{content:"";position:absolute;inset:0;border-radius:inherit;background:#1b1c1f;box-shadow:0 0 0 1.1cqh #1b1c1f}
+body.page-case .ph-back::before{transform:translateZ(.55cqh)}
+body.page-case .ph-back::after{transform:translateZ(1.1cqh);background:#26272b;box-shadow:0 0 0 1.1cqh #26272b}
+body.page-case .ph-glare{position:absolute;inset:0;border-radius:5.4cqh;pointer-events:none;background:linear-gradient(115deg,transparent 34%,rgba(255,255,255,.26) 47%,rgba(255,255,255,.06) 54%,transparent 64%);background-size:260% 100%;background-position:70% 0;transform:translateZ(.2cqh)}
+body.page-case .on .ph3 .ph-glare{animation:glare 2.5s ease-in-out both}
+body.page-case .ph3::after{content:"";position:absolute;left:4%;right:4%;bottom:-10%;height:9%;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent);filter:blur(1.2cqh);transform:translateZ(-4cqh)}
+@media (prefers-reduced-motion:reduce){
+body.page-case .scene{transition:none}
+body.page-case .on .ph3 .ph-glare{animation:none}
+}
 
 /* ---------- 6 · Impressum und Datenschutz (dunkel wie die Startseite) ---------- */
 html:has(> body.page-legal){background:var(--surface-dark)}
@@ -1129,3 +1143,4 @@ html body header nav .sound[aria-checked="true"],html body .h3-top nav .sound[ar
 @keyframes sitzt{0%,100%{transform:none}45%{transform:translateY(-14px) scale(1.06)}}
 @keyframes fbm{to{transform:translateX(-50%)}}
 @keyframes am-run{from{stroke-dashoffset:var(--len)}to{stroke-dashoffset:-28}}
+@keyframes glare{from{background-position:100% 0}to{background-position:0% 0}}
