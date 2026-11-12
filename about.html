@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Über mich · Valeriia Kulakova</title>
 <meta name="description" content="Valeriia Kulakova: von der Entwicklung über Product Ownership zum Product Builder für UX/UI.">
-<link rel="stylesheet" href="style.css?v=10a80de3">
+<link rel="stylesheet" href="style.css?v=395d76bc">
 <script src="nav.js?v=99ee467f"></script>
 <script src="cursor.js?v=5340a399"></script>
 </head>
@@ -206,6 +206,28 @@
 
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.2});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+</script>
+<script>
+/* Navigation beim Hochwischen: Ist die Navigation oben aus dem Bild gescrollt, erscheint sie als feste Leiste,
+   sobald man ein Stück nach oben wischt. Beim Runterscrollen verschwindet sie wieder. */
+(function(){
+  const nav=document.querySelector('header nav'); if(!nav) return;
+  const bar=document.createElement('div'); bar.className='pinbar'; bar.setAttribute('aria-hidden','true'); bar.inert=true;
+  const n=nav.cloneNode(true); n.setAttribute('aria-label','Hauptnavigation, oben fixiert'); bar.appendChild(n); document.body.appendChild(bar);
+  let last=scrollY, shown=false;
+  function set(v){
+    if(v===shown) return; shown=v;
+    bar.classList.toggle('on',v); bar.setAttribute('aria-hidden',v?'false':'true'); bar.inert=!v;
+    document.body.style.setProperty('--pin-h',bar.offsetHeight+'px'); document.body.classList.toggle('pin-on',v);
+  }
+  addEventListener('scroll',()=>{
+    const y=scrollY, d=y-last;
+    if(nav.getBoundingClientRect().bottom>0) set(false);
+    else if(d<-4) set(true);
+    else if(d>4) set(false);
+    last=y;
+  },{passive:true});
 })();
 </script>
 </body>

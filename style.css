@@ -263,7 +263,7 @@ body.page-about .skip:focus{left:8px}
 body.page-about .sr,body.page-about .px-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 body.page-about .px{display:block;height:100%;width:auto}
 body.page-about #dots{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;will-change:transform,opacity}
-body.page-about header{position:fixed;top:0;left:0;right:0;z-index:5;display:flex;justify-content:flex-end;padding:clamp(10px,2vw,24px) var(--gutter)}
+body.page-about header{position:absolute;top:0;left:0;right:0;z-index:5;display:flex;justify-content:flex-end;padding:clamp(10px,2vw,24px) var(--gutter)}
 body.page-about header nav{display:flex;gap:clamp(8px,1.6vw,20px);font-family:var(--font-mono);font-size:.9rem}
 body.page-about header nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;text-decoration:none}
 body.page-about header nav a:hover,body.page-about header nav a[aria-current]{text-decoration:underline;text-underline-offset:5px}
@@ -303,6 +303,19 @@ body.page-about .legal{padding:var(--space-3,24px) var(--gutter) var(--space-5,6
 body.page-about .legal a{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;text-decoration:none}
 body.page-about .legal a{color:var(--color-muted)}
 body.page-about .legal a:hover{color:var(--color-text);text-decoration:underline;text-underline-offset:4px}
+body.page-about .pinbar{position:fixed;z-index:40;top:0;left:0;right:0;display:flex;justify-content:flex-end;padding:4px var(--gutter);background:rgba(201,202,205,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(14,15,18,.18);translate:0 -110%;transition:translate .3s cubic-bezier(.2,.7,.2,1)}
+body.page-about .pinbar.on{translate:0 0}
+body.page-about .pinbar nav{display:flex;gap:clamp(8px,1.6vw,20px);font-family:var(--font-mono);font-size:.9rem}
+body.page-about .pinbar nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;color:var(--color-text);text-decoration:none;white-space:nowrap}
+body.page-about .pinbar nav a:hover,body.page-about .pinbar nav a[aria-current]{text-decoration:underline;text-underline-offset:5px}
+body.page-about .pinbar nav a:focus-visible{outline:2px solid var(--color-focus);outline-offset:2px}
+@media (max-width:560px){
+body.page-about .pinbar{justify-content:center;padding:2px 8px}
+body.page-about .pinbar nav{gap:0;font-size:.68rem}
+}
+@media (prefers-reduced-motion:reduce){
+body.page-about .pinbar{transition:none}
+}
 body.page-about .about-intro{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,3vw,40px) clamp(24px,3vw,48px);margin:0 0 clamp(56px,9vh,104px);font-family:var(--font-mono);font-size:.9rem;line-height:1.5;color:var(--color-text)}
 body.page-about .about-intro p{max-width:34ch}
 body.page-about .ai-cap{text-transform:uppercase;letter-spacing:.06em}
