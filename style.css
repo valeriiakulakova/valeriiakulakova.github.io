@@ -916,7 +916,7 @@ body.page-case .b2-type .t-w{font-family:"Work Sans",var(--font-sans)}
 body.page-case .b2-row{grid-template-columns:1fr}
 }
 body.page-case .b2-row{grid-template-columns:repeat(2,minmax(0,1fr))}
-body.page-case .pv-cap{max-width:1320px;margin:var(--space-2) auto 0;font-family:var(--font-mono);font-size:.85rem;line-height:1.55;color:var(--rs-ink)}
+body.page-case .pv-cap{max-width:1320px;margin:0 auto var(--space-2);font-family:var(--font-mono);font-size:.85rem;line-height:1.55;color:var(--rs-ink)}
 body.page-case .pv-cap .label{margin-right:8px;color:var(--rs-muted)}
 
 /* ---------- 6 · Impressum und Datenschutz (dunkel wie die Startseite) ---------- */
