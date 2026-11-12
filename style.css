@@ -916,17 +916,29 @@ body.page-case .b2-type .t-w{font-family:"Work Sans",var(--font-sans)}
 body.page-case .b2-row{grid-template-columns:1fr}
 }
 body.page-case .b2-row{grid-template-columns:repeat(2,minmax(0,1fr))}
-body.page-case .brand2{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:var(--space-4);align-items:center;margin-top:var(--space-5)}
-body.page-case .b2-word{padding:var(--space-4) 0}
-body.page-case .b2-word .wm{width:100%}
-body.page-case .b2-row{margin:0;grid-template-columns:1fr 1fr;gap:var(--space-3)}
-body.page-case .b2-box{height:clamp(110px,11vw,160px)}
-body.page-case .b2-row .wheel{width:clamp(100px,9vw,140px)}
-body.page-case .b2-row p{font-size:.85rem}
-body.page-case .b2-type{grid-column:1/-1;margin-top:0}
-@media (max-width:760px){
-body.page-case .brand2{grid-template-columns:1fr}
-body.page-case .b2-word{padding:var(--space-3) 0}
+body.page-case .brand2{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:var(--space-3) var(--space-4);align-items:start;margin-top:var(--space-4);padding-top:var(--space-3);border-top:1px solid var(--rs-line)}
+body.page-case .b2-word{padding:0;border:0}
+body.page-case .b2-word .wm{display:block;width:min(300px,100%);margin:0}
+body.page-case .b2-row{display:contents}
+body.page-case .b2-row li{display:flex;flex-direction:column;gap:12px}
+body.page-case .b2-box{height:48px;display:flex;align-items:center;justify-content:flex-start}
+body.page-case .b2-mark .mk{width:auto;height:44px}
+body.page-case .b2-row .spectrum{flex-direction:row;gap:0}
+body.page-case .b2-row .wheel{display:none}
+body.page-case .b2-row .sw-list{display:flex;gap:6px}
+body.page-case .b2-row .sw-list li{display:block}
+body.page-case .b2-row .sw-list i{display:block;width:26px;height:26px}
+body.page-case .b2-row .sw-list b,body.page-case .b2-row .sw-list span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+body.page-case .b2-row p{margin:0;font-size:.82rem;max-width:28ch}
+body.page-case .b2-font .b2-box{gap:14px;font-size:2.2rem;line-height:1}
+body.page-case .b2-font .t-u{font-family:"Urbanist",var(--font-sans);font-weight:700}
+body.page-case .b2-font .t-w{font-family:"Work Sans",var(--font-sans)}
+@media (max-width:900px){
+body.page-case .brand2{grid-template-columns:repeat(3,minmax(0,1fr))}
+body.page-case .b2-word{grid-column:1/-1}
+}
+@media (max-width:520px){
+body.page-case .brand2{grid-template-columns:1fr 1fr}
 }
 
 /* ---------- 6 · Impressum und Datenschutz (dunkel wie die Startseite) ---------- */
