@@ -74,7 +74,7 @@
   const buffers = {};            // geladene Musik, je Datei einmal
   let music = null;              // { src, node, gain } – das Stück der aktuellen Seite
   const playing = new Set();     // alle gestarteten Musikstücke, damit beim Wechsel sicher jedes endet
-  let musicOn = true;           // Seitenmusik: Standard an, gilt für alle Seiten, bis man sie ausschaltet
+  let musicOn = false;          // Seitenmusik: Standard aus, gilt für alle Seiten, sobald man sie einschaltet
   let musicGen = 0;
   let finishedSrc = '';          // Stück einer Seite ohne Schleife ist zu Ende: bis zum Seitenwechsel still bleiben
   const later = (fn, ms) => (window.SoftNav ? SoftNav.later(fn, ms) : setTimeout(fn, ms));
@@ -198,7 +198,7 @@
   // „ton an/aus“ gilt für alle offenen Tabs dieser Website gleichzeitig
   listen(window, 'storage', e => {
     if (e.key !== 'sound') return;
-    const v = e.newValue !== '0';
+    const v = e.newValue === '1';
     if (v === on) return;
     on = musicOn = v;
     if (!v) { if (bedGain && ctx) bedGain.gain.setTargetAtTime(0, ctx.currentTime, 0.05); musicGen++; stopMusic(); if (ctx && ctx.state === 'running') ctx.suspend().catch(() => {}); }
@@ -207,8 +207,8 @@
   });
   listen(window, 'pageshow', () => Sound.resume());
 
-  // Gemerkte Wahl aus einer anderen Seite. Standard: an. Nur wer selbst „off“ gewählt hat, bleibt stumm.
-  try { on = musicOn = localStorage.getItem('sound') !== '0'; } catch (e) { on = musicOn = true; }
+  // Gemerkte Wahl aus einer anderen Seite. Standard: aus. Ton gibt es nur, wenn man ihn selbst eingeschaltet hat.
+  try { on = musicOn = localStorage.getItem('sound') === '1'; } catch (e) { on = musicOn = false; }
 
   // Ton-Schalter als kleine Pille unten links, auf allen Seiten gleich.
   // Wird einmal gebaut und nach einem Seitenwechsel nur in die neue Seite umgehängt (bindToggles).

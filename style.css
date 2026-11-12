@@ -1074,6 +1074,10 @@ body.page-case .scene{transition:none}
 body.page-case .on .ph3 .ph-glare{animation:none}
 }
 body.page-case .h3-kick,body.page-case .h3-meta,body.page-case .tasks{max-width:1100px;margin-left:auto;margin-right:auto}
+body.page-case .h3-kick .snd-hint{font-family:var(--font-mono);font-size:.9rem;color:var(--rs-ink);background:none;border:0;padding:0 4px;min-height:44px;cursor:pointer;white-space:nowrap}
+body.page-case .h3-kick .snd-hint:hover{text-decoration:underline;text-underline-offset:5px}
+body.page-case .h3-kick .snd-hint:focus-visible{outline:2px solid var(--color-focus);outline-offset:2px;border-radius:4px}
+body.page-case .kick-btns{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 
 /* ---------- 6 · Impressum und Datenschutz (dunkel wie die Startseite) ---------- */
 html:has(> body.page-legal){background:var(--surface-dark)}
