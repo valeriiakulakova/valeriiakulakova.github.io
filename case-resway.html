@@ -6,7 +6,7 @@
 <meta name="tdm-reservation" content="1">
 <title>ReSway · Case Study · Valeriia Kulakova</title>
 <meta name="description" content="ReSway: eine App, die Menschen mit ADHS beim Wiedereinstieg in ihre Routinen hilft. Case Study von Valeriia Kulakova.">
-<link rel="stylesheet" href="style.css?v=d862108a">
+<link rel="stylesheet" href="style.css?v=1ea629e1">
 <script src="nav.js?v=99ee467f"></script>
 <script src="cursor.js?v=5340a399"></script>
 <script>document.documentElement.classList.add('js');</script>
@@ -205,28 +205,36 @@
 <section class="sec warm" id="overview" aria-labelledby="ov-t">
   <div class="sh">
     <h2 id="ov-t">Die App</h2>
-    <p class="sh-txt">Vier Momente, in denen ReSway beim Wiedereinstieg hilft. Im MVP steckt nur dieser Restart-Modus. Routine-Modus, To-dos, KI-Agent und Challenges kommen später.</p>
+    <p class="sh-txt">Die Bausteine des Restart-Modus. Routine-Modus, To-dos, KI-Agent und Challenges kommen später.</p>
   </div>
   <figure class="flowvid" id="flowvid">
     <div class="fv-dev"><video src="media/resway/video/hifi-flow.mp4" width="834" height="1716" muted loop playsinline preload="none" aria-label="Bildschirmaufnahme des Hi-Fi-Prototyps ohne Ton: Restart einrichten, Heute, Zeitsprung und Wochenabschluss."></video></div>
-    <figcaption><span class="feat-n">Video · 48 s</span><h3>Eine Runde durch den Prototyp</h3><p>Aufgenommen im Figma-Prototyp, etwas schneller abgespielt und ohne Ton.</p><button type="button" class="fv-btn" id="fvBtn" aria-pressed="false">pause</button></figcaption>
+    <figcaption><span class="feat-n">Video · 48 s</span><h3>Eine Runde durch den Prototyp</h3><button type="button" class="fv-btn" id="fvBtn" aria-pressed="false">pause</button></figcaption>
   </figure>
-  <ol class="feats">
-    <li class="feat">
-      <div class="feat-txt"><span class="feat-n">01</span><h3>Stufe wählen</h3><p>Mini, Halb oder Ganz. Die Stufe steht in der eigenen Einheit da, Balken zeigen den Unterschied.</p></div>
-      <img class="feat-img" src="media/resway/frei/2-stufe.png" width="1600" height="1000" loading="lazy" decoding="async" alt="Screen „Wie steigst du ein?“ und daneben groß die Stufen-Karte mit 2,5 km.">
+  <ol class="blocks">
+    <li class="blk">
+      <div class="blk-vis"><img src="media/resway/bausteine/stufe.png" width="690" height="760" loading="lazy" decoding="async" alt="Karte „Version“: 2,5 km, Halbe Version, Balken für 1, 2,5 und 5 km, darunter Mini, Halb und Ganz."></div>
+      <div class="blk-txt"><span class="tn" data-pixel>01</span><h3>Stufe wählen</h3><p>Nach einer Pause startet man eine Stufe kleiner, nicht bei null.</p></div>
     </li>
-    <li class="feat">
-      <div class="feat-txt"><span class="feat-n">02</span><h3>Menge einstellen</h3><p>Beim Anlegen einer Routine stellst du die Menge am Regler ein, hier 10 Minuten. Am Regler lässt sich die Menge besser schätzen als in einem Zahlenfeld. Und er macht Spaß: Als ADHSlerin weiß ich, wie schnell nüchterne Listen abschrecken.</p></div>
-      <img class="feat-img" src="media/resway/frei/3-menge.png" width="1600" height="1000" loading="lazy" decoding="async" alt="groß der Mengen-Regler mit 10 Minuten, daneben der Screen „Neue Routine“.">
+    <li class="blk">
+      <div class="blk-vis"><img src="media/resway/bausteine/menge.png" width="606" height="702" loading="lazy" decoding="async" alt="Karte „Menge“ mit rundem Regler auf 10 Minuten."></div>
+      <div class="blk-txt"><span class="tn" data-pixel>02</span><h3>Menge einstellen</h3><p>Am Regler lässt sich die Menge besser schätzen als in einem Zahlenfeld. Als ADHSlerin weiß ich, wie schnell nüchterne Listen abschrecken.</p></div>
     </li>
-    <li class="feat">
-      <div class="feat-txt"><span class="feat-n">03</span><h3>Eine Sache im Fokus</h3><p>Auf Heute liegt die Restart-Routine oben im Stapel. Ein Tipp hakt sie ab, dann rückt die nächste nach. Statt einer langen Liste zeigt ReSway nur, was jetzt dran ist. So muss man nicht erst entscheiden, womit man anfängt.</p></div>
-      <img class="feat-img" src="media/resway/frei/4-fokus.png" width="1600" height="1000" loading="lazy" decoding="async" alt="Screen „Heute“ und daneben groß die Restart-Karte Laufen im Stapel.">
+    <li class="blk">
+      <div class="blk-vis"><img src="media/resway/bausteine/fokus.png" width="786" height="640" loading="lazy" decoding="async" alt="Restart-Karte Laufen, 1 km, Tag 1 von 7, oben auf einem Stapel."></div>
+      <div class="blk-txt"><span class="tn" data-pixel>03</span><h3>Eine Sache im Fokus</h3><p>Oben liegt nur, was jetzt dran ist. So muss man nicht erst entscheiden, womit man anfängt.</p><p class="blk-hex"><i style="--c:#EDFF8C"></i>Lime #EDFF8C · nur dort, wo jemand zurückkommt</p></div>
     </li>
-    <li class="feat">
-      <div class="feat-txt"><span class="feat-n">04</span><h3>Zurückkommen feiern</h3><p>Nach dem ersten Lauf feiert ReSway das Zurückkommen. Die Woche zeigt, welcher Tag geschafft ist. Gefeiert wird der Wiedereinstieg, nicht eine Serie. Das setzt etwas gegen das Gefühl, versagt zu haben.</p></div>
-      <img class="feat-img" src="media/resway/frei/5-feiern.png" width="1600" height="1000" loading="lazy" decoding="async" alt="Screen „Du warst da.“ und daneben groß die Wochen-Karte mit dem ersten Haken.">
+    <li class="blk">
+      <div class="blk-vis"><img src="media/resway/bausteine/ringe.png" width="948" height="328" loading="lazy" decoding="async" alt="Fünf Routinen als Ringe: Laufen, Skincare, Self-Study, Bewerbung, Aufräumen."></div>
+      <div class="blk-txt"><span class="tn" data-pixel>04</span><h3>Fünf Kern-Routinen</h3><p>Du verfolgst höchstens fünf. So bleibt der Fokus, kleine Aufgaben kommen später als To-dos.</p></div>
+    </li>
+    <li class="blk">
+      <div class="blk-vis"><img src="media/resway/bausteine/plus.png" width="786" height="760" loading="lazy" decoding="async" alt="Geöffnetes Fächermenü mit fünf runden Knöpfen, vorne „Routine hinzufügen“ in Lime, unten das Zahnrad."></div>
+      <div class="blk-txt"><span class="tn" data-pixel>05</span><h3>Plus-Menü</h3><p>Ein Tipp auf Plus öffnet ein Fächermenü. Vorne liegt „Routine hinzufügen“, das Zahnrad führt zu den Einstellungen.</p></div>
+    </li>
+    <li class="blk">
+      <div class="blk-vis"><img src="media/resway/bausteine/figur.png" width="1556" height="454" loading="lazy" decoding="async" alt="Die ReSway-Figur zweimal: flach liegend und als w geformt."></div>
+      <div class="blk-txt"><span class="tn" data-pixel>06</span><h3>Zurückkommen feiern</h3><p>In der Pause liegt die Figur flach, beim Zurückkommen wird sie zum w. Gefeiert wird der Wiedereinstieg, nicht eine Serie.</p></div>
     </li>
   </ol>
 </section>
@@ -448,7 +456,7 @@
   // Ruhiges Erscheinen
   // Nacheinander erscheinen: Überschrift, dann Text, dann Karten und Bilder; was gleichzeitig ins Bild kommt, erscheint versetzt
   io(document.querySelectorAll('.mk-anim'),el=>el.classList.add('in'),.4);
-  const rv=[...document.querySelectorAll('.sh h2,.sh .sh-txt,.vi-txt,.vi-img,.pv-row > *,.facts > div,.stat,.quote-row > *,.dec4 > *,.voices,.bigquote,.flowvid .fv-dev,.flowvid figcaption,.feat-txt,.feat-img,.ba,.result li,.cols4 li,.learn li,.af-c,.af-ins,.ba3-item')];
+  const rv=[...document.querySelectorAll('.sh h2,.sh .sh-txt,.vi-txt,.vi-img,.pv-row > *,.facts > div,.stat,.quote-row > *,.dec4 > *,.voices,.bigquote,.flowvid .fv-dev,.flowvid figcaption,.feat-txt,.feat-img,.ba,.result li,.cols4 li,.learn li,.af-c,.af-ins,.ba3-item,.blk')];
   document.querySelectorAll('.feat').forEach((f,i)=>{const img=f.querySelector('.feat-img'); if(img) img.classList.add(i%2?'rv-l':'rv-r');});
   rv.forEach(el=>el.classList.add('rv'));
   if(!reduce){
