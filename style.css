@@ -908,8 +908,6 @@ body.page-case .b2-type .t-w{font-family:"Work Sans",var(--font-sans)}
 body.page-case .b2-row{grid-template-columns:1fr}
 }
 body.page-case .b2-row{grid-template-columns:repeat(2,minmax(0,1fr))}
-body.page-case .pv-cap{max-width:1320px;margin:0 auto var(--space-2);font-family:var(--font-mono);font-size:.85rem;line-height:1.55;color:var(--rs-ink)}
-body.page-case .pv-cap .label{margin-right:8px;color:var(--rs-muted)}
 body.page-case .feat-txt .hex{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:var(--space-2);font-family:var(--font-mono);font-size:.82rem;color:var(--rs-paper)}
 body.page-case .feat-txt .hex i{width:18px;height:18px;border-radius:50%;background:var(--c)}
 body.page-case .feat-txt .hex span{color:var(--color-on-stage-muted)}
@@ -964,6 +962,14 @@ body.page-case .co-n [data-pixel]{display:block;height:20px}
 body.page-case .concept h3{font-family:var(--font-sans);font-weight:500;letter-spacing:-.03em;font-size:clamp(1.5rem,2.2vw,2rem);line-height:1.05}
 body.page-case .concept p:not(.label){font-family:var(--font-mono);font-size:.9rem;line-height:1.55;max-width:46ch}
 body.page-case .co-img{display:block;width:100%;max-width:440px;height:auto;margin-top:6px;border-radius:var(--rs-r-card);background:var(--rs-paper)}
+body.page-case .pv-txt{display:flex;flex-direction:column;justify-content:flex-end;gap:14px;padding:var(--space-3) var(--space-3) var(--space-3) 0}
+body.page-case .pv-lead{font-family:var(--font-sans);font-weight:500;letter-spacing:-.03em;font-size:clamp(1.5rem,2.4vw,2.2rem);line-height:1.1;max-width:14ch}
+body.page-case .pv-txt p:not(.pv-lead){font-family:var(--font-mono);font-size:.88rem;line-height:1.55;color:var(--rs-muted);max-width:34ch}
+@media (max-width:900px){
+body.page-case .pv-row{grid-template-columns:1fr}
+body.page-case .pv-txt{padding:0 0 var(--space-2)}
+body.page-case .pv-lead{max-width:none}
+}
 
 /* ---------- 6 · Impressum und Datenschutz (dunkel wie die Startseite) ---------- */
 html:has(> body.page-legal){background:var(--surface-dark)}
