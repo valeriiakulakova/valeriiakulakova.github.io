@@ -859,6 +859,25 @@ body.page-case .af-list{grid-template-columns:repeat(2,minmax(0,1fr))}
 body.page-case .af-c{rotate:none;aspect-ratio:auto;min-height:84px}
 body.page-case .af-key{grid-column:1/-1;order:-1}
 }
+body.page-case .ba3{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,48px)}
+body.page-case .ba3-item{border-top:1px solid rgba(239,239,239,.25);padding-top:var(--space-3);display:flex;flex-direction:column;gap:var(--space-3)}
+body.page-case .ba3-pair{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.4vw,18px);max-width:340px}
+body.page-case .ba3-pair figure{margin:0}
+body.page-case .ba3-dev{border-radius:clamp(14px,1.6vw,22px);overflow:hidden;box-shadow:0 0 0 4px var(--color-device)}
+body.page-case .ba3-dev img{display:block;width:100%;height:auto}
+body.page-case .ba3-pair figcaption{margin-top:10px;font-family:var(--font-mono);font-size:var(--text-label);color:var(--color-on-stage-muted)}
+body.page-case .ba3-after figcaption{color:var(--rs-lime)}
+body.page-case .ba3-txt .tn{display:block;height:24px;margin-bottom:10px}
+body.page-case .ba3-txt h3{font-family:var(--font-sans);font-weight:500;letter-spacing:-.025em;font-size:1.25rem;line-height:1.2}
+body.page-case .ba3-txt p{margin-top:.5em;font-family:var(--font-mono);font-size:.88rem;line-height:1.55;max-width:40ch}
+@media (max-width:900px){
+body.page-case .ba3{grid-template-columns:1fr}
+body.page-case .ba3-item{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);align-items:start;gap:var(--space-3)}
+}
+@media (max-width:520px){
+body.page-case .ba3-item{grid-template-columns:1fr}
+body.page-case .ba3-pair{max-width:260px}
+}
 
 /* ---------- 6 · Impressum und Datenschutz (dunkel wie die Startseite) ---------- */
 html:has(> body.page-legal){background:var(--surface-dark)}

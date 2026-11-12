@@ -6,7 +6,7 @@
 <meta name="tdm-reservation" content="1">
 <title>ReSway · Case Study · Valeriia Kulakova</title>
 <meta name="description" content="ReSway: eine App, die Menschen mit ADHS beim Wiedereinstieg in ihre Routinen hilft. Case Study von Valeriia Kulakova.">
-<link rel="stylesheet" href="style.css?v=5e7c1022">
+<link rel="stylesheet" href="style.css?v=2d7894ae">
 <script src="nav.js?v=99ee467f"></script>
 <script src="cursor.js?v=5340a399"></script>
 <script>document.documentElement.classList.add('js');</script>
@@ -235,14 +235,28 @@
     <p class="sh-txt">Mid-Fi · 2 Personen · 6 Aufgaben. Das Konzept hat getragen. Gestolpert sind beide über einzelne Wörter.</p>
   </div>
   <div class="ba-list">
-    <article class="ba">
-      <figure class="before"><div class="dev"><img src="media/resway/test/f1-vorher.jpg" width="812" height="1759" loading="lazy" decoding="async" alt="Mid-Fi-Screen „Stufe wählen“, wie er getestet wurde."></div><figcaption class="tagline">Vorher · Mid-Fi</figcaption></figure>
-      <figure class="after"><div class="dev"><img src="media/resway/test/f1-nachher.jpg" width="812" height="1759" loading="lazy" decoding="async" alt="Hi-Fi-Screen „Wie steigst du ein?“ mit 1, 2,5 und 5 km als Balken."></div><figcaption class="tagline">Nachher · Hi-Fi</figcaption></figure>
-      <div class="ba-txt"><span class="tn" data-pixel>01</span><h3>„Halbe Runde“ war mehrdeutig</h3><p>Im Test war unklar, ob „Halbe Runde“ Strecke oder Häufigkeit meint. Jetzt steht die Stufe in Kilometern da, mit Balken zum Vergleich.</p></div>
-    </article>
-    <ol class="ba-more" start="2">
-    <li><span class="tn" data-pixel>02</span><div><h3>Anker und Buttons ließen offen, was passiert</h3><p>„Nach dem Kaffee“ und „Später entscheiden“ waren unklar. Jetzt gibt es Tageszeit, Uhrzeit und „Jederzeit“ und ein klares X zum Abbrechen.</p></div></li>
-    <li><span class="tn" data-pixel>03</span><div><h3>Optionen nannten keine Folgen</h3><p>„So lassen“ sagte nicht, was danach kommt. Jetzt beschreibt jede Option ihre Folge, etwa „Restart beenden – wieder als normale Routine“.</p></div></li>
+    <ol class="ba3">
+    <li class="ba3-item">
+      <div class="ba3-pair">
+        <figure><div class="ba3-dev"><img src="media/resway/test/f1-vorher.jpg" width="812" height="1759" loading="lazy" decoding="async" alt="Mid-Fi-Screen „Wie steigst du diese Woche ein?“ mit Nur anfangen, Halbe Runde und Normal weitermachen."></div><figcaption>vorher</figcaption></figure>
+        <figure class="ba3-after"><div class="ba3-dev"><img src="media/resway/test/f1-nachher.jpg" width="812" height="1759" loading="lazy" decoding="async" alt="Hi-Fi-Screen „Wie steigst du ein?“ mit 1, 2,5 und 5 km als Balken."></div><figcaption>nachher</figcaption></figure>
+      </div>
+      <div class="ba3-txt"><span class="tn" data-pixel>01</span><h3>„Halbe Runde“ war mehrdeutig</h3><p>Im Test war unklar, ob Strecke oder Häufigkeit gemeint ist. Jetzt steht die Stufe in Kilometern da.</p></div>
+    </li>
+    <li class="ba3-item">
+      <div class="ba3-pair">
+        <figure><div class="ba3-dev"><img src="media/resway/test/f2-vorher.jpg" width="812" height="1759" loading="lazy" decoding="async" alt="Mid-Fi-Screen „Moment wählen“ mit Ankern wie „Nach dem Kaffee“."></div><figcaption>vorher</figcaption></figure>
+        <figure class="ba3-after"><div class="ba3-dev"><img src="media/resway/test/f2-nachher.jpg" width="812" height="1759" loading="lazy" decoding="async" alt="Hi-Fi-Screen „Wann möchtest du wieder starten?“ mit Morgens, Mittags, Abends und einer Uhrzeit."></div><figcaption>nachher</figcaption></figure>
+      </div>
+      <div class="ba3-txt"><span class="tn" data-pixel>02</span><h3>Anker ließen offen, wann es losgeht</h3><p>„Nach dem Kaffee“ und „Später entscheiden“ waren im Test unklar. Jetzt wählt man eine Tageszeit und eine Uhrzeit.</p></div>
+    </li>
+    <li class="ba3-item">
+      <div class="ba3-pair">
+        <figure><div class="ba3-dev"><img src="media/resway/test/f3-vorher.jpg" width="812" height="1759" loading="lazy" decoding="async" alt="Mid-Fi-Screen „Deine Woche ist um“ mit Optionen wie „So lassen“."></div><figcaption>vorher</figcaption></figure>
+        <figure class="ba3-after"><div class="ba3-dev"><img src="media/resway/test/f3-nachher.jpg" width="812" height="1759" loading="lazy" decoding="async" alt="Hi-Fi-Screen „Restart geschafft“, jede Option mit ihrer Folge."></div><figcaption>nachher</figcaption></figure>
+      </div>
+      <div class="ba3-txt"><span class="tn" data-pixel>03</span><h3>Optionen nannten keine Folgen</h3><p>Bei „So lassen“ war unklar, was danach passiert. Jetzt steht bei jeder Option, was folgt.</p></div>
+    </li>
     </ol>
   </div>
   <div class="result">
@@ -431,7 +445,7 @@
   // Ruhiges Erscheinen
   // Nacheinander erscheinen: Überschrift, dann Text, dann Karten und Bilder; was gleichzeitig ins Bild kommt, erscheint versetzt
   io(document.querySelectorAll('.mk-anim'),el=>el.classList.add('in'),.4);
-  const rv=[...document.querySelectorAll('.sh h2,.sh .sh-txt,.vi-txt,.vi-img,.pv-row > *,.facts > div,.stat,.quote-row > *,.dec4 > *,.voices,.bigquote,.flowvid .fv-dev,.flowvid figcaption,.feat-txt,.feat-img,.ba,.result li,.cols4 li,.learn li,.af-c,.af-ins')];
+  const rv=[...document.querySelectorAll('.sh h2,.sh .sh-txt,.vi-txt,.vi-img,.pv-row > *,.facts > div,.stat,.quote-row > *,.dec4 > *,.voices,.bigquote,.flowvid .fv-dev,.flowvid figcaption,.feat-txt,.feat-img,.ba,.result li,.cols4 li,.learn li,.af-c,.af-ins,.ba3-item')];
   document.querySelectorAll('.feat').forEach((f,i)=>{const img=f.querySelector('.feat-img'); if(img) img.classList.add(i%2?'rv-l':'rv-r');});
   rv.forEach(el=>el.classList.add('rv'));
   if(!reduce){
