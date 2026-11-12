@@ -222,6 +222,20 @@ body.page-home header nav{margin-left:auto}
 body.page-home .badge{order:2}
 body.page-home header nav .sound{font-size:.8rem}
 }
+body.page-home .pinbar{position:fixed;z-index:40;top:0;left:0;right:0;display:flex;justify-content:flex-end;padding:4px var(--gutter);background:rgba(37,37,43,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(236,234,230,.12);translate:0 -110%;transition:translate .3s cubic-bezier(.2,.7,.2,1)}
+body.page-home .pinbar.on{translate:0 0}
+body.page-home .pinbar nav{display:flex;gap:clamp(8px,1.6vw,20px);font-family:var(--font-mono);font-size:.9rem;text-transform:lowercase}
+body.page-home .pinbar nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;color:var(--color-text);text-decoration:none}
+body.page-home .pinbar nav a:hover{text-decoration:underline;text-underline-offset:4px}
+body.page-home .pinbar nav a:focus-visible{outline:2px solid var(--color-focus);outline-offset:2px}
+@media (max-width:560px){
+body.page-home .pinbar{justify-content:center}
+body.page-home .pinbar nav{gap:4px}
+body.page-home .pinbar nav a{font-size:.8rem}
+}
+@media (prefers-reduced-motion:reduce){
+body.page-home .pinbar{transition:none}
+}
 
 /* ---------- 4 · About ---------- */
 body.page-about{background:var(--color-bg)}
@@ -969,6 +983,22 @@ body.page-case .pv-row{grid-template-columns:1fr}
 body.page-case .pv-txt{padding:0 0 var(--space-2)}
 body.page-case .pv-lead{max-width:none}
 }
+body.page-case .pinbar{position:fixed;z-index:40;top:0;left:0;right:0;display:flex;justify-content:flex-end;padding:4px var(--gutter);background:rgba(201,202,205,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--rs-line);translate:0 -110%;transition:translate .3s var(--ease)}
+body.page-case .pinbar.on{translate:0 0}
+body.page-case .pinbar nav{display:flex;gap:clamp(8px,1.6vw,20px);font-family:var(--font-mono);font-size:.9rem}
+body.page-case .pinbar nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;color:var(--rs-ink);text-decoration:none}
+body.page-case .pinbar nav a:hover,body.page-case .pinbar nav a[aria-current]{text-decoration:underline;text-underline-offset:5px}
+body.page-case .pinbar nav a:focus-visible{outline:2px solid var(--color-focus);outline-offset:2px}
+@media (max-width:900px){
+body.page-case .pinbar{justify-content:center}
+body.page-case .pinbar nav{font-size:.68rem;gap:2px}
+body.page-case .rail{transition:top .3s var(--ease),opacity .3s}
+body.page-case.pin-on .rail{top:var(--pin-h,52px)}
+}
+@media (prefers-reduced-motion:reduce){
+body.page-case .pinbar,body.page-case .rail{transition:none}
+}
+body.page-case #case{overflow-x:clip}
 
 /* ---------- 6 · Impressum und Datenschutz (dunkel wie die Startseite) ---------- */
 html:has(> body.page-legal){background:var(--surface-dark)}

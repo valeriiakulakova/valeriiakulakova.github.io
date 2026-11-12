@@ -6,7 +6,7 @@
 <meta name="tdm-reservation" content="1">
 <title>ReSway · Case Study · Valeriia Kulakova</title>
 <meta name="description" content="ReSway: eine App, die Menschen mit ADHS beim Wiedereinstieg in ihre Routinen hilft. Case Study von Valeriia Kulakova.">
-<link rel="stylesheet" href="style.css?v=497d2ad9">
+<link rel="stylesheet" href="style.css?v=43f50035">
 <script src="nav.js?v=99ee467f"></script>
 <script src="cursor.js?v=5340a399"></script>
 <script>document.documentElement.classList.add('js');</script>
@@ -376,6 +376,28 @@
       if(k<1) requestAnimationFrame(step); else { lo.classList.remove('drawing'); lo.classList.add('drawn'); setTimeout(()=>hi.classList.add('in'),250); } })(t0);
   },{threshold:.45});
   io.observe(lo);
+})();
+</script>
+<script>
+/* Navigation beim Hochwischen: Ist die Navigation oben aus dem Bild gescrollt, erscheint sie als feste Leiste,
+   sobald man ein Stück nach oben wischt. Beim Runterscrollen verschwindet sie wieder. */
+(function(){
+  const nav=document.querySelector('.h3-top nav'); if(!nav) return;
+  const bar=document.createElement('div'); bar.className='pinbar'; bar.setAttribute('aria-hidden','true'); bar.inert=true;
+  const n=nav.cloneNode(true); n.setAttribute('aria-label','Hauptnavigation, oben fixiert'); bar.appendChild(n); document.body.appendChild(bar);
+  let last=scrollY, shown=false;
+  function set(v){
+    if(v===shown) return; shown=v;
+    bar.classList.toggle('on',v); bar.setAttribute('aria-hidden',v?'false':'true'); bar.inert=!v;
+    document.body.style.setProperty('--pin-h',bar.offsetHeight+'px'); document.body.classList.toggle('pin-on',v);
+  }
+  addEventListener('scroll',()=>{
+    const y=scrollY, d=y-last;
+    if(nav.getBoundingClientRect().bottom>0) set(false);
+    else if(d<-4) set(true);
+    else if(d>4) set(false);
+    last=y;
+  },{passive:true});
 })();
 </script>
 
