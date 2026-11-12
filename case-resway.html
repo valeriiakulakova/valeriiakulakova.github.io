@@ -6,7 +6,7 @@
 <meta name="tdm-reservation" content="1">
 <title>ReSway · Case Study · Valeriia Kulakova</title>
 <meta name="description" content="ReSway: eine App, die Menschen mit ADHS beim Wiedereinstieg in ihre Routinen hilft. Case Study von Valeriia Kulakova.">
-<link rel="stylesheet" href="style.css?v=43f50035">
+<link rel="stylesheet" href="style.css?v=2eae450f">
 <script src="nav.js?v=99ee467f"></script>
 <script src="cursor.js?v=5340a399"></script>
 <script>document.documentElement.classList.add('js');</script>
@@ -308,6 +308,7 @@
     <li><span class="tn" data-pixel>02</span><h3>Ein Test ist nur so gut wie der Prototyp.</h3><p>Heute klicke ich alles einmal komplett durch, bevor jemand anderes es tut.</p></li>
     <li><span class="tn" data-pixel>03</span><h3>Der Kern reicht.</h3><p>Challenges und Sticker waren Ideen, die mein Test nicht verlangt hat. Heute frage ich zuerst: Hilft das beim Wiedereinstieg?</p></li>
   </ol>
+  <p class="to-top"><a href="#hero" data-top>( nach oben ↑ )</a></p>
 </section>
 
 </main>
@@ -384,15 +385,24 @@
 (function(){
   const nav=document.querySelector('.h3-top nav'); if(!nav) return;
   const bar=document.createElement('div'); bar.className='pinbar'; bar.setAttribute('aria-hidden','true'); bar.inert=true;
-  const n=nav.cloneNode(true); n.setAttribute('aria-label','Hauptnavigation, oben fixiert'); bar.appendChild(n); document.body.appendChild(bar);
+  const n=nav.cloneNode(true); n.setAttribute('aria-label','Hauptnavigation, oben fixiert'); const up=document.createElement('a'); up.href='#hero'; up.className='pin-top'; up.setAttribute('data-top',''); up.innerHTML='( <span class="pt-l">nach oben </span>↑ )'; up.setAttribute('aria-label','Nach oben'); bar.append(up,n); document.body.appendChild(bar);
   let last=scrollY, shown=false;
   function set(v){
     if(v===shown) return; shown=v;
     bar.classList.toggle('on',v); bar.setAttribute('aria-hidden',v?'false':'true'); bar.inert=!v;
     document.body.style.setProperty('--pin-h',bar.offsetHeight+'px'); document.body.classList.toggle('pin-on',v);
   }
+  // Nach oben: sanft scrollen (bei „weniger Bewegung“ direkt), dann Fokus auf den Seitenanfang
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let jumping=false;
+  document.querySelectorAll('[data-top]').forEach(a=>a.addEventListener('click',e=>{
+    e.preventDefault(); set(false); jumping=true;
+    scrollTo({top:0,behavior:reduce?'auto':'smooth'});
+    const h=document.getElementById('hero'); if(h){ h.setAttribute('tabindex','-1'); h.setAttribute('data-softfocus',''); h.focus({preventScroll:true}); }
+  }));
   addEventListener('scroll',()=>{
     const y=scrollY, d=y-last;
+    if(jumping){ if(y<5) jumping=false; last=y; return; }
     if(nav.getBoundingClientRect().bottom>0) set(false);
     else if(d<-4) set(true);
     else if(d>4) set(false);

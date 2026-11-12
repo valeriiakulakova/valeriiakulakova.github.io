@@ -983,7 +983,7 @@ body.page-case .pv-row{grid-template-columns:1fr}
 body.page-case .pv-txt{padding:0 0 var(--space-2)}
 body.page-case .pv-lead{max-width:none}
 }
-body.page-case .pinbar{position:fixed;z-index:40;top:0;left:0;right:0;display:flex;justify-content:flex-end;padding:4px var(--gutter);background:rgba(201,202,205,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--rs-line);translate:0 -110%;transition:translate .3s var(--ease)}
+body.page-case .pinbar{position:fixed;z-index:40;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:4px var(--gutter);background:rgba(201,202,205,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--rs-line);translate:0 -110%;transition:translate .3s var(--ease)}
 body.page-case .pinbar.on{translate:0 0}
 body.page-case .pinbar nav{display:flex;gap:clamp(8px,1.6vw,20px);font-family:var(--font-mono);font-size:.9rem}
 body.page-case .pinbar nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;color:var(--rs-ink);text-decoration:none}
@@ -999,6 +999,19 @@ body.page-case.pin-on .rail{top:var(--pin-h,52px)}
 body.page-case .pinbar,body.page-case .rail{transition:none}
 }
 body.page-case #case{overflow-x:clip}
+body.page-case .pin-top,body.page-case .to-top a{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;font-family:var(--font-mono);font-size:.9rem;text-decoration:none}
+body.page-case .pin-top{color:var(--rs-ink);white-space:nowrap}
+body.page-case .pin-top:hover,body.page-case .to-top a:hover{text-decoration:underline;text-underline-offset:5px}
+body.page-case .pin-top:focus-visible,body.page-case .to-top a:focus-visible{outline:2px solid var(--color-focus);outline-offset:2px}
+body.page-case .to-top{max-width:1320px;margin:var(--space-5) auto 0;text-align:center}
+body.page-case .to-top a{color:var(--rs-paper)}
+body.page-case .pinbar nav a{white-space:nowrap}
+@media (max-width:900px){
+body.page-case .pinbar{justify-content:space-between;gap:4px;padding:2px 10px}
+body.page-case .pin-top{font-size:.68rem}
+body.page-case .pt-l{display:none}
+body.page-case .pinbar nav{gap:0}
+}
 
 /* ---------- 6 · Impressum und Datenschutz (dunkel wie die Startseite) ---------- */
 html:has(> body.page-legal){background:var(--surface-dark)}
