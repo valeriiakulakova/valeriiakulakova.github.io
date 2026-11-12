@@ -1,8 +1,10 @@
 /* Klänge, im Browser erzeugt (Web Audio), keine Audiodateien.
-   Standard: an. Die Wahl „an/aus“ merkt sich der Browser für die anderen Seiten.
+   Standard: aus. Jeder neue Besuch beginnt mit „ton aus“. Wer „ton an“ wählt, hat Ton auf allen
+   Seiten, bis der Tab geschlossen wird (sessionStorage, nur für diesen Besuch).
    Browser erlauben Ton auf jeder Seite erst nach einem Klick, Tipp oder Tastendruck
-   (Scrollen zählt nicht). Ist der Ton an, aber noch gesperrt, zeigt der Schalter
-   „ton an“; der erste Klick irgendwo auf der Seite startet ihn.
+   (Scrollen zählt nicht). Ist der Ton an, aber noch gesperrt (z. B. nach einem Neuladen),
+   zeigt der Schalter „ton an“; der erste Tipp irgendwo auf der Seite startet ihn.
+   iPhone: Ton spielt auch bei eingeschaltetem Stummschalter (audioSession „playback“).
    Nutzung:
      Sound.key()        kurzer Tastenklick beim Tippen
      Sound.tick()       kleiner Ton für Buttons
@@ -12,22 +14,31 @@
      Sound.count(k)     kurzer Ton beim Hochzählen, steigt mit k (0 … 1)
      Sound.pop()        weicher Ton beim Wechsel eines Screens im Showreel
      Sound.chime()      zwei helle Töne, wenn eine neue Jahreszahl erscheint
+     Sound.gather(k)    Punkte sammeln sich zur Jahreszahl: feine Tropfen, dann ein Ton (k 0 … 1 = Höhe)
+     Sound.scatter()    Punkte fliegen zurück: weiches, fallendes Rauschen
+     Sound.drift(x)     sehr leises Rascheln beim Scrollen (0 … 1), About
    Seitenmusik: <body data-music="media/sounds/….mp3"> startet leise, sobald der Ton frei ist,
-   läuft einmal durch und blendet beim Seitenwechsel weich in die Musik der nächsten Seite über. */
+   läuft in Schleife und blendet beim Seitenwechsel weich in die Musik der nächsten Seite über. */
 (function () {
   let ctx = null, on = false, noise = null, bedGain = null, bedFilter = null;
   let musicBus = null, analyser = null, freq = null;   // Musik läuft über einen Bus mit „Zuhörer“ für den Beat
   let labels = [];
+  const KEY = 'ton';         // Speicherplatz der Wahl in sessionStorage
+  let chosen = false;        // schon „an“ oder „aus“ gewählt (in diesem Besuch)?
   let gestured = false;    // gab es in dieser Sitzung schon einen Klick, Tipp oder Tastendruck?
   let firstGesture = false; // ist die gerade laufende Geste die erste (Ton war bis eben gesperrt)?
   // Safari meldet manchmal „running“, spielt aber vor dem ersten Klick nichts ab: deshalb zählt erst die Geste
   const ready = () => gestured && !!ctx && ctx.state === 'running';
   const refresh = () => labels.forEach(f => f());
-  // Effekt-Klänge nur auf Seiten ohne eigene Musik (Startseite); About, Case, Kontakt haben nur ihre Musik
+  // Effekt-Klänge nur auf Seiten ohne eigene Musik (Startseite, About); Case und Kontakt haben nur ihre Musik
   const fx = () => on && !(document.body && document.body.dataset.music);
   // Dauerhafte Listener: bleiben beim Seitenwechsel ohne Neuladen (nav.js) erhalten
   const listen = (tg, type, fn, opt) => window.SoftNav ? SoftNav.on(tg, type, fn, opt) : tg.addEventListener(type, fn, opt);
 
+  // iPhone/iPad: Web Audio ist sonst bei eingeschaltetem Stummschalter still
+  function playbackSession() {
+    try { if (navigator.audioSession && navigator.audioSession.type !== 'playback') navigator.audioSession.type = 'playback'; } catch (e) {}
+  }
   function init() {
     if (ctx) return;
     const AC = window.AudioContext || window.webkitAudioContext;
@@ -105,7 +116,7 @@
     try { buf = await loadBuffer(src); } catch (e) { return; }
     if (my !== musicGen || !musicOn) return;                         // inzwischen andere Seite oder wieder aus
     const node = ctx.createBufferSource(); node.buffer = buf;
-    node.loop = 'musicLoop' in document.body.dataset;   // Schleife nur, wo die Seite es will (Projekt-Seite), sonst einmal
+    node.loop = true;   // jede Seite spielt ihr Stück in Schleife (CLAUDE.md)
     const gain = ctx.createGain(); const t = ctx.currentTime;
     gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(MUSIC_VOL, t + FADE);
     node.connect(gain).connect(musicBus || ctx.destination); node.start(t);
@@ -117,6 +128,7 @@
     get on() { return on; },
     get musicSrc() { return music ? music.src : ''; },   // welche Seitenmusik gerade läuft (zum Prüfen)
     get musicOn() { return musicOn; },
+    get chosen() { return chosen; },                     // hat man in diesem Besuch schon „an“ oder „aus“ gewählt?
     // Bass-Lautstärke der laufenden Musik, 0 … 1 (für Elemente, die im Beat pulsieren)
     level() {
       if (!analyser || !music || !ctx || ctx.state !== 'running') return 0;
@@ -128,8 +140,9 @@
     // Ein Schalter für alles: Effekt-Klänge (Startseite) und Seitenmusik (About, Case, Kontakt)
     set(v) {
       on = musicOn = !!v;
-      try { localStorage.setItem('sound', on ? '1' : '0'); } catch (e) {}
-      if (on) { finishedSrc = ''; Sound.resume(true); syncMusic(); }
+      chosen = true;
+      try { sessionStorage.setItem(KEY, on ? '1' : '0'); } catch (e) {}
+      if (on) { finishedSrc = ''; playbackSession(); Sound.resume(true); syncMusic(); }
       else {
         if (bedGain && ctx) bedGain.gain.setTargetAtTime(0, ctx.currentTime, 0.05);
         musicGen++; stopMusic();
@@ -148,7 +161,8 @@
           try { const b = ctx.createBuffer(1, 1, 22050), s = ctx.createBufferSource(); s.buffer = b; s.connect(ctx.destination); s.start(0); } catch (e) {}
         }
       }
-      if (on && gestured && !document.hidden && ctx && ctx.state !== 'running') ctx.resume().then(() => { refresh(); if (!music) syncMusic(); }).catch(() => {});
+      // iPhone kennt auch „interrupted“ (Anruf, App-Wechsel): jeder Zustand außer „running“ wird geweckt
+      if (on && gestured && !document.hidden && ctx && ctx.state !== 'running') { if (fromGesture) playbackSession(); ctx.resume().then(() => { refresh(); if (!music) syncMusic(); }).catch(() => {}); }
       else if (fromGesture && ctx && !music) syncMusic();   // erster Klick auf einer Musik-Seite: Stück starten
       refresh();
     },
@@ -180,6 +194,51 @@
       const v = Math.max(0, Math.min(1, x));
       bedGain.gain.setTargetAtTime(v * 0.07, ctx.currentTime, 0.08);
       bedFilter.frequency.setTargetAtTime(1800 + v * 2400, ctx.currentTime, 0.1);
+    },
+    // About: Punkte fliegen zur Jahreszahl. Viele kleine Tropfen (die landenden Punkte), dann ein runder Ton.
+    // k = Höhe des Tons: neueste Station oben, ältere tiefer (Töne einer Pentatonik, klingen immer zusammen).
+    gather(k) {
+      if (!fx() || !ctx) return;
+      const scale = [392, 440, 523.25, 587.33, 659.25, 783.99];   // G A C D E G
+      const base = scale[Math.round(Math.max(0, Math.min(1, k)) * (scale.length - 1))];
+      const t0 = ctx.currentTime;
+      for (let i = 0; i < 9; i++) {
+        const t = t0 + i * 0.045 + Math.random() * 0.02;
+        const o = ctx.createOscillator(); o.type = 'sine';
+        o.frequency.setValueAtTime(base * (2 + Math.random() * 1.5), t);
+        const g = ctx.createGain();
+        g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.012 + i * 0.002, t + 0.005);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.06);
+        o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + 0.08);
+      }
+      // runder Ton mit Quinte, wenn die Zahl steht
+      [[base, 0.05], [base * 1.5, 0.022]].forEach(([f, v], n) => {
+        const t = t0 + 0.42 + n * 0.06;
+        const o = ctx.createOscillator(); o.type = n ? 'sine' : 'triangle'; o.frequency.setValueAtTime(f, t);
+        const g = ctx.createGain();
+        g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(v, t + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 1.1);
+        o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + 1.15);
+      });
+    },
+    // About: Punkte fliegen zurück ins Porträt
+    scatter() {
+      if (!fx() || !ctx) return;
+      const t = ctx.currentTime;
+      const s = ctx.createBufferSource(); s.buffer = noise;
+      const f = ctx.createBiquadFilter(); f.type = 'bandpass'; f.Q.value = 1.4;
+      f.frequency.setValueAtTime(3600, t); f.frequency.exponentialRampToValueAtTime(700, t + 0.5);
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.05, t + 0.06);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.55);
+      s.connect(f).connect(g).connect(ctx.destination); s.start(t, Math.random() * 0.3, 0.6);
+    },
+    // About: sehr leises Rascheln, solange gescrollt wird (das Porträt dreht sich mit)
+    drift(x) {
+      if (!fx() || !bedGain) return;
+      const v = Math.max(0, Math.min(1, x));
+      bedGain.gain.setTargetAtTime(v * 0.025, ctx.currentTime, 0.12);
+      bedFilter.frequency.setTargetAtTime(900 + v * 1400, ctx.currentTime, 0.15);
     }
   };
   window.Sound = Sound;
@@ -195,20 +254,13 @@
     if (document.hidden) { if (ctx.state === 'running') ctx.suspend().catch(() => {}); }
     else Sound.resume();
   });
-  // „ton an/aus“ gilt für alle offenen Tabs dieser Website gleichzeitig
-  listen(window, 'storage', e => {
-    if (e.key !== 'sound') return;
-    const v = e.newValue === '1';
-    if (v === on) return;
-    on = musicOn = v;
-    if (!v) { if (bedGain && ctx) bedGain.gain.setTargetAtTime(0, ctx.currentTime, 0.05); musicGen++; stopMusic(); if (ctx && ctx.state === 'running') ctx.suspend().catch(() => {}); }
-    else if (!document.hidden) { Sound.resume(); syncMusic(); }
-    refresh();
-  });
   listen(window, 'pageshow', () => Sound.resume());
 
-  // Gemerkte Wahl aus einer anderen Seite. Standard: aus. Ton gibt es nur, wenn man ihn selbst eingeschaltet hat.
-  try { on = musicOn = localStorage.getItem('sound') === '1'; } catch (e) { on = musicOn = false; }
+  // Wahl gilt nur für diesen Besuch (Tab). Jeder neue Besuch beginnt mit „ton aus“.
+  // Alte, dauerhaft gespeicherte Wahl aus früheren Versionen löschen: Sie ließ das Handy mit „ton an“ starten.
+  try { localStorage.removeItem('sound'); } catch (e) {}
+  let v = null; try { v = sessionStorage.getItem(KEY); } catch (e) {}
+  chosen = v !== null; on = musicOn = v === '1';
 
   // Ton-Schalter als kleine Pille unten links, auf allen Seiten gleich.
   // Wird einmal gebaut und nach einem Seitenwechsel nur in die neue Seite umgehängt (bindToggles).

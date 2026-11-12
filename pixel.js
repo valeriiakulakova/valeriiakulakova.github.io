@@ -63,18 +63,30 @@
     return { cells, width: x };
   }
 
-  function svgFor(text) {
+  // opt.dots = n: jede Zelle als n × n kleine Punkte mit Lücken (Look wie „DESIGN + CODE + AI“ auf der Startseite)
+  function svgFor(text, opt) {
     const { cells: rects, width: x } = cellsFor(text);
+    const n = opt && opt.dots ? opt.dots : 0;
     const svg = document.createElementNS(NS, 'svg');
     svg.setAttribute('viewBox', '0 0 ' + x + ' 7');
     // Eigene Größe angeben: sonst setzt Safari für die Grafik 300 px Breite ein und verschiebt das Layout
     svg.setAttribute('width', x); svg.setAttribute('height', 7);
     svg.setAttribute('aria-hidden', 'true');
     svg.setAttribute('focusable', 'false');
-    svg.setAttribute('shape-rendering', 'crispEdges');
+    svg.setAttribute('shape-rendering', n ? 'geometricPrecision' : 'crispEdges');
     svg.classList.add('px');
+    if (n) svg.classList.add('px-dots');
     const path = document.createElementNS(NS, 'path');
-    path.setAttribute('d', rects.map(([a, b]) => 'M' + a + ' ' + b + 'h1v1h-1z').join(''));
+    let d;
+    if (n) {
+      const sub = 1 / n, dot = +(sub * 0.74).toFixed(3);   // Punkt füllt ¾ seines Feldes, der Rest ist Lücke
+      d = rects.map(([a, b]) => {
+        let s = '';
+        for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) s += 'M' + (a + i * sub).toFixed(3) + ' ' + (b + j * sub).toFixed(3) + 'h' + dot + 'v' + dot + 'h-' + dot + 'z';
+        return s;
+      }).join('');
+    } else d = rects.map(([a, b]) => 'M' + a + ' ' + b + 'h1v1h-1z').join('');
+    path.setAttribute('d', d);
     path.setAttribute('fill', 'currentColor');
     svg.appendChild(path);
     return svg;

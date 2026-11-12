@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Über mich · Valeriia Kulakova</title>
 <meta name="description" content="Valeriia Kulakova: von der Entwicklung über Product Ownership zum Product Builder für UX/UI.">
-<link rel="stylesheet" href="style.css?v=068581a6">
-<script src="nav.js?v=99ee467f"></script>
+<link rel="stylesheet" href="style.css?v=896b5bdf">
+<script src="nav.js?v=afdbf128"></script>
 <script src="cursor.js?v=5340a399"></script>
 </head>
-<body class="page-about" data-music="media/sounds/contact.mp3">
+<body class="page-about">
 <a class="skip" href="#inhalt">Zum Inhalt springen</a>
 <canvas id="dots" aria-hidden="true"></canvas>
 
@@ -90,8 +90,8 @@
 <footer class="legal"><a href="impressum.html">( impressum )</a><a href="datenschutz.html">( datenschutz )</a></footer>
 
 
-<script src="pixel.js?v=dce35151"></script>
-<script src="sound.js?v=c4a3cfdd"></script>
+<script src="pixel.js?v=43813e9c"></script>
+<script src="sound.js?v=8afd395a"></script>
 <script>
 (function(){
   document.documentElement.classList.add('js');
@@ -160,15 +160,26 @@
       if(d<bd){bd=d;best=el;}
     });
     const y=(best&&bd<H*0.32)?best.textContent.trim():null;
-    if(y!==activeYear){activeYear=y;layoutYear();if(y&&window.Sound)Sound.chime();}
+    if(y!==activeYear){
+      const was=activeYear; activeYear=y; layoutYear();
+      // Klang (nur wenn „ton an“): Punkte sammeln sich zur Zahl, neueste Station klingt am höchsten; zurück ins Porträt rauscht es leise
+      if(window.Sound){
+        if(y) Sound.gather(years.length>1?1-years.indexOf(best)/(years.length-1):1);
+        else if(was) Sound.scatter();
+      }
+    }
   }
 
   const clamp=v=>v<0?0:v>1?1:v;
   let isMover=new Uint8Array(N); movers.forEach(i=>isMover[i]=1);
   const moverIndex=new Int32Array(N).fill(-1); movers.forEach((i,k)=>moverIndex[i]=k);
 
+  let lastScroll=scrollY;
   function frame(t){
     const total=Math.max(1,document.documentElement.scrollHeight-H);
+    // leises Rascheln, solange gescrollt wird – folgt der Geschwindigkeit (bei „weniger Bewegung“ still)
+    if(!reduce&&window.Sound&&Sound.drift){Sound.drift(Math.min(1,Math.abs(scrollY-lastScroll)/40));}
+    lastScroll=scrollY;
     const p=clamp(scrollY/total);
     // Drehung: von -24° bis +24° über die ganze Seite, dazu ein leichtes Atmen
     const a=reduce?0:(p-0.5)*0.84+Math.sin(t*0.0004)*0.04;

@@ -71,7 +71,7 @@
   async function go(url, push) {
     if (busy) return; busy = true;
     try {
-      const res = await fetch(url, { credentials: 'same-origin' });
+      const res = await fetch(url, { credentials: 'same-origin', cache: 'no-cache' });   // HTML immer beim Server nachfragen: nach einem Update keine alte Seite
       if (!res.ok) throw new Error(res.status);
       const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
       if (!doc.body || !doc.querySelector('script[src*="nav.js"]')) throw new Error('keine Soft-Seite');
