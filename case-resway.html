@@ -6,7 +6,7 @@
 <meta name="tdm-reservation" content="1">
 <title>ReSway · Case Study · Valeriia Kulakova</title>
 <meta name="description" content="ReSway: eine App, die Menschen mit ADHS beim Wiedereinstieg in ihre Routinen hilft. Case Study von Valeriia Kulakova.">
-<link rel="stylesheet" href="style.css?v=6daf88f3">
+<link rel="stylesheet" href="style.css?v=cbc9ab49">
 <script src="nav.js?v=99ee467f"></script>
 <script src="cursor.js?v=5340a399"></script>
 <script>document.documentElement.classList.add('js');</script>
@@ -154,7 +154,7 @@
 <section class="sec paper" id="process" aria-labelledby="proc-t">
   <div class="sh">
     <h2 id="proc-t">Prozess</h2>
-    <p class="sh-txt">Für wen ich gestaltet habe und wie aus der ersten Skizze der Screen wurde.</p>
+    <p class="sh-txt">Für wen ich gestaltet habe, was die Forschung gezeigt hat und wie aus der ersten Skizze der Screen wurde.</p>
   </div>
   <div class="proc">
     <article class="persona" aria-label="Persona Gabi">
@@ -173,18 +173,29 @@
       <p class="label">02 · Low-Fi → Hi-Fi</p>
       <div class="sp-row">
         <div class="sp-lofi" id="spLofi">
-          <img src="media/resway/prozess/lofi-stufe.png" width="786" height="1704" loading="lazy" decoding="async" alt="Low-Fi-Screen „Wie steigst du diese Woche ein?“: drei Optionen als Liste, Tiny, Easy und Normal, darunter die Wochentage.">
+          <img src="media/resway/prozess/lofi-heute.png" width="786" height="1704" loading="lazy" decoding="async" alt="Low-Fi-Screen „Heute“: oben die Restart-Woche mit sieben Tagen und dem Knopf Erledigt, darunter alle Routinen als Kacheln.">
           <svg class="sp-pencil" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21l3.5-1 11-11-2.5-2.5-11 11L3 21z"/><path d="M14 6.5l2.5 2.5M17 4l3 3-1.5 1.5-3-3z"/></svg>
           <span class="sp-tag">Low-Fi</span>
         </div>
         <span class="sp-arrow" aria-hidden="true">→</span>
         <div class="sp-hifi" id="spHifi">
-          <img src="media/resway/prozess/hifi-stufe.png" width="786" height="1704" loading="lazy" decoding="async" alt="Finaler Screen „Wie steigst du ein?“: Stufe Halb mit 2,5 km, Balken für 1, 2,5 und 5 km, darunter Mini, Halb und Ganz.">
+          <img src="media/resway/prozess/hifi-heute.png" width="786" height="1704" loading="lazy" decoding="async" alt="Finaler Screen „Heute“: groß die Karte Laufen, 1 km, Tag 1 von 7, oben im Stapel, darunter die Routinen als kleine Ringe.">
           <span class="sp-tag">Hi-Fi</span>
         </div>
       </div>
-      <figcaption>Im Low-Fi war die Stufe eine Liste mit Tiny, Easy und Normal. Im Hi-Fi wurden daraus Balken in Kilometern: Man sieht den Unterschied, statt ihn zu lesen.</figcaption>
+      <figcaption>Im Low-Fi zeigte Heute die Restart-Woche und darunter alle Routinen als Kacheln. Im Hi-Fi liegt nur die nächste Aufgabe groß oben im Stapel, der Rest wird zu kleinen Ringen: Man sieht sofort, was jetzt dran ist.</figcaption>
     </figure>
+    <div class="affin">
+      <p class="label">03 · Affinity Map · Interviews, Umfrage und Desk Research</p>
+      <ul class="af-list" aria-label="Fünf Cluster der Affinity Map">
+        <li class="af-c">Einstiegs&shy;barriere</li>
+        <li class="af-c af-key"><span class="af-mark">wichtigstes Cluster</span>Externer Druck als Auslöser</li>
+        <li class="af-c">Ausweich&shy;verhalten bei Unterbrechung</li>
+        <li class="af-c">Wiedereinstieg als kognitive Last</li>
+        <li class="af-c">Schuldgefühl statt Belohnung</li>
+      </ul>
+      <p class="af-ins">Betroffene wissen, dass sie ohne Anstoß von außen nicht in Gang kommen, und verlassen sich auf Zufälle wie Haustiere oder Deadlines. Die Chance für ReSway: ein verlässlicher Auslöser, der nicht vom Zufall abhängt.</p>
+    </div>
   </div>
 </section>
 
@@ -421,7 +432,7 @@
   // Ruhiges Erscheinen
   // Nacheinander erscheinen: Überschrift, dann Text, dann Karten und Bilder; was gleichzeitig ins Bild kommt, erscheint versetzt
   io(document.querySelectorAll('.mk-anim'),el=>el.classList.add('in'),.4);
-  const rv=[...document.querySelectorAll('.sh h2,.sh .sh-txt,.vi-txt,.vi-img,.pv-row > *,.facts > div,.stat,.quote-row > *,.dec4 > *,.voices,.bigquote,.flowvid .fv-dev,.flowvid figcaption,.feat-txt,.feat-img,.ba,.result li,.cols4 li,.learn li')];
+  const rv=[...document.querySelectorAll('.sh h2,.sh .sh-txt,.vi-txt,.vi-img,.pv-row > *,.facts > div,.stat,.quote-row > *,.dec4 > *,.voices,.bigquote,.flowvid .fv-dev,.flowvid figcaption,.feat-txt,.feat-img,.ba,.result li,.cols4 li,.learn li,.af-c,.af-ins')];
   document.querySelectorAll('.feat').forEach((f,i)=>{const img=f.querySelector('.feat-img'); if(img) img.classList.add(i%2?'rv-l':'rv-r');});
   rv.forEach(el=>el.classList.add('rv'));
   if(!reduce){

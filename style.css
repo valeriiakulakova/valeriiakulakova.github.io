@@ -843,6 +843,19 @@ body.page-case .sketch-pair figcaption{font-size:.82rem}
 @media (prefers-reduced-motion:reduce){
 .js body.page-case .sp-hifi{opacity:1;translate:none;transition:none}
 }
+body.page-case .affin{grid-column:1/-1;padding-top:12px;border-top:1px solid var(--rs-line)}
+body.page-case .af-list{list-style:none;padding:0;margin-top:16px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(8px,1.4vw,18px)}
+body.page-case .af-c{aspect-ratio:1;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:clamp(10px,1.4vw,18px);background:var(--rs-peach);color:var(--rs-ink);font-family:var(--font-sans);font-weight:500;letter-spacing:-.02em;font-size:clamp(.95rem,1.35vw,1.25rem);line-height:1.15;hyphens:manual;box-shadow:var(--shadow-float);rotate:-1.2deg}
+body.page-case .af-c:nth-child(even){rotate:1.4deg}
+body.page-case .af-key{background:var(--rs-ink);color:var(--rs-paper)}
+body.page-case .af-mark{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-weight:400;font-size:.72rem;letter-spacing:0;color:var(--rs-lime)}
+body.page-case .af-mark::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--rs-glow)}
+body.page-case .af-ins{margin-top:20px;font-family:var(--font-sans);font-size:clamp(1.1rem,1.6vw,1.35rem);line-height:1.4;letter-spacing:-.01em;max-width:60ch}
+@media (max-width:760px){
+body.page-case .af-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+body.page-case .af-c{rotate:none;aspect-ratio:auto;min-height:84px}
+body.page-case .af-key{grid-column:1/-1;order:-1}
+}
 
 /* ---------- 6 · Impressum und Datenschutz (dunkel wie die Startseite) ---------- */
 html:has(> body.page-legal){background:var(--surface-dark)}
