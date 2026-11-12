@@ -236,6 +236,14 @@ body.page-home .pinbar nav a{font-size:.8rem}
 @media (prefers-reduced-motion:reduce){
 body.page-home .pinbar{transition:none}
 }
+body.page-home .legal{position:absolute;left:50%;bottom:clamp(14px,2.4vw,26px);translate:-50% 0;z-index:3;display:flex;padding:0 10px;border-radius:999px;background:rgba(37,37,43,.85);gap:clamp(8px,2vw,20px);font-family:var(--font-mono);font-size:.75rem}
+body.page-home .legal a{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;color:var(--color-muted);text-decoration:none}
+body.page-home .legal a:hover{color:var(--color-text);text-decoration:underline;text-underline-offset:4px}
+body.page-home .legal a{white-space:nowrap}
+@media (max-width:560px){
+body.page-home .legal{left:auto;right:12px;translate:none;gap:2px;bottom:20px}
+body.page-home .legal a{font-size:.68rem;min-height:40px}
+}
 
 /* ---------- 4 · About ---------- */
 body.page-about{background:var(--color-bg)}
@@ -290,6 +298,11 @@ body.page-about .cv,body.page-about .contact{background:linear-gradient(90deg,rg
 @media (prefers-reduced-motion:reduce){
 .js body.page-about .reveal{opacity:1;transform:none;transition:none}
 }
+body.page-about .legal{display:flex;justify-content:center;gap:clamp(8px,2vw,20px);font-family:var(--font-mono);font-size:.75rem}
+body.page-about .legal{padding:var(--space-3,24px) var(--gutter) var(--space-5,64px)}
+body.page-about .legal a{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;text-decoration:none}
+body.page-about .legal a{color:var(--color-muted)}
+body.page-about .legal a:hover{color:var(--color-text);text-decoration:underline;text-underline-offset:4px}
 body.page-about .about-intro{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,3vw,40px) clamp(24px,3vw,48px);margin:0 0 clamp(56px,9vh,104px);font-family:var(--font-mono);font-size:.9rem;line-height:1.5;color:var(--color-text)}
 body.page-about .about-intro p{max-width:34ch}
 body.page-about .ai-cap{text-transform:uppercase;letter-spacing:.06em}
@@ -1012,11 +1025,22 @@ body.page-case .pin-top{font-size:.68rem}
 body.page-case .pt-l{display:none}
 body.page-case .pinbar nav{gap:0}
 }
+body.page-case .legal{display:flex;justify-content:center;gap:clamp(8px,2vw,20px);font-family:var(--font-mono);font-size:.75rem}
+body.page-case .legal{max-width:1320px;margin:8px auto 0}
+body.page-case .legal a{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;text-decoration:none}
+body.page-case .legal a{color:var(--color-on-stage-muted)}
+body.page-case .legal a:hover{color:var(--rs-paper);text-decoration:underline;text-underline-offset:5px}
+@media (max-width:760px){
+body.page-case .legal{padding-bottom:150px}
+}
 
 /* ---------- 6 · Impressum und Datenschutz (dunkel wie die Startseite) ---------- */
 html:has(> body.page-legal){background:var(--surface-dark)}
 body.page-legal{--color-bg:#25252b;--color-text:#eceae6;--color-muted:#a9abb1;--color-line:rgba(236,234,230,.2);--color-focus:#8fd0fb;background:var(--color-bg);color:var(--color-text);font-family:var(--font-sans);line-height:1.55;min-height:100svh;display:flex;flex-direction:column}
 body.page-legal a{color:inherit;text-underline-offset:4px}
+body.page-legal .legal{display:flex;justify-content:center;gap:20px;padding:24px var(--gutter) 40px;font-family:var(--font-mono);font-size:.75rem}
+body.page-legal .legal a{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;color:var(--color-muted);text-decoration:none}
+body.page-legal .legal a:hover{color:var(--color-text);text-decoration:underline}
 body.page-legal a:focus-visible{outline:2px solid var(--color-focus);outline-offset:3px;border-radius:3px}
 body.page-legal .skip{position:absolute;left:-9999px;top:8px;z-index:10;background:var(--color-text);color:var(--color-bg);padding:8px 12px;border-radius:4px}
 body.page-legal .skip:focus{left:8px}
