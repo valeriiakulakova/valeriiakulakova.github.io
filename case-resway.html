@@ -6,7 +6,7 @@
 <meta name="tdm-reservation" content="1">
 <title>ReSway · Case Study · Valeriia Kulakova</title>
 <meta name="description" content="ReSway: eine App, die Menschen mit ADHS beim Wiedereinstieg in ihre Routinen hilft. Case Study von Valeriia Kulakova.">
-<link rel="stylesheet" href="style.css?v=3808c1bf">
+<link rel="stylesheet" href="style.css?v=26498ab3">
 <script src="nav.js?v=99ee467f"></script>
 <script src="cursor.js?v=5340a399"></script>
 <script>document.documentElement.classList.add('js');</script>
@@ -189,15 +189,43 @@
     </figure>
     <div class="affin">
       <p class="label">03 · Affinity Map · Interviews, Umfrage und Desk Research</p>
-      <ul class="af-list" aria-label="Fünf Cluster der Affinity Map">
-        <li class="af-c">Einstiegs&shy;barriere</li>
-        <li class="af-c">Externer Druck als Auslöser</li>
-        <li class="af-c">Ausweich&shy;verhalten bei Unterbrechung</li>
-        <li class="af-c af-key"><span class="af-mark">mein Fokus</span>Wiedereinstieg als kognitive Last</li>
-        <li class="af-c">Schuldgefühl statt Belohnung</li>
-      </ul>
+      <div class="amap" id="amap">
+        <svg class="am-lines" aria-hidden="true"></svg>
+        <p class="am-hub">Die aus der Routine Gefallenen<span>5 Cluster · antippen für ein Zitat</span></p>
+        <ul class="am-nodes" aria-label="Fünf Cluster der Affinity Map">
+          <li><button type="button" class="am-node" aria-pressed="false" data-q="„Ich brauchte nur den Anstoß … danach ging der Rest quasi automatisiert durch.“" data-src="Interview · Einstiegsbarriere">Einstiegs&shy;barriere</button></li>
+          <li><button type="button" class="am-node" aria-pressed="false" data-q="„Ich brauche tatsächlich externe Motivation … von innen kommt irgendwie nicht viel.“" data-src="Interview · Externer Druck als Auslöser">Externer Druck als Auslöser</button></li>
+          <li><button type="button" class="am-node" aria-pressed="false" data-q="„… dann habe ich am Handy rumgespielt, also ich habe die Zeit einfach komplett verblödelt.“" data-src="Interview · Ausweichverhalten bei Unterbrechung">Ausweich&shy;verhalten bei Unterbrechung</button></li>
+          <li><button type="button" class="am-node am-key" aria-pressed="true" data-q="„… wieder die Kraft zu finden, das komplett von vorne aufzubauen, ist am schwersten.“" data-src="Interview · Wiedereinstieg als kognitive Last"><span class="am-mark">mein Fokus</span>Wiedereinstieg als kognitive Last</button></li>
+          <li><button type="button" class="am-node" aria-pressed="false" data-q="„Das Gefühl, versagt zu haben, zu überwinden.“" data-src="Umfrage · Schuldgefühl statt Belohnung">Schuldgefühl statt Belohnung</button></li>
+        </ul>
+        <figure class="am-quote" aria-live="polite"><blockquote id="amQ">„… wieder die Kraft zu finden, das komplett von vorne aufzubauen, ist am schwersten.“</blockquote><figcaption id="amS">Interview · Wiedereinstieg als kognitive Last</figcaption></figure>
+      </div>
       <p class="af-ins">7 von 14 Befragten schaffen den Wiedereinstieg fast nie, ohne alles neu aufzubauen. Für 57,1 % ist das die frustrierendste Phase. Hier setzt ReSway an.</p>
     </div>
+    <script>
+    (function(){
+      const map=document.getElementById('amap'); if(!map) return;
+      const svg=map.querySelector('.am-lines'), hub=map.querySelector('.am-hub'), btns=[...map.querySelectorAll('.am-node')];
+      const NS='http://www.w3.org/2000/svg';
+      function draw(){
+        const r=map.getBoundingClientRect(); svg.setAttribute('viewBox','0 0 '+r.width+' '+r.height); svg.innerHTML='';
+        const h=hub.getBoundingClientRect(); const x0=h.left+h.width/2-r.left, y0=h.bottom-r.top;
+        btns.forEach(b=>{
+          const n=b.getBoundingClientRect(); const x1=n.left+n.width/2-r.left, y1=n.top-r.top; const ym=y0+(y1-y0)*.55;
+          const d='M'+x0+' '+y0+' C'+x0+' '+ym+' '+x1+' '+(ym-10)+' '+x1+' '+y1;
+          const p=document.createElementNS(NS,'path'); p.setAttribute('d',d); p.setAttribute('class','am-line'+(b.classList.contains('am-key')?' am-line-key':'')); svg.appendChild(p);
+          if(b.classList.contains('am-key')){ const run=p.cloneNode(); run.setAttribute('class','am-run'); svg.appendChild(run); run.style.setProperty('--len', run.getTotalLength()); }
+        });
+      }
+      draw(); new ResizeObserver(draw).observe(map);
+      const q=document.getElementById('amQ'), s=document.getElementById('amS');
+      btns.forEach(b=>b.addEventListener('click',()=>{
+        btns.forEach(x=>x.setAttribute('aria-pressed', x===b?'true':'false'));
+        q.textContent=b.dataset.q; s.textContent=b.dataset.src;
+      }));
+    })();
+    </script>
   </div>
 </section>
 
@@ -448,7 +476,7 @@
   // Ruhiges Erscheinen
   // Nacheinander erscheinen: Überschrift, dann Text, dann Karten und Bilder; was gleichzeitig ins Bild kommt, erscheint versetzt
   io(document.querySelectorAll('.mk-anim'),el=>el.classList.add('in'),.4);
-  const rv=[...document.querySelectorAll('.sh h2,.sh .sh-txt,.vi-txt,.vi-img,.pv-row > *,.facts > div,.stat,.quote-row > *,.dec4 > *,.voices,.bigquote,.flowvid .fv-dev,.flowvid figcaption,.feat-txt,.feat-img,.ba,.result li,.cols4 li,.learn li,.af-c,.af-ins,.ba3-item,.pop')];
+  const rv=[...document.querySelectorAll('.sh h2,.sh .sh-txt,.vi-txt,.vi-img,.pv-row > *,.facts > div,.stat,.quote-row > *,.dec4 > *,.voices,.bigquote,.flowvid .fv-dev,.flowvid figcaption,.feat-txt,.feat-img,.ba,.result li,.cols4 li,.learn li,.amap,.af-ins,.ba3-item,.pop')];
   document.querySelectorAll('.feat').forEach((f,i)=>{const img=f.querySelector('.feat-img'); if(img) img.classList.add(i%2?'rv-l':'rv-r');});
   rv.forEach(el=>el.classList.add('rv'));
   if(!reduce){
