@@ -955,6 +955,7 @@ body.page-case .am-node{min-height:64px;font-size:.85rem}
 body.page-case .am-run{animation:none;stroke-dashoffset:0;stroke-dasharray:none;stroke-width:1.5;opacity:.8}
 body.page-case .am-node{transition:none}
 }
+body.page-case .sec.line{border-top:1px solid var(--rs-line)}
 
 /* ---------- 6 · Impressum und Datenschutz (dunkel wie die Startseite) ---------- */
 html:has(> body.page-legal){background:var(--surface-dark)}

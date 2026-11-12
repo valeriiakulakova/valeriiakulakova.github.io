@@ -6,7 +6,7 @@
 <meta name="tdm-reservation" content="1">
 <title>ReSway · Case Study · Valeriia Kulakova</title>
 <meta name="description" content="ReSway: eine App, die Menschen mit ADHS beim Wiedereinstieg in ihre Routinen hilft. Case Study von Valeriia Kulakova.">
-<link rel="stylesheet" href="style.css?v=68082707">
+<link rel="stylesheet" href="style.css?v=af158b56">
 <script src="nav.js?v=99ee467f"></script>
 <script src="cursor.js?v=5340a399"></script>
 <script>document.documentElement.classList.add('js');</script>
@@ -135,26 +135,8 @@
   </div>
 </section>
 
-<!-- Stimmen aus dem Research -->
-<section class="sec ink" id="decisions" aria-labelledby="dec-t">
-  <div class="sh">
-    <h2 id="dec-t">Was ich gehört und entschieden habe</h2>
-    <p class="sh-txt">Zwei Sätze aus Interview und Umfrage. Dazu vier Entscheidungen, jede gegen eine Alternative.</p>
-  </div>
-  <div class="voices">
-    <blockquote><p>„Ich hatte auch irgendwie Angst, … nicht auf dem alten Niveau zu sein.“</p><footer>Interview</footer></blockquote>
-    <blockquote><p>„Das Gefühl, versagt zu haben, zu überwinden.“</p><footer>Umfrage</footer></blockquote>
-  </div>
-  <ul class="dec4" aria-label="Entscheidungen und verworfene Alternativen">
-    <li><b>Stufen</b> statt Neustart bei null<span class="dec-why">Am schwersten ist, alles wieder von vorne aufzubauen. Deshalb startet ReSway nach einer Pause eine Stufe kleiner.</span><span class="label">Interview</span></li>
-    <li><b>Orange</b> statt Rot<span class="dec-why">Rot wirkt wie ein Fehler. Nach einer Pause soll sich nichts nach Versagen anfühlen.</span><span class="label">Umfrage</span></li>
-    <li><b>Wenige Kern-Routinen</b> statt unbegrenzt<span class="dec-why">Du legst fest, wie viele Routinen du verfolgst, ReSway rät zu höchstens fünf. So bleibt der Fokus. Kleine Aufgaben kommen später als To-dos dazu.</span><span class="label">Konzept</span></li>
-    <li><b>Kilometer</b> statt „Halbe Runde“<span class="dec-why">Im Test war unklar, ob „Halbe Runde“ Strecke oder Häufigkeit meint. Konkrete Werte versteht man schneller.</span><span class="label">Usability-Test</span></li>
-  </ul>
-</section>
-
 <!-- Prozess: Persona und Low-Fi → Hi-Fi -->
-<section class="sec paper" id="process" aria-labelledby="proc-t">
+<section class="sec paper line" id="process" aria-labelledby="proc-t">
   <div class="sh">
     <h2 id="proc-t">Prozess</h2>
   </div>
@@ -196,12 +178,12 @@
           <li><button type="button" class="am-node" aria-pressed="false" data-q="„Ich brauchte nur den Anstoß … danach ging der Rest quasi automatisiert durch.“" data-src="Interview · Einstiegsbarriere">Einstiegs&shy;barriere</button></li>
           <li><button type="button" class="am-node" aria-pressed="false" data-q="„Ich brauche tatsächlich externe Motivation … von innen kommt irgendwie nicht viel.“" data-src="Interview · Externer Druck als Auslöser">Externer Druck als Auslöser</button></li>
           <li><button type="button" class="am-node" aria-pressed="false" data-q="„… dann habe ich am Handy rumgespielt, also ich habe die Zeit einfach komplett verblödelt.“" data-src="Interview · Ausweichverhalten bei Unterbrechung">Ausweich&shy;verhalten bei Unterbrechung</button></li>
-          <li><button type="button" class="am-node am-key" aria-pressed="true" data-q="„… wieder die Kraft zu finden, das komplett von vorne aufzubauen, ist am schwersten.“" data-src="Interview · Wiedereinstieg als kognitive Last"><span class="am-mark">mein Fokus</span>Wiedereinstieg als kognitive Last</button></li>
+          <li><button type="button" class="am-node am-key" aria-pressed="true" data-q="„Ich hatte auch irgendwie Angst, … nicht auf dem alten Niveau zu sein.“" data-src="Interview · Wiedereinstieg als kognitive Last"><span class="am-mark">mein Fokus</span>Wiedereinstieg als kognitive Last</button></li>
           <li><button type="button" class="am-node" aria-pressed="false" data-q="„Das Gefühl, versagt zu haben, zu überwinden.“" data-src="Umfrage · Schuldgefühl statt Belohnung">Schuldgefühl statt Belohnung</button></li>
         </ul>
-        <figure class="am-quote" aria-live="polite"><blockquote id="amQ">„… wieder die Kraft zu finden, das komplett von vorne aufzubauen, ist am schwersten.“</blockquote><figcaption id="amS">Interview · Wiedereinstieg als kognitive Last</figcaption></figure>
+        <figure class="am-quote" aria-live="polite"><blockquote id="amQ">„Ich hatte auch irgendwie Angst, … nicht auf dem alten Niveau zu sein.“</blockquote><figcaption id="amS">Interview · Wiedereinstieg als kognitive Last</figcaption></figure>
       </div>
-      <p class="af-ins">7 von 14 Befragten schaffen den Wiedereinstieg fast nie, ohne alles neu aufzubauen. Für 57,1 % ist das die frustrierendste Phase. Hier setzt ReSway an.</p>
+      <p class="af-ins">Aus Interviews, Umfrage und Desk Research wurden fünf Muster. Weiter ging ich mit dem Wiedereinstieg.</p>
     </div>
     <script>
     (function(){
@@ -356,7 +338,7 @@
   }
 
   // Abschnitts-Leiste
-  const parts=[['problem','Problem'],['decisions','Entscheidungen'],['process','Prozess'],['overview','Die App'],['testing','Testing'],['ai','KI'],['learnings','Learnings']]
+  const parts=[['problem','Problem'],['process','Prozess'],['overview','Die App'],['testing','Testing'],['ai','KI'],['learnings','Learnings']]
     .filter(([id])=>document.getElementById(id));
   const rail=document.createElement('nav');
   rail.className='rail'; rail.setAttribute('aria-label','Abschnitte');
