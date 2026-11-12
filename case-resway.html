@@ -6,7 +6,7 @@
 <meta name="tdm-reservation" content="1">
 <title>ReSway · Case Study · Valeriia Kulakova</title>
 <meta name="description" content="ReSway: eine App, die Menschen mit ADHS beim Wiedereinstieg in ihre Routinen hilft. Case Study von Valeriia Kulakova.">
-<link rel="stylesheet" href="style.css?v=03ec677b">
+<link rel="stylesheet" href="style.css?v=6daf88f3">
 <script src="nav.js?v=99ee467f"></script>
 <script src="cursor.js?v=5340a399"></script>
 <script>document.documentElement.classList.add('js');</script>
@@ -150,6 +150,44 @@
   </ul>
 </section>
 
+<!-- Prozess: Persona und Low-Fi → Hi-Fi -->
+<section class="sec paper" id="process" aria-labelledby="proc-t">
+  <div class="sh">
+    <h2 id="proc-t">Prozess</h2>
+    <p class="sh-txt">Für wen ich gestaltet habe und wie aus der ersten Skizze der Screen wurde.</p>
+  </div>
+  <div class="proc">
+    <article class="persona" aria-label="Persona Gabi">
+      <p class="label">01 · Persona · aus 3 Interviews und der Umfrage</p>
+      <div class="pe-head"><span class="pe-av" aria-hidden="true"><span data-pixel>G</span></span><div><h3>Gabi</h3><p class="pe-sub">die aus der Routine Gefallene</p></div></div>
+      <p class="pe-sit">Zwei Wochen lang jeden Morgen 10 Minuten Sport. Dann ein Tag verpasst, dann noch einer.</p>
+      <ul class="pe-pain">
+        <li>Der Wiedereinstieg fühlt sich wie ein Neuanfang an.</li>
+        <li>Ein verpasster Tag reicht, um alles zu verlieren.</li>
+        <li>Nach dem Ausfall kommt starke innere Kritik.</li>
+      </ul>
+      <p class="pe-goal"><span class="label">braucht</span>Den Wiedereinstieg als Fortsetzung erleben, nicht als Neuanfang.</p>
+      <blockquote class="pe-quote">„…und jetzt weiß ich gar nicht mehr, wie ich wieder anfangen soll.“</blockquote>
+    </article>
+    <figure class="sketch-pair">
+      <p class="label">02 · Low-Fi → Hi-Fi</p>
+      <div class="sp-row">
+        <div class="sp-lofi" id="spLofi">
+          <img src="media/resway/prozess/lofi-stufe.png" width="786" height="1704" loading="lazy" decoding="async" alt="Low-Fi-Screen „Wie steigst du diese Woche ein?“: drei Optionen als Liste, Tiny, Easy und Normal, darunter die Wochentage.">
+          <svg class="sp-pencil" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21l3.5-1 11-11-2.5-2.5-11 11L3 21z"/><path d="M14 6.5l2.5 2.5M17 4l3 3-1.5 1.5-3-3z"/></svg>
+          <span class="sp-tag">Low-Fi</span>
+        </div>
+        <span class="sp-arrow" aria-hidden="true">→</span>
+        <div class="sp-hifi" id="spHifi">
+          <img src="media/resway/prozess/hifi-stufe.png" width="786" height="1704" loading="lazy" decoding="async" alt="Finaler Screen „Wie steigst du ein?“: Stufe Halb mit 2,5 km, Balken für 1, 2,5 und 5 km, darunter Mini, Halb und Ganz.">
+          <span class="sp-tag">Hi-Fi</span>
+        </div>
+      </div>
+      <figcaption>Im Low-Fi war die Stufe eine Liste mit Tiny, Easy und Normal. Im Hi-Fi wurden daraus Balken in Kilometern: Man sieht den Unterschied, statt ihn zu lesen.</figcaption>
+    </figure>
+  </div>
+</section>
+
 <!-- Systemüberblick -->
 <section class="sec warm" id="overview" aria-labelledby="ov-t">
   <div class="sh">
@@ -263,7 +301,7 @@
   }
 
   // Abschnitts-Leiste
-  const parts=[['problem','Problem'],['decisions','Entscheidungen'],['overview','Die App'],['testing','Testing'],['ai','KI'],['learnings','Learnings']]
+  const parts=[['problem','Problem'],['decisions','Entscheidungen'],['process','Prozess'],['overview','Die App'],['testing','Testing'],['ai','KI'],['learnings','Learnings']]
     .filter(([id])=>document.getElementById(id));
   const rail=document.createElement('nav');
   rail.className='rail'; rail.setAttribute('aria-label','Abschnitte');
@@ -282,6 +320,27 @@
   const first=document.getElementById(parts[0][0]);
   const show=()=>rail.classList.toggle('on', first.getBoundingClientRect().top < innerHeight*0.7);
   addEventListener('scroll',show,{passive:true}); show();
+})();
+</script>
+
+<script>
+/* Low-Fi zeichnet sich wie mit einem Bleistift: von oben nach unten aufgedeckt, der Stift fährt im Zickzack mit.
+   Danach erscheint der Hi-Fi-Screen. Bei „weniger Bewegung“ steht beides sofort da. */
+(function(){
+  const lo=document.getElementById('spLofi'), hi=document.getElementById('spHifi'); if(!lo||!hi) return;
+  const img=lo.querySelector('img'), pen=lo.querySelector('.sp-pencil');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const set=p=>{ lo.style.setProperty('--p',(p*104).toFixed(2)+'%');
+    const y=p*100, x=12+(Math.sin(p*Math.PI*18)*0.5+0.5)*76;
+    pen.style.left=x+'%'; pen.style.top=y+'%'; };
+  if(reduce){ lo.classList.add('drawn'); hi.classList.add('in'); return; }
+  set(0);
+  const io=new IntersectionObserver(es=>{ if(!es.some(e=>e.isIntersecting)) return; io.disconnect();
+    lo.classList.add('drawing'); const t0=performance.now(), D=2600;
+    (function step(now){ const k=Math.min(1,(now-t0)/D), e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2; set(e);
+      if(k<1) requestAnimationFrame(step); else { lo.classList.remove('drawing'); lo.classList.add('drawn'); setTimeout(()=>hi.classList.add('in'),250); } })(t0);
+  },{threshold:.45});
+  io.observe(lo);
 })();
 </script>
 
