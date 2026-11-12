@@ -201,6 +201,9 @@ body.page-home .code .s{color:var(--color-string)}
 body.page-home .code .p{color:var(--color-muted)}
 body.page-home .code .d{color:var(--color-decl)}
 body.page-home .plain{margin:0;padding:18px 20px 22px;font-size:clamp(1rem,1.3vw,1.15rem);line-height:1.6;min-height:13.5em}
+body.page-home .plain p{margin:0;max-width:34ch}
+body.page-home .plain p+p{margin-top:.7em;color:var(--color-muted)}
+body.page-home .plain .plain-lead{font-size:1.3em;line-height:1.3;letter-spacing:-.01em;color:var(--color-text)}
 body.page-home .folders{transform-origin:50% 50%}
 body.page-home header nav a,body.page-home .badge{white-space:nowrap}
 @media (max-width:700px){
