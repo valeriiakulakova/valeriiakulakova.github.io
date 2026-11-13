@@ -19,6 +19,8 @@
   --color-cursor:#ffffff;          /* Ring mit Differenz-Mischung: hell auf dunkel, dunkel auf hell */
   --color-accent-dot:#ff5a1f;      /* oranger Punkt (Zeiger, Ton-Balken) */
   --snd-bg:rgba(14,15,18,.78);     /* Ton-Pille: dunkle Fläche auf allen Seiten */
+  --dock-bg:rgba(14,15,18,.62);    /* Sprach-/Ton-Leiste: etwas durchsichtiger, mit Unschärfe (Kontrast bleibt über 4,5:1) */
+  --snd-on-bg:rgba(255,90,31,.88); /* Ton an: Orange, leicht durchsichtig */
   --snd-text:#eceae6;
   --snd-inner:rgba(255,255,255,.09);  /* Ton-Pille innerhalb der Sprach-/Ton-Leiste */
   --snd-on-text:#0e0f12;           /* dunkle Schrift auf oranger Ton-Pille (Kontrast ca. 6:1) */
@@ -1224,16 +1226,16 @@ body.page-home header nav .sound:hover{text-decoration:none;color:var(--color-te
 /* ---------- Sprache + Ton unten links (alle Seiten): eine gemeinsame Pille ----------
    links „de en“, aktive Sprache hell mit orangem Pixel-Quadrat darunter (zwei Merkmale), andere gedämpft und klickbar;
    rechts darin eine eigene kleine Pille für den Ton: aus = grau, an = orange Fläche mit dunkler Schrift und tanzenden Balken */
-.dock-l{position:fixed;z-index:60;left:clamp(12px,2vw,28px);bottom:clamp(12px,2vw,28px);display:flex;align-items:center;gap:4px;padding:4px;border-radius:999px;background:var(--snd-bg);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--snd-text);font-family:var(--font-mono);font-size:.8rem}
+.dock-l{position:fixed;z-index:60;left:clamp(12px,2vw,28px);bottom:clamp(12px,2vw,28px);display:flex;align-items:center;gap:4px;padding:4px;border-radius:999px;background:var(--dock-bg);-webkit-backdrop-filter:blur(16px) saturate(1.2);backdrop-filter:blur(16px) saturate(1.2);color:var(--snd-text);font-family:var(--font-mono);font-size:.8rem}
 .dock-l .lang{display:flex;align-items:center;gap:2px;padding:0 4px 0 6px}
 .dock-l .lang > *{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:36px;min-height:40px;padding:0 6px;border-radius:999px;color:inherit;text-decoration:none}
-.dock-l .lang a{opacity:.62}
+.dock-l .lang a{opacity:.8}
 .dock-l .lang a:hover{opacity:1}
 .dock-l .lang .cur::after{content:"";position:absolute;left:50%;bottom:5px;width:4px;height:4px;margin-left:-2px;background:var(--color-accent-dot)}
 .dock-l .lang a:focus-visible{opacity:1;outline:2px solid var(--snd-text);outline-offset:-2px}
 .snd{position:relative;display:inline-flex;align-items:center;gap:10px;min-height:40px;padding:0 16px 0 14px;border:0;border-radius:999px;background:var(--snd-inner);color:inherit;font:inherit;cursor:pointer}
 .snd:focus-visible{outline:2px solid var(--snd-text);outline-offset:2px}
-.snd.on{background:var(--color-accent);color:var(--snd-on-text)}
+.snd.on{background:var(--snd-on-bg);color:var(--snd-on-text)}
 .snd-eq{display:inline-flex;align-items:center;gap:2px;height:14px}
 .snd-eq i{width:2px;height:3px;border-radius:1px;background:currentColor;opacity:.7}
 .snd.on .snd-eq i{background:currentColor;opacity:1;animation:snd-eq .9s ease-in-out infinite}
