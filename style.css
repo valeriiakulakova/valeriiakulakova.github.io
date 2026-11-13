@@ -1218,8 +1218,16 @@ body.page-home header nav .sound:hover{text-decoration:none;color:var(--color-te
 [data-softfocus]:focus{outline:none}
 
 /* ---------- Ton-Pille unten links (alle Seiten) ---------- */
-.snd{position:fixed;z-index:60;left:clamp(12px,2vw,28px);bottom:clamp(12px,2vw,28px);display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 16px 0 14px;border:0;border-radius:999px;background:var(--snd-bg);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--snd-text);font-family:var(--font-mono);font-size:.8rem;cursor:pointer}
+.dock-l{position:fixed;z-index:60;left:clamp(12px,2vw,28px);bottom:clamp(12px,2vw,28px);display:flex;align-items:center;gap:8px}
+.snd{position:relative;display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 16px 0 14px;border:0;border-radius:999px;background:var(--snd-bg);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--snd-text);font-family:var(--font-mono);font-size:.8rem;cursor:pointer}
 .snd:focus-visible{outline:2px solid var(--snd-text);outline-offset:3px}
+/* Sprach-Schalter neben dem Ton: gleiche Pille; aktive Sprache hell + unterstrichen, andere gedämpft */
+.dock-l .lang{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border-radius:999px;background:var(--snd-bg);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--snd-text);font-family:var(--font-mono);font-size:.8rem;text-decoration:none}
+.dock-l .lang span{opacity:.62}
+.dock-l .lang .cur{opacity:1;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.dock-l .lang .lang-sl{opacity:.4}
+.dock-l .lang:hover span:not(.cur):not(.lang-sl){opacity:1}
+.dock-l .lang:focus-visible{outline:2px solid var(--snd-text);outline-offset:3px}
 .snd-eq{display:inline-flex;align-items:center;gap:2px;height:14px}
 .snd-eq i{width:2px;height:3px;border-radius:1px;background:currentColor;opacity:.7}
 .snd.on .snd-eq i{background:var(--color-accent-dot);opacity:1;animation:snd-eq .9s ease-in-out infinite}

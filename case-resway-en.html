@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="tdm-reservation" content="1">
+<title>ReSway · Case Study · Valeriia Kulakova</title>
+<meta name="description" content="ReSway: an app that helps people with ADHD get back into their routines. Case study by Valeriia Kulakova.">
+<link rel="stylesheet" href="style.css?v=f1c820ac">
+<script src="nav.js?v=debee6c0"></script>
+<script src="cursor.js?v=5340a399"></script>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body class="page-case" data-music="media/sounds/project.mp3" data-music-loop>
+<a class="skip" href="#case">Skip to content</a>
+
+<!-- Hero: Stimmungsbild, Wortmarke, schwebende Komponenten -->
+<header class="hero3" id="hero">
+  <div class="h3-top">
+    <h1 class="h3-logo" id="title"><svg class="wm" role="img" aria-label="ReSway" viewBox="0 0 742 240" fill="none" xmlns="http://www.w3.org/2000/svg"><g><path d="M12.1 190L12 90H36.4L36.5 98.9C39.9 95.3 43.9667 92.4667 48.7 90.4C53.4333 88.2667 58.5333 87.2 64 87.2C67.6667 87.2 71.3333 87.7333 75 88.8L65.4 113.4C62.8667 112.4 60.3333 111.9 57.8 111.9C53.8667 111.9 50.2667 112.867 47 114.8C43.8 116.667 41.2333 119.233 39.3 122.5C37.4333 125.7 36.5 129.267 36.5 133.2V190H12.1ZM125.531 192.6C116.331 192.6 107.931 190.233 100.331 185.5C92.7979 180.767 86.7646 174.4 82.2313 166.4C77.7646 158.4 75.5313 149.567 75.5313 139.9C75.5313 132.633 76.8313 125.833 79.4313 119.5C82.0313 113.1 85.5979 107.5 90.1313 102.7C94.7313 97.8333 100.065 94.0333 106.131 91.3C112.198 88.5667 118.665 87.2 125.531 87.2C133.331 87.2 140.465 88.8667 146.931 92.2C153.465 95.4667 158.998 99.9667 163.531 105.7C168.065 111.433 171.365 117.967 173.431 125.3C175.498 132.633 175.965 140.3 174.831 148.3H101.731C102.665 152.033 104.198 155.4 106.331 158.4C108.465 161.333 111.165 163.7 114.431 165.5C117.698 167.233 121.398 168.133 125.531 168.2C129.798 168.267 133.665 167.267 137.131 165.2C140.665 163.067 143.598 160.2 145.931 156.6L170.831 162.4C166.765 171.267 160.698 178.533 152.631 184.2C144.565 189.8 135.531 192.6 125.531 192.6ZM100.931 130H150.131C149.398 126 147.831 122.4 145.431 119.2C143.098 115.933 140.198 113.333 136.731 111.4C133.265 109.467 129.531 108.5 125.531 108.5C121.531 108.5 117.831 109.467 114.431 111.4C111.031 113.267 108.131 115.833 105.731 119.1C103.398 122.3 101.798 125.933 100.931 130ZM221.383 191.8C216.183 191.467 211.149 190.433 206.283 188.7C201.483 186.9 197.216 184.467 193.483 181.4C189.749 178.333 186.883 174.667 184.883 170.4L205.483 161.6C206.283 162.933 207.583 164.367 209.383 165.9C211.183 167.367 213.316 168.6 215.783 169.6C218.316 170.6 221.083 171.1 224.083 171.1C226.616 171.1 229.016 170.767 231.283 170.1C233.616 169.367 235.483 168.267 236.883 166.8C238.349 165.333 239.083 163.433 239.083 161.1C239.083 158.633 238.216 156.733 236.483 155.4C234.816 154 232.683 152.967 230.083 152.3C227.549 151.567 225.083 150.9 222.683 150.3C216.349 149.033 210.449 147.067 204.983 144.4C199.583 141.733 195.216 138.3 191.883 134.1C188.616 129.833 186.983 124.7 186.983 118.7C186.983 112.1 188.716 106.4 192.183 101.6C195.716 96.8 200.283 93.1 205.883 90.5C211.549 87.9 217.649 86.6 224.183 86.6C232.116 86.6 239.383 88.2667 245.983 91.6C252.649 94.8667 257.916 99.5 261.783 105.5L242.483 116.9C241.549 115.3 240.249 113.833 238.583 112.5C236.916 111.1 235.016 109.967 232.883 109.1C230.749 108.167 228.516 107.633 226.183 107.5C223.183 107.367 220.449 107.633 217.983 108.3C215.516 108.967 213.516 110.1 211.983 111.7C210.516 113.3 209.783 115.433 209.783 118.1C209.783 120.633 210.783 122.533 212.783 123.8C214.783 125 217.183 125.933 219.983 126.6C222.849 127.267 225.583 128 228.183 128.8C234.049 130.733 239.549 133.1 244.683 135.9C249.883 138.7 254.049 142.133 257.183 146.2C260.316 150.267 261.816 155.133 261.683 160.8C261.683 167.267 259.749 172.933 255.883 177.8C252.016 182.6 247.016 186.267 240.883 188.8C234.816 191.333 228.316 192.333 221.383 191.8Z" fill="currentColor"/><path d="M495.049 89.9293C501.768 89.4249 507.624 94.4626 508.129 101.181C509.553 120.146 504.392 139.021 493.516 154.623C482.641 170.224 466.716 181.596 448.43 186.821C430.144 192.045 410.616 190.802 393.14 183.301C382.594 178.775 373.185 172.136 365.445 163.88C362.807 167.359 359.744 170.531 356.301 173.31C346.661 181.092 334.646 185.336 322.257 185.336C309.869 185.336 297.854 181.092 288.214 173.31C278.574 165.529 271.89 154.679 269.277 142.569C267.856 135.983 272.043 129.491 278.63 128.07C285.216 126.649 291.707 130.835 293.129 137.422C294.565 144.08 298.24 150.045 303.54 154.324C308.84 158.602 315.446 160.936 322.257 160.936C329.069 160.936 335.675 158.602 340.975 154.324C346.276 150.045 349.951 144.08 351.387 137.422L351.498 136.955C352.729 132.165 356.744 128.574 361.676 127.906C366.768 127.217 371.745 129.791 374.125 134.344C380.333 146.221 390.448 155.594 402.763 160.88C415.079 166.165 428.841 167.042 441.727 163.36C454.613 159.678 465.836 151.664 473.5 140.67C481.164 129.675 484.801 116.374 483.798 103.009C483.293 96.2905 488.331 90.434 495.049 89.9293Z" fill="currentColor"/><circle cx="502.161" cy="58.1744" r="14.64" fill="currentColor"/><path d="M599.761 90H624.161V190H599.761L598.661 177.6C595.928 182.067 592.294 185.7 587.761 188.5C583.294 191.233 577.994 192.6 571.861 192.6C564.461 192.6 557.528 191.2 551.061 188.4C544.594 185.6 538.894 181.733 533.961 176.8C529.094 171.867 525.261 166.167 522.461 159.7C519.728 153.233 518.361 146.3 518.361 138.9C518.361 131.767 519.661 125.067 522.261 118.8C524.928 112.533 528.628 107.033 533.361 102.3C538.094 97.5667 543.561 93.8667 549.761 91.2C555.961 88.5333 562.628 87.2 569.761 87.2C576.361 87.2 582.261 88.6667 587.461 91.6C592.728 94.5333 597.194 98.2667 600.861 102.8L599.761 90ZM571.261 169.1C576.461 169.1 581.061 167.8 585.061 165.2C589.061 162.6 592.194 159.1 594.461 154.7C596.728 150.233 597.861 145.333 597.861 140C597.861 134.6 596.728 129.7 594.461 125.3C592.194 120.833 589.028 117.3 584.961 114.7C580.961 112.1 576.394 110.8 571.261 110.8C566.128 110.8 561.428 112.133 557.161 114.8C552.961 117.4 549.594 120.9 547.061 125.3C544.594 129.7 543.361 134.6 543.361 140C543.361 145.4 544.628 150.3 547.161 154.7C549.694 159.1 553.061 162.6 557.261 165.2C561.528 167.8 566.194 169.1 571.261 169.1ZM707.219 90H733.119L678.419 240H652.519L670.619 190L634.619 90H661.319L682.819 156.6L707.219 90Z" fill="currentColor"/></g></svg></h1>
+    <nav aria-label="Main navigation"><a href="index-en.html">( home )</a><a href="case-resway-en.html" aria-current="page">( projects )</a><a href="about-en.html">( about )</a><a href="contact-en.html">( contact )</a></nav>
+  </div>
+  <div class="h3-kick"><div class="h3-what"><p class="label">Case 01 · UX/UI · Product design</p><p class="h3-sub">A routine app for getting back on track after a break, made for people with ADHD</p></div><span class="kick-btns"><button type="button" class="snd-hint" id="sndHint" hidden>( watch with sound ♪ )</button><button type="button" class="demo-btn" data-demo aria-haspopup="dialog">( <i aria-hidden="true"></i> Watch demo · 48 s )</button></span></div>
+  <div class="stage inline hero-stage" id="heroStage" role="button" tabindex="0" aria-label="Core flow: choose a level, Today with the plus menu, celebrate coming back. Tap or press Enter for the next step."><img class="bg" src="media/resway/reel/bild-rhythmus.jpg" width="1376" height="768" alt=""><span class="scene s1"><span class="ph3 turn"><span class="ph-back"></span><span class="phone"><img src="media/resway/reel/screen-mini.jpg" width="786" height="1704" alt=""><img src="media/resway/reel/screen-halb.jpg" width="786" height="1704" alt=""><img src="media/resway/reel/screen-ganz.jpg" width="786" height="1704" alt=""></span><span class="ph-glare"></span></span></span><span class="scene s2"><span class="ph3 lying"><span class="ph-back"></span><span class="phone"><img src="media/resway/reel/screen-heute.jpg" width="786" height="1704" alt=""><img src="media/resway/reel/screen-plus.png" width="786" height="1704" alt=""></span><span class="ph-glare"></span></span></span><span class="scene s3"><span class="ph3 rise"><span class="ph-back"></span><span class="phone"><img src="media/resway/reel/screen-sprung.jpg" width="786" height="1704" alt=""></span><span class="ph-glare"></span></span></span></div>
+  <dl class="h3-meta">
+    <div><dt>Role</dt><dd>Product Builder<span class="meta-sub">Research, UX, UI, motion, usability testing</span></dd></div>
+    <div><dt>Timeline</dt><dd>Aug – Dec 2026</dd></div>
+    <div><dt>Methods</dt><dd>Interviews, survey, usability test</dd></div>
+    <div><dt>Tools</dt><dd>Figma, FigJam, Miro</dd></div>
+    <div><dt>AI</dt><dd>NotebookLM, Perplexity, Claude, Figma Make, Gemini</dd></div>
+  </dl>
+  <div class="tasks"><p class="label">What I did</p><ul class="task-list" aria-label="What I did on the project"><li><a href="#process">( Interviews )</a></li><li><a href="#problem">( Survey )</a></li><li><a href="#process">( Affinity Map )</a></li><li><a href="#process">( Concept )</a></li><li><a href="#process">( Low-Fi )</a></li><li><a href="#overview">( Hi-Fi )</a></li><li><a href="#overview">( Prototype )</a></li><li><a href="#testing">( Usability test )</a></li><li><a href="#marke">( Branding )</a></li><li><a href="#overview">( Motion )</a></li></ul></div>
+</header>
+
+<!-- Showreel: immer unten rechts -->
+<button type="button" class="mini dock" id="reelOpen" aria-haspopup="dialog">
+  <span class="mini-lab">( watch showreel )</span>
+  <span class="stage small" aria-hidden="true"><img class="bg" src="media/resway/reel/bild-rhythmus.jpg" width="1376" height="768" alt=""><span class="scene s1"><span class="ph3 turn"><span class="ph-back"></span><span class="phone"><img src="media/resway/reel/screen-mini.jpg" width="786" height="1704" alt=""><img src="media/resway/reel/screen-halb.jpg" width="786" height="1704" alt=""><img src="media/resway/reel/screen-ganz.jpg" width="786" height="1704" alt=""></span><span class="ph-glare"></span></span></span><span class="scene s2"><span class="ph3 lying"><span class="ph-back"></span><span class="phone"><img src="media/resway/reel/screen-heute.jpg" width="786" height="1704" alt=""><img src="media/resway/reel/screen-plus.png" width="786" height="1704" alt=""></span><span class="ph-glare"></span></span></span><span class="scene s3"><span class="ph3 rise"><span class="ph-back"></span><span class="phone"><img src="media/resway/reel/screen-sprung.jpg" width="786" height="1704" alt=""></span><span class="ph-glare"></span></span></span></span>
+</button>
+<dialog class="reel-dlg" id="reelDlg" aria-labelledby="reel-cap">
+  <div class="stage big"><img class="bg" src="media/resway/reel/bild-rhythmus.jpg" width="1376" height="768" alt=""><span class="scene s1"><span class="ph3 turn"><span class="ph-back"></span><span class="phone"><img src="media/resway/reel/screen-mini.jpg" width="786" height="1704" alt=""><img src="media/resway/reel/screen-halb.jpg" width="786" height="1704" alt=""><img src="media/resway/reel/screen-ganz.jpg" width="786" height="1704" alt=""></span><span class="ph-glare"></span></span></span><span class="scene s2"><span class="ph3 lying"><span class="ph-back"></span><span class="phone"><img src="media/resway/reel/screen-heute.jpg" width="786" height="1704" alt=""><img src="media/resway/reel/screen-plus.png" width="786" height="1704" alt=""></span><span class="ph-glare"></span></span></span><span class="scene s3"><span class="ph3 rise"><span class="ph-back"></span><span class="phone"><img src="media/resway/reel/screen-sprung.jpg" width="786" height="1704" alt=""></span><span class="ph-glare"></span></span></span></div>
+  <div class="reel-cap">
+    <p id="reel-cap"><span class="lab">Showreel</span> Three moments from ReSway: choosing how to restart, Today with the plus menu, celebrating the comeback.</p>
+    <span class="btns"><button type="button" class="ctl" id="reelPause" aria-pressed="false">( pause )</button><button type="button" class="ctl" id="reelClose">( close × )</button></span>
+  </div>
+</dialog>
+
+<dialog class="reel-dlg demo-dlg" id="demoDlg" aria-labelledby="demo-cap">
+  <div class="demo-box"><video id="demoVid" src="media/resway/video/hifi-flow.mp4" width="834" height="1716" muted loop playsinline preload="none" aria-label="Screen recording of the hi-fi prototype, no sound: setting up a restart, Today, adding a routine, a time jump and challenges."></video></div>
+  <div class="reel-cap">
+    <p id="demo-cap"><span class="lab">Demo · 48 s</span> A walkthrough of the hi-fi prototype.</p>
+    <span class="btns"><button type="button" class="ctl" id="demoPause" aria-pressed="false">( pause )</button><button type="button" class="ctl" id="demoClose">( close × )</button></span>
+  </div>
+</dialog>
+
+<main id="case">
+
+<!-- About the project -->
+<section class="sec paper intro" aria-labelledby="about-t">
+  <h2 class="sr" id="about-t">About the project</h2>
+  <div class="vi-grid">
+    <div class="vi-txt">
+      <p class="vi-pill"><span>About the project</span><span class="vi-pill-ic" aria-hidden="true"><svg class="mk mk-s" viewBox="258 30 270 170" aria-hidden="true" focusable="false"><path d="M495.049 89.9293C501.768 89.4249 507.624 94.4626 508.129 101.181C509.553 120.146 504.392 139.021 493.516 154.623C482.641 170.224 466.716 181.596 448.43 186.821C430.144 192.045 410.616 190.802 393.14 183.301C382.594 178.775 373.185 172.136 365.445 163.88C362.807 167.359 359.744 170.531 356.301 173.31C346.661 181.092 334.646 185.336 322.257 185.336C309.869 185.336 297.854 181.092 288.214 173.31C278.574 165.529 271.89 154.679 269.277 142.569C267.856 135.983 272.043 129.491 278.63 128.07C285.216 126.649 291.707 130.835 293.129 137.422C294.565 144.08 298.24 150.045 303.54 154.324C308.84 158.602 315.446 160.936 322.257 160.936C329.069 160.936 335.675 158.602 340.975 154.324C346.276 150.045 349.951 144.08 351.387 137.422L351.498 136.955C352.729 132.165 356.744 128.574 361.676 127.906C366.768 127.217 371.745 129.791 374.125 134.344C380.333 146.221 390.448 155.594 402.763 160.88C415.079 166.165 428.841 167.042 441.727 163.36C454.613 159.678 465.836 151.664 473.5 140.67C481.164 129.675 484.801 116.374 483.798 103.009C483.293 96.2905 488.331 90.434 495.049 89.9293Z" style="fill:currentColor;stroke:none"/><circle cx="502.161" cy="58.1744" r="14.64"/></svg></span></p>
+      <p class="vi-lead"><span class="vi-mute">ReSway isn’t another tracking app that counts streaks.</span> It’s for the moment after: when a routine has broken off and getting back in is hardest.</p>
+    </div>
+    <figure class="vi-img">
+      <svg class="vi-photo" viewBox="320 0 800 768" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A young man in light green sportswear sits on concrete steps after a run, smiling at his phone."><image href="media/resway/bild/laeufer.jpg" width="1408" height="768"/></svg>
+      <span class="vi-tag vi-c">[ ReSway App ]</span>
+      <figcaption class="sr">AI-generated image. It shows the mood, not a real person.</figcaption>
+    </figure>
+  </div>
+</section>
+
+
+
+<!-- Kurz-Vorschau -->
+<section class="preview" id="marke" aria-label="App preview">
+  <div class="pv-row">
+  <div class="pv-txt">
+    <p class="pv-lead">Re as in again, sway as in swing.</p>
+    <p>The w in the logo traces that path: a small swing first, then a bigger one. The dot at the end is the moment you come back.</p>
+  </div>
+  <div class="cp-photo">
+    <img class="cp-bg" src="media/resway/bild/stimmung.jpg" width="1600" height="960" loading="lazy" decoding="async" alt="">
+    <div class="cp-appcard" role="img" aria-label="App card: ReSway, routines after a break"><span class="cp-ic"><svg class="mk mk-s" viewBox="258 30 270 170" aria-hidden="true" focusable="false"><path d="M495.049 89.9293C501.768 89.4249 507.624 94.4626 508.129 101.181C509.553 120.146 504.392 139.021 493.516 154.623C482.641 170.224 466.716 181.596 448.43 186.821C430.144 192.045 410.616 190.802 393.14 183.301C382.594 178.775 373.185 172.136 365.445 163.88C362.807 167.359 359.744 170.531 356.301 173.31C346.661 181.092 334.646 185.336 322.257 185.336C309.869 185.336 297.854 181.092 288.214 173.31C278.574 165.529 271.89 154.679 269.277 142.569C267.856 135.983 272.043 129.491 278.63 128.07C285.216 126.649 291.707 130.835 293.129 137.422C294.565 144.08 298.24 150.045 303.54 154.324C308.84 158.602 315.446 160.936 322.257 160.936C329.069 160.936 335.675 158.602 340.975 154.324C346.276 150.045 349.951 144.08 351.387 137.422L351.498 136.955C352.729 132.165 356.744 128.574 361.676 127.906C366.768 127.217 371.745 129.791 374.125 134.344C380.333 146.221 390.448 155.594 402.763 160.88C415.079 166.165 428.841 167.042 441.727 163.36C454.613 159.678 465.836 151.664 473.5 140.67C481.164 129.675 484.801 116.374 483.798 103.009C483.293 96.2905 488.331 90.434 495.049 89.9293Z" style="fill:currentColor;stroke:none"/><circle cx="502.161" cy="58.1744" r="14.64"/></svg></span><span class="cp-txt"><b>ReSway</b><span>Routines after a break</span><span class="cp-tagline">Restart, not reset.</span></span></div>
+  </div>
+  </div>
+</section>
+
+
+<!-- Problem -->
+<section class="sec paper" id="problem" aria-labelledby="problem-t">
+  <div class="sh">
+    <h2 id="problem-t">The problem</h2>
+    <p class="sh-txt">The hurdle is getting started. After a few days off, the distance to the routine grows every day.</p>
+  </div>
+  <dl class="facts">
+    <div><dt>Problem</dt><dd>Many people drop a routine completely after a few missed days, then start over from zero or not at all.</dd></div>
+    <div><dt>Challenge</dt><dd>Take away the pressure of having to start from scratch after a break.</dd></div>
+    <div><dt>Strategy</dt><dd>A restart mode: one week at a lower level, then you decide how to continue.</dd></div>
+  </dl>
+  <div class="desk" aria-label="Desk research: what is known and what gap remains">
+    <p class="ri-head">( desk research )</p>
+    <div class="desk-cols">
+      <div><p class="label">( what research knows )</p><p class="desk-t">Adults with ADHD struggle more with time management, planning and getting started on tasks.</p></div>
+      <div><p class="label">( what it doesn’t )</p><p class="desk-t">What happens after an interruption, and what actually helps people get back in, has barely been studied.</p></div>
+    </div>
+    <svg class="desk-lines" viewBox="0 0 1000 130" aria-hidden="true"><path d="M250 8 V36 C250 96 500 64 500 120"/><path d="M750 8 V36 C750 96 500 64 500 120"/><circle cx="250" cy="8" r="6"/><circle cx="750" cy="8" r="6"/><circle class="dl-end" cx="500" cy="120" r="9"/></svg>
+    <div class="desk-gap"><p class="label">( the gap = my focus )</p><p class="desk-q">Getting back in after a break.</p><p class="desk-s">That’s where my 3 interviews and the survey come in.</p></div>
+  </div>
+  <div class="ri" aria-label="What the survey shows and how ReSway responds">
+    <p class="ri-head">( survey · 14 responses )</p>
+    <div class="ri-row">
+      <div class="stat" data-count="78.6" data-dec="1">
+        <div class="ri-n"><p class="stat-num"><span class="sr">78.6%</span><span class="px-num" aria-hidden="true"></span></p><p class="dotbar" aria-hidden="true"></p></div>
+        <div class="ri-t"><p class="stat-lab"><i aria-hidden="true"></i>Get back in after weeks, or never</p><p class="stat-txt">50% can’t do it without rebuilding from scratch, 28.6% only after weeks.</p></div>
+      </div>
+      <a class="ri-go" href="#feat-1" aria-label="To screen 01: choose a level">( to screen 01 ↓ )</a>
+    </div>
+    <div class="ri-row">
+      <div class="stat" data-count="100" data-dec="0">
+        <div class="ri-n"><p class="stat-num"><span class="sr">100%</span><span class="px-num" aria-hidden="true"></span></p><p class="dotbar" aria-hidden="true"></p></div>
+        <div class="ri-t"><p class="stat-lab"><i aria-hidden="true"></i>Frustrated by putting it off</p><p class="stat-txt">Everyone rated it 4 or 5 out of 5.</p></div>
+      </div>
+      <a class="ri-go" href="#feat-4" aria-label="To screen 04: celebrate coming back">( to screen 04 ↓ )</a>
+    </div>
+    <div class="ri-row">
+      <div class="stat" data-count="64.3" data-dec="1">
+        <div class="ri-n"><p class="stat-num"><span class="sr">64.3%</span><span class="px-num" aria-hidden="true"></span></p><p class="dotbar" aria-hidden="true"></p></div>
+        <div class="ri-t"><p class="stat-lab"><i aria-hidden="true"></i>Try several times a week</p><p class="stat-txt">So it’s not for lack of wanting to.</p></div>
+      </div>
+      <a class="ri-go" href="#feat-3" aria-label="To screen 03: one thing in focus">( to screen 03 ↓ )</a>
+    </div>
+  </div>
+  <figure class="pauseline">
+    <svg viewBox="0 0 1000 120" aria-hidden="true">
+      <path class="pl-run" d="M8 80 H380" />
+      <path class="pl-pause" d="M410 80 H630" />
+      <path class="pl-back" d="M660 80 C700 80 700 34 740 34 C780 34 780 80 820 80 C860 80 860 34 900 34" />
+      <circle class="pl-dot" cx="940" cy="24" r="13" />
+    </svg>
+    <figcaption class="pl-cap"><span>Routine</span><span>Break</span><span>Restart</span></figcaption>
+  </figure>
+  <div class="quote-row">
+    <figure class="at at-mood">
+      <img class="mood-bg" src="media/resway/bild/stimmung.jpg" width="1600" height="960" loading="lazy" decoding="async" alt="">
+      <div class="glass-push" role="img" aria-label="Push notification from ReSway: Running has been quiet for a week. Want to start again, just a little?">
+        <span class="gp-ic" aria-hidden="true"><svg class="mk mk-s" viewBox="258 30 270 170" aria-hidden="true" focusable="false"><path d="M495.049 89.9293C501.768 89.4249 507.624 94.4626 508.129 101.181C509.553 120.146 504.392 139.021 493.516 154.623C482.641 170.224 466.716 181.596 448.43 186.821C430.144 192.045 410.616 190.802 393.14 183.301C382.594 178.775 373.185 172.136 365.445 163.88C362.807 167.359 359.744 170.531 356.301 173.31C346.661 181.092 334.646 185.336 322.257 185.336C309.869 185.336 297.854 181.092 288.214 173.31C278.574 165.529 271.89 154.679 269.277 142.569C267.856 135.983 272.043 129.491 278.63 128.07C285.216 126.649 291.707 130.835 293.129 137.422C294.565 144.08 298.24 150.045 303.54 154.324C308.84 158.602 315.446 160.936 322.257 160.936C329.069 160.936 335.675 158.602 340.975 154.324C346.276 150.045 349.951 144.08 351.387 137.422L351.498 136.955C352.729 132.165 356.744 128.574 361.676 127.906C366.768 127.217 371.745 129.791 374.125 134.344C380.333 146.221 390.448 155.594 402.763 160.88C415.079 166.165 428.841 167.042 441.727 163.36C454.613 159.678 465.836 151.664 473.5 140.67C481.164 129.675 484.801 116.374 483.798 103.009C483.293 96.2905 488.331 90.434 495.049 89.9293Z" style="fill:currentColor;stroke:none"/><circle cx="502.161" cy="58.1744" r="14.64"/></svg></span>
+        <span class="gp-txt"><small>ReSway · now</small>Running has been quiet for a week. Want to start again, just a little?</span>
+      </div>
+      <figcaption><b>The gentle nudge</b> After a week off, ReSway reaches out on its own, so getting back in doesn’t depend on luck.</figcaption>
+    </figure>
+  <blockquote class="bigquote">
+    <p>“…finding the strength again to build it all back up from scratch is the hardest part.”</p>
+    <footer>Interview, translated from German</footer>
+  </blockquote>
+  </div>
+</section>
+
+<!-- Prozess: Persona und Low-Fi → Hi-Fi -->
+<section class="sec paper line" id="process" aria-labelledby="proc-t">
+  <div class="sh">
+    <h2 id="proc-t">Process</h2>
+  </div>
+  <div class="proc">
+    <div class="affin">
+      <p class="label">01 · Affinity map · interviews, survey and desk research</p>
+      <div class="amap" id="amap">
+        <svg class="am-lines" aria-hidden="true"></svg>
+        <p class="am-hub">Fallen out of routine<span>5 clusters · tap for a quote</span></p>
+        <ul class="am-nodes" aria-label="Five affinity map clusters">
+          <li><button type="button" class="am-node" aria-pressed="false" data-q="“I just needed the push … after that, the rest pretty much ran on autopilot.”" data-src="Interview · Barrier to starting">Barrier to starting</button></li>
+          <li><button type="button" class="am-node" aria-pressed="false" data-q="“I actually need outside motivation … not much comes from inside.”" data-src="Interview · External pressure as a trigger">External pressure as a trigger</button></li>
+          <li><button type="button" class="am-node" aria-pressed="false" data-q="“… then I just messed around on my phone, I completely wasted the time.”" data-src="Interview · Avoidance after an interruption">Avoidance after an interruption</button></li>
+          <li><button type="button" class="am-node am-key" aria-pressed="true" data-q="“I was also kind of afraid … of not being at my old level.”" data-src="Interview · Getting back in as cognitive load"><span class="am-mark">my focus</span>Getting back in as cognitive load</button></li>
+          <li><button type="button" class="am-node" aria-pressed="false" data-q="“Getting over the feeling of having failed.”" data-src="Survey · Guilt instead of reward">Guilt instead of reward</button></li>
+        </ul>
+        <figure class="am-quote" aria-live="polite"><blockquote id="amQ">“I was also kind of afraid … of not being at my old level.”</blockquote><figcaption id="amS">Interview · Getting back in as cognitive load</figcaption></figure>
+      </div>
+      <p class="af-ins">From there, I focused on getting back in.</p>
+    </div>
+    <script>
+    (function(){
+      const map=document.getElementById('amap'); if(!map) return;
+      const svg=map.querySelector('.am-lines'), hub=map.querySelector('.am-hub'), btns=[...map.querySelectorAll('.am-node')];
+      const NS='http://www.w3.org/2000/svg';
+      function draw(){
+        const r=map.getBoundingClientRect(); svg.setAttribute('viewBox','0 0 '+r.width+' '+r.height); svg.innerHTML='';
+        const h=hub.getBoundingClientRect(); const x0=h.left+h.width/2-r.left, y0=h.bottom-r.top;
+        btns.forEach(b=>{
+          const n=b.getBoundingClientRect(); const x1=n.left+n.width/2-r.left, y1=n.top-r.top; const ym=y0+(y1-y0)*.55;
+          const d='M'+x0+' '+y0+' C'+x0+' '+ym+' '+x1+' '+(ym-10)+' '+x1+' '+y1;
+          const p=document.createElementNS(NS,'path'); p.setAttribute('d',d); p.setAttribute('class','am-line'+(b.classList.contains('am-key')?' am-line-key':'')); svg.appendChild(p);
+          if(b.classList.contains('am-key')){ const run=p.cloneNode(); run.setAttribute('class','am-run'); svg.appendChild(run); run.style.setProperty('--len', run.getTotalLength()); }
+        });
+      }
+      draw(); new ResizeObserver(draw).observe(map);
+      const q=document.getElementById('amQ'), s=document.getElementById('amS');
+      btns.forEach(b=>b.addEventListener('click',()=>{
+        btns.forEach(x=>x.setAttribute('aria-pressed', x===b?'true':'false'));
+        q.textContent=b.dataset.q; s.textContent=b.dataset.src;
+      }));
+    })();
+    </script>
+    <article class="concept" aria-labelledby="co-t">
+      <p class="label">02 · Concept</p>
+      <div class="co-head"><span class="co-n" aria-hidden="true"><span data-pixel>5</span></span><h3 id="co-t">A few routines that stick</h3></div>
+      <p>You decide how many routines to track. The app suggests five at most, so it stays doable.</p>
+      <p>The goal is to repeat these few routines until they run on their own. To-dos and an AI agent come later, but the focus stays on the core routines.</p>
+      <p>And it should be an app you enjoy opening. Many people with ADHD care a lot about how things look, so ReSway is playful and interactive.</p>
+      <img class="co-img" src="media/resway/prozess/ringe.png" width="948" height="328" loading="lazy" decoding="async" alt="Five core routines as rings: running, skincare, self-study, job applications, tidying up.">
+    </article>
+    <figure class="sketch-pair">
+      <p class="label">03 · Low-Fi → Hi-Fi</p>
+      <div class="sp-row">
+        <div class="sp-lofi" id="spLofi">
+          <img src="media/resway/prozess/lofi-heute.png" width="786" height="1704" loading="lazy" decoding="async" alt="Lo-fi “Today” screen: the restart week with seven days and a Done button at the top, all routines as tiles below.">
+          <svg class="sp-pencil" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21l3.5-1 11-11-2.5-2.5-11 11L3 21z"/><path d="M14 6.5l2.5 2.5M17 4l3 3-1.5 1.5-3-3z"/></svg>
+          <span class="sp-tag">Low-Fi</span>
+        </div>
+        <span class="sp-arrow" aria-hidden="true">→</span>
+        <div class="sp-hifi" id="spHifi">
+          <img src="media/resway/prozess/hifi-heute.png" width="786" height="1704" loading="lazy" decoding="async" alt="Final “Today” screen: a large Running card, 1 km, day 1 of 7, on top of the stack, with the routines as small rings below.">
+          <span class="sp-tag">Hi-Fi</span>
+        </div>
+      </div>
+      <figcaption>In the lo-fi, I explored how to make starting more interactive. That’s why the hi-fi shows only the next routine, as a card on top.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- Systemüberblick -->
+<section class="sec warm" id="overview" aria-labelledby="ov-t">
+  <div class="sh">
+    <h2 id="ov-t">The app</h2>
+  </div>
+<div class="ov-intro">
+  <figure class="flowvid" id="flowvid">
+    <div class="fv-dev"><video src="media/resway/video/hifi-flow.mp4" width="834" height="1716" muted loop playsinline preload="none" aria-label="Screen recording of the hi-fi prototype, no sound: setting up a restart, Today, a time jump and the end of the week."></video><button type="button" class="fv-btn" id="fvBtn" aria-label="Pause video"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="i-pause" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/><path class="i-play" d="M8 5l11 7-11 7z"/></svg></button></div>
+    <figcaption><span class="feat-n">Video · 48 s · prototype</span></figcaption>
+  </figure>
+  <p class="ov-txt">Restart mode in four moments.</p>
+  </div>
+  <ol class="feats">
+    <li class="feat" id="feat-1">
+      <div class="feat-txt"><span class="feat-n">01</span><h3>Choose a level</h3><p>After a break, you start one level lower, not at zero.</p></div>
+      <div class="feat-vis"><img class="feat-img" src="media/resway/frei/2-stufe.png" width="1600" height="1000" loading="lazy" decoding="async" alt="The “How do you want to restart?” screen next to an enlarged level card showing 2.5 km."><figure class="pop pop-br"><span class="pop-l">4 steps</span><img src="media/resway/details/stufe-schritte.png" width="730" height="126" loading="lazy" decoding="async" alt="Step bar: step 1 of 4, version, then time, days and reminder."></figure></div>
+    </li>
+    <li class="feat" id="feat-2">
+      <div class="feat-txt"><span class="feat-n">02</span><h3>Set the amount</h3><p>A slider makes the amount easier to estimate than a number field. And it’s fun: as someone with ADHD, I know how quickly plain lists put people off.</p></div>
+      <div class="feat-vis"><img class="feat-img" src="media/resway/frei/3-menge.png" width="1600" height="1000" loading="lazy" decoding="async" alt="The amount slider at 10 minutes, enlarged, next to the “New routine” screen."><figure class="pop pop-bl"><span class="pop-l">Time</span><img src="media/resway/details/zeit-chips.jpg" width="572" height="96" loading="lazy" decoding="async" alt="Time of day picker: morning, midday, evening."></figure></div>
+    </li>
+    <li class="feat" id="feat-3">
+      <div class="feat-txt"><span class="feat-n">03</span><h3>One thing in focus</h3><p>Instead of a long list, ReSway shows only what’s up next, so you don’t have to decide where to start.</p><p class="hex"><span>Hex</span><i style="--c:#EDFF8C"></i>EDFF8C<span>Lime only where someone comes back</span></p></div>
+      <div class="feat-vis"><img class="feat-img" src="media/resway/frei/4-fokus.png" width="1600" height="1000" loading="lazy" decoding="async" alt="The “Today” screen next to an enlarged Running restart card in the stack."><figure class="pop pop-br pop-sq"><span class="pop-l">Check off</span><img src="media/resway/details/fokus-haken.png" width="124" height="124" loading="lazy" decoding="async" alt="Round check button on the restart card."></figure></div>
+    </li>
+    <li class="feat" id="feat-4">
+      <div class="feat-txt"><span class="feat-n">04</span><h3>Celebrate coming back</h3><p>What gets celebrated is that you’re back. It pushes back against the feeling of having failed.</p></div>
+      <div class="feat-vis"><img class="feat-img" src="media/resway/frei/5-feiern.png" width="1600" height="1000" loading="lazy" decoding="async" alt="The “You showed up.” screen next to an enlarged week card with the first check mark."><figure class="pop pop-br"><span class="pop-l">Character</span><img src="media/resway/details/figur.png" width="1556" height="454" loading="lazy" decoding="async" alt="The ReSway character lying flat and shaped like a w."></figure></div>
+    </li>
+  </ol>
+</section>
+
+<!-- Testing -->
+<section class="sec ink" id="testing" aria-labelledby="testing-t">
+  <div class="sh">
+    <h2 id="testing-t">Testing</h2>
+    <p class="sh-txt">Mid-fi · 2 people · 6 tasks. The concept held up in testing. Both people tripped over individual words.</p>
+  </div>
+  <div class="ba-list">
+    <ol class="ba3">
+    <li class="ba3-item">
+      <div class="ba3-pair">
+        <figure><div class="ba3-dev"><img src="media/resway/test/f1-vorher.jpg" width="812" height="1759" loading="lazy" decoding="async" alt="Mid-fi screen “How do you want to restart this week?” with Just start, Half a lap and Continue as usual."></div><figcaption>before</figcaption></figure>
+        <figure class="ba3-after"><div class="ba3-dev"><img src="media/resway/test/f1-nachher.jpg" width="812" height="1759" loading="lazy" decoding="async" alt="Hi-fi screen “How do you want to restart?” with 1, 2.5 and 5 km as bars."></div><figcaption>after</figcaption></figure>
+      </div>
+      <div class="ba3-txt"><span class="tn" data-pixel>01</span><h3>“Half a lap” was ambiguous</h3><p>Testers couldn’t tell whether it meant distance or frequency. Now the level is shown in kilometers.</p></div>
+    </li>
+    <li class="ba3-item">
+      <div class="ba3-pair">
+        <figure><div class="ba3-dev"><img src="media/resway/test/f2-vorher.jpg" width="812" height="1759" loading="lazy" decoding="async" alt="Mid-fi screen “Pick a moment” with anchors like “After coffee”."></div><figcaption>before</figcaption></figure>
+        <figure class="ba3-after"><div class="ba3-dev"><img src="media/resway/test/f2-nachher.jpg" width="812" height="1759" loading="lazy" decoding="async" alt="Hi-fi screen “When do you want to start again?” with morning, midday, evening and a set time."></div><figcaption>after</figcaption></figure>
+      </div>
+      <div class="ba3-txt"><span class="tn" data-pixel>02</span><h3>Anchors left the start time open</h3><p>“After coffee” and “Decide later” were unclear in testing. Now you pick a time of day and a set time.</p></div>
+    </li>
+    <li class="ba3-item">
+      <div class="ba3-pair">
+        <figure><div class="ba3-dev"><img src="media/resway/test/f3-vorher.jpg" width="812" height="1759" loading="lazy" decoding="async" alt="Mid-fi screen “Your week is up” with options like “Keep it as is”."></div><figcaption>before</figcaption></figure>
+        <figure class="ba3-after"><div class="ba3-dev"><img src="media/resway/test/f3-nachher.jpg" width="812" height="1759" loading="lazy" decoding="async" alt="Hi-fi screen “Restart done”, each option with what happens next."></div><figcaption>after</figcaption></figure>
+      </div>
+      <div class="ba3-txt"><span class="tn" data-pixel>03</span><h3>Options didn’t say what happens next</h3><p>With “Keep it as is”, it wasn’t clear what would happen. Now every option says what comes next.</p></div>
+    </li>
+    </ol>
+  </div>
+</section>
+
+<!-- Erfolg messen: Wirkungskette, North Star, eine KPI (alles Hypothese) -->
+<section class="sec paper line" id="measure" aria-labelledby="measure-t">
+  <div class="sh">
+    <h2 id="measure-t">Measuring success</h2>
+  </div>
+  <ol class="chain" aria-label="Outcome chain: from today’s behavior to business outcome">
+    <li><span class="ch-n" aria-hidden="true">01</span><h3>Behavior today</h3><p>After a lapse, getting back in feels like starting over. Many give up entirely.</p></li>
+    <li><span class="ch-n" aria-hidden="true">02</span><h3>Desired behavior</h3><p>Return at a lower level after a break and adjust the suggestion yourself.</p></li>
+    <li><span class="ch-n" aria-hidden="true">03</span><h3>User Outcome</h3><p>Getting back in feels more doable and less shameful.</p></li>
+    <li class="ch-ns"><span class="ch-n" aria-hidden="true">04</span><h3>Product Outcome</h3><p>More people return after a break instead of dropping off.</p><p class="ch-foot"><span class="label">( north star )</span> Share of interrupted routines that are successfully resumed.</p></li>
+    <li class="ch-open"><span class="ch-n" aria-hidden="true">05</span><h3>Business Outcome</h3><p>More people stick with it. Whether they’ll pay for it is still open.</p><p class="ch-foot"><span class="label">( open )</span></p></li>
+  </ol>
+</section>
+
+<!-- KI -->
+<section class="sec paper" id="ai" aria-labelledby="ai-t">
+  <div class="sh">
+    <h2 id="ai-t">AI in the process</h2>
+  </div>
+  <ul class="cols4 cols5 ai-tools">
+    <li><span class="label">NotebookLM</span><span class="ai-skill">Research synthesis</span><ul>
+      <li>Transcribed interview audio and collected it as sources</li>
+      <li>Identified patterns across the interviews and the survey</li></ul></li>
+    <li><span class="label">Perplexity</span><span class="ai-skill">Desk Research</span><ul>
+      <li>Found scientific studies on ADHD and routines</li>
+      <li>Gathered evidence for the research gap</li></ul></li>
+    <li><span class="label">Claude</span><span class="ai-skill">Prototyping &amp; sparring</span><ul>
+      <li>Explored design variations quickly</li>
+      <li>Built interactions and animations directly in code, including this website</li>
+      <li>Pressure-tested my decisions</li></ul></li>
+    <li><span class="label">Figma Make</span><span class="ai-skill">Design review</span><ul>
+      <li>Checked the prototype against AI suggestions: what holds up, what doesn’t</li>
+      <li>Generated quick alternatives for the level picker and kept the bars</li></ul></li>
+    <li><span class="label">Gemini</span><span class="ai-skill">Imagery</span><ul>
+      <li>Generated mood images, the persona image and stickers in one style</li></ul></li>
+  </ul>
+  <p class="not-del"><span class="label">Not delegated</span> Interviews, interpretation, ideas, logic and structure, design decisions.</p>
+</section>
+
+<!-- Learnings -->
+<section class="sec ink" id="learnings" aria-labelledby="learn-t">
+  <div class="sh">
+    <h2 id="learn-t">Learnings &amp; next steps</h2>
+  </div>
+  <ol class="learn learn2">
+    <li><span class="tn" data-pixel>01</span><span class="label learn-tag">( what worked )</span><h3>What’s clear to me isn’t clear to others.</h3><p>In the usability test, both people tripped over words I thought were obvious. Without testing, I wouldn’t have seen it. The test was the most honest feedback the app got.</p></li>
+    <li><span class="tn" data-pixel>02</span><span class="label learn-tag">( what I’d do differently )</span><h3>Validate first, then build.</h3><p>My first instinct was to start building right away. Now I look at the research data and existing solutions first. A hunch becomes a hypothesis, and I test it with data.</p></li>
+  </ol>
+  <div class="next">
+    <h3 class="label">( next steps )</h3>
+    <ol>
+      <li><span class="next-n">01</span><b>Test the hi-fi</b><span>Usability testing with users before the app goes live.</span></li>
+      <li><span class="next-n">02</span><b>Launch</b><span>Release ReSway and collect real usage data.</span></li>
+      <li><span class="next-n">03</span><b>Expand</b><span>Add routine mode and the logic behind the stats.</span></li>
+    </ol>
+  </div>
+  <p class="to-top"><a href="#hero" data-top>( back to top ↑ )</a></p>
+  <footer class="legal"><a href="impressum.html">( legal notice )</a><a href="datenschutz.html">( privacy )</a></footer>
+</section>
+
+</main>
+
+<script>
+/* Projekt-Seite: im Beat der Musik pulsieren, Abschnitts-Leiste
+   - --beat (0 … 1) folgt den Bass-Schlägen der laufenden Seitenmusik; App-Bilder, Video und Icon werden dabei kurz etwas größer
+   - Abschnitts-Leiste: links am Rand (Handy: oben), zeigt den aktuellen Abschnitt, Klick springt hin
+   - Weniger Bewegung gewünscht: kein Pulsieren, Sprung ohne Gleiten */
+(function(){
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const body=document.body;
+
+  // Beat: Abstand der aktuellen Bass-Lautstärke zum gleitenden Mittel = Schlag; danach weich abklingen
+  if(!reduce){
+    let avg=0, env=0, last=-1;
+    (function tick(){
+      const l=(window.Sound&&Sound.level)?Sound.level():0;
+      avg=avg*0.95+l*0.05;
+      const hit=Math.max(0,Math.min(1,(l-avg)*6));
+      env=Math.max(hit, env*0.86);
+      const v=Math.round(env*100)/100;
+      if(v!==last){ body.style.setProperty('--beat', v); last=v; }
+      requestAnimationFrame(tick);
+    })();
+  }
+
+  // Abschnitts-Leiste
+  const parts=[['problem','Problem'],['process','Process'],['overview','The app'],['testing','Testing'],['measure','Metrics'],['ai','AI'],['learnings','Learnings']]
+    .filter(([id])=>document.getElementById(id));
+  const rail=document.createElement('nav');
+  rail.className='rail'; rail.setAttribute('aria-label','Sections');
+  rail.innerHTML=parts.map(([id,name],i)=>`<a href="#${id}"><i aria-hidden="true"></i><span>${name}</span></a>`).join('');
+  body.appendChild(rail);
+  const links=[...rail.querySelectorAll('a')];
+  links.forEach(a=>a.addEventListener('click',e=>{
+    const el=document.getElementById(a.hash.slice(1)); if(!el) return;
+    e.preventDefault(); el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+    history.replaceState(history.state,'',a.hash);
+  }));
+  const setActive=id=>links.forEach(a=>{ if(a.hash==='#'+id) a.setAttribute('aria-current','true'); else a.removeAttribute('aria-current'); });
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) setActive(e.target.id); }),{rootMargin:'-45% 0px -50% 0px'});
+  parts.forEach(([id])=>io.observe(document.getElementById(id)));
+  // erst zeigen, wenn der Einstieg vorbei ist
+  const first=document.getElementById(parts[0][0]);
+  const show=()=>rail.classList.toggle('on', first.getBoundingClientRect().top < innerHeight*0.7);
+  addEventListener('scroll',show,{passive:true}); show();
+})();
+</script>
+
+<script>
+/* Low-Fi zeichnet sich wie mit einem Bleistift: von oben nach unten aufgedeckt, der Stift fährt im Zickzack mit.
+   Danach erscheint der Hi-Fi-Screen. Bei „weniger Bewegung“ steht beides sofort da. */
+(function(){
+  const lo=document.getElementById('spLofi'), hi=document.getElementById('spHifi'); if(!lo||!hi) return;
+  const img=lo.querySelector('img'), pen=lo.querySelector('.sp-pencil');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const set=p=>{ lo.style.setProperty('--p',(p*104).toFixed(2)+'%');
+    const y=p*100, x=12+(Math.sin(p*Math.PI*18)*0.5+0.5)*76;
+    pen.style.left=x+'%'; pen.style.top=y+'%'; };
+  if(reduce){ lo.classList.add('drawn'); hi.classList.add('in'); return; }
+  set(0);
+  const io=new IntersectionObserver(es=>{ if(!es.some(e=>e.isIntersecting)) return; io.disconnect();
+    lo.classList.add('drawing'); const t0=performance.now(), D=2600;
+    (function step(now){ const k=Math.min(1,(now-t0)/D), e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2; set(e);
+      if(k<1) requestAnimationFrame(step); else { lo.classList.remove('drawing'); lo.classList.add('drawn'); setTimeout(()=>hi.classList.add('in'),250); } })(t0);
+  },{threshold:.45});
+  io.observe(lo);
+})();
+</script>
+<script>
+/* Navigation beim Hochwischen: Ist die Navigation oben aus dem Bild gescrollt, erscheint sie als feste Leiste,
+   sobald man ein Stück nach oben wischt. Beim Runterscrollen verschwindet sie wieder. */
+(function(){
+  const nav=document.querySelector('.h3-top nav'); if(!nav) return;
+  const bar=document.createElement('div'); bar.className='pinbar'; bar.setAttribute('aria-hidden','true'); bar.inert=true;
+  const n=nav.cloneNode(true); n.setAttribute('aria-label','Main navigation, pinned to top'); const up=document.createElement('a'); up.href='#hero'; up.className='pin-top'; up.setAttribute('data-top',''); up.innerHTML='( <span class="pt-l">back to top </span>↑ )'; up.setAttribute('aria-label','Back to top'); bar.append(up,n); document.body.appendChild(bar);
+  let last=scrollY, shown=false;
+  function set(v){
+    if(v===shown) return; shown=v;
+    bar.classList.toggle('on',v); bar.setAttribute('aria-hidden',v?'false':'true'); bar.inert=!v;
+    document.body.style.setProperty('--pin-h',bar.offsetHeight+'px'); document.body.classList.toggle('pin-on',v);
+  }
+  // Nach oben: sanft scrollen (bei „weniger Bewegung“ direkt), dann Fokus auf den Seitenanfang
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let jumping=false;
+  document.querySelectorAll('[data-top]').forEach(a=>a.addEventListener('click',e=>{
+    e.preventDefault(); set(false); jumping=true;
+    scrollTo({top:0,behavior:reduce?'auto':'smooth'});
+    const h=document.getElementById('hero'); if(h){ h.setAttribute('tabindex','-1'); h.setAttribute('data-softfocus',''); h.focus({preventScroll:true}); }
+  }));
+  addEventListener('scroll',()=>{
+    const y=scrollY, d=y-last;
+    if(jumping){ if(y<5) jumping=false; last=y; return; }
+    if(nav.getBoundingClientRect().bottom>0) set(false);
+    else if(d<-4) set(true);
+    else if(d>4) set(false);
+    last=y;
+  },{passive:true});
+})();
+</script>
+
+<script>
+/* Ton ist standardmäßig aus. Wer in diesem Besuch noch nicht gewählt hat, bekommt hier einmal das Angebot, mit Musik weiterzuschauen. */
+(function(){
+  function init(){
+    const b=document.getElementById('sndHint'); if(!b||!window.Sound) return;
+    if(Sound.chosen||Sound.musicOn){ b.remove(); return; }
+    b.hidden=false;
+    b.addEventListener('click',()=>{ Sound.set(true); b.remove(); });
+  }
+  // sound.js wird erst nach diesem Skript geladen
+  window.Sound ? init() : document.addEventListener('DOMContentLoaded', init);
+})();
+</script>
+
+<script src="sound.js?v=86cb3853"></script>
+<script>
+/* Showreel an drei Stellen: Karte unten rechts (bewegt sich beim Überfahren), große Version im Fenster,
+   und „App in Bewegung“ (läuft, solange sie zu sehen ist). Bei „weniger Bewegung“ Standbild. */
+(function(){
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, D=2.5;
+  function player(stage){
+    if(!stage) return {play(){},stop(){},reset(){}};
+    const sc=[...stage.querySelectorAll('.scene')]; let i=0,t=0,run=false;
+    let shown=-1; const show=k=>{sc.forEach((el,n)=>el.classList.toggle('on',n===k)); if(shown>=0&&k!==shown&&stage.classList.contains('hero-stage')&&window.Sound)Sound.pop(); shown=k;};
+    show(0); if(reduce) stage.classList.add('still');
+    let last=performance.now();
+    (function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;
+      if(run&&!reduce){t+=dt;if(t>=D){t=0;i=(i+1)%sc.length;show(i);}}
+      requestAnimationFrame(loop);})(last);
+    return {play(){run=true;stage.classList.remove('paused');},stop(){run=false;stage.classList.add('paused');},reset(){i=0;t=0;show(0);},next(){t=0;i=(i+1)%sc.length;show(i);}};
+  }
+  const small=player(document.querySelector('.stage.small')), big=player(document.querySelector('.stage.big')), inline=player(document.querySelector('.stage.inline'));
+  small.stop(); big.stop(); inline.stop();
+  const open=document.getElementById('reelOpen'), dlg=document.getElementById('reelDlg'), pause=document.getElementById('reelPause'), close=document.getElementById('reelClose');
+  ['pointerenter','focus'].forEach(e=>open.addEventListener(e,()=>small.play()));
+  ['pointerleave','blur'].forEach(e=>open.addEventListener(e,()=>{small.stop();small.reset();}));
+  let paused=false;
+  open.addEventListener('click',()=>{dlg.showModal();big.reset();paused=false;pause.textContent='( pause )';pause.setAttribute('aria-pressed','false');big.play();});
+  pause.addEventListener('click',()=>{paused=!paused;paused?big.stop():big.play();pause.textContent=paused?'( play )':'( pause )';pause.setAttribute('aria-pressed',paused);});
+  close.addEventListener('click',()=>dlg.close());
+  dlg.addEventListener('close',()=>big.stop());
+  dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
+  if(reduce) pause.hidden=true;
+  // Räumlich: Mit der Maus kippt das Handy leicht mit (nur Maus, nicht bei „weniger Bewegung“)
+  if(!reduce && matchMedia('(pointer: fine)').matches) document.querySelectorAll('.stage').forEach(s=>{
+    s.addEventListener('pointermove',e=>{const r=s.getBoundingClientRect(); s.style.setProperty('--px',((e.clientX-r.left)/r.width-.5).toFixed(3)); s.style.setProperty('--py',((e.clientY-r.top)/r.height-.5).toFixed(3));});
+    s.addEventListener('pointerleave',()=>{s.style.setProperty('--px','0'); s.style.setProperty('--py','0');});
+  });
+  const hs=document.getElementById('heroStage');
+  if(hs){const go=()=>inline.next(); hs.addEventListener('click',go); hs.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});}
+  const st=document.querySelector('.stage.inline');
+  if(st) new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting?inline.play():inline.stop()),{threshold:.3}).observe(st);
+})();
+</script>
+<script>
+/* Handy zum Selbstklicken: ein Screen nach dem anderen, Tasten ← → im Bereich */
+(function(){
+  const list=document.getElementById('protoList'); if(!list) return;
+  const shots=[...list.querySelectorAll('.shot')], n=shots.length; let i=0;
+  const ctl=document.createElement('div');
+  ctl.innerHTML='<div class="proto-nav"><button type="button" class="btn" data-d="-1">( ← back )</button><button type="button" class="btn" data-d="1">( next → )</button></div><div class="dots" role="group" aria-label="Choose a screen"></div><p class="sr" aria-live="polite"></p>';
+  const dots=ctl.querySelector('.dots'), live=ctl.querySelector('[aria-live]'), [prev,next]=ctl.querySelectorAll('.btn');
+  shots.forEach((s,k)=>{const b=document.createElement('button');b.type='button';b.textContent=k+1;b.setAttribute('aria-label','Screen '+(k+1)+': '+s.querySelector('h3').textContent);b.addEventListener('click',()=>go(k));dots.appendChild(b);});
+  function go(k,announce=true){
+    i=Math.max(0,Math.min(n-1,k));
+    shots.forEach((s,m)=>s.classList.toggle('on',m===i));
+    shots[i].querySelector('.txt').appendChild(ctl);
+    prev.disabled=i===0; next.disabled=i===n-1;
+    [...dots.children].forEach((b,m)=>{if(m===i)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current');});
+    if(announce) live.textContent='Screen '+(i+1)+' of '+n+': '+shots[i].querySelector('h3').textContent;
+  }
+  prev.addEventListener('click',()=>go(i-1)); next.addEventListener('click',()=>go(i+1));
+  list.parentElement.addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(i+1);if(e.key==='ArrowLeft')go(i-1);});
+  go(0,false);
+})();
+</script>
+<script src="pixel.js?v=43813e9c"></script>
+<script>
+/* Zahlen zählen hoch, Linien zeichnen sich, Abschnitte erscheinen, Komponenten zum Ausprobieren */
+(function(){
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const io=(els,fn,th=.35)=>{const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){fn(e.target);o.unobserve(e.target);}}),{threshold:th});els.forEach(el=>o.observe(el));};
+  // Zahlen aus der Umfrage
+  const fmt=(v,d)=>v.toFixed(d)+'%';
+  document.querySelectorAll('.stat[data-count]').forEach(el=>{
+    const box=el.querySelector('.px-num'), to=parseFloat(el.dataset.count), d=+el.dataset.dec;
+    const bar=el.querySelector('.dotbar'); if(bar) bar.innerHTML='<i></i>'.repeat(20);
+    const dots=bar?[...bar.children]:[];
+    const draw=v=>{box.replaceChildren(PixelFont.svgFor(fmt(v,d),{dots:3}));   // Punkt-Look wie „DESIGN + CODE + AI“
+      const on=Math.round(v/5); dots.forEach((x,i)=>x.classList.toggle('on',i<on));};
+    draw(reduce?to:0);
+    if(!reduce) io([el],()=>{const t0=performance.now();let last=-1;(function step(now){const k=Math.min(1,(now-t0)/1100);const v=k<1?to*(1-Math.pow(1-k,4)):to;draw(v);const s=Math.floor(v/4);if(s!==last&&window.Sound){Sound.count(v/to);last=s;}if(k<1)requestAnimationFrame(step);})(t0);},.5);
+  });
+  // Wirkungskette: jede Karte beginnt etwa auf halber Höhe der vorherigen (versetzt links/rechts)
+  const ch=document.querySelector('.chain');
+  if(ch){const lay=()=>{const two=getComputedStyle(ch).gridTemplateColumns.split(' ').length>1;const li=[...ch.children];li.forEach((l,i)=>{l.style.marginTop=(two&&i)?(-Math.round(li[i-1].offsetHeight*0.5))+'px':'';});};lay();addEventListener('resize',lay);}
+  // Linien zeichnen sich beim Hinscrollen
+  document.querySelectorAll('.pauseline path,.path4 path,.desk-lines path').forEach(p=>p.style.setProperty('--len',Math.ceil(p.getTotalLength())));
+  io(document.querySelectorAll('.pauseline,.path4,.desk-lines,.chain'),el=>el.classList.add('in'),.4);
+  // Ruhiges Erscheinen
+  // Nacheinander erscheinen: Überschrift, dann Text, dann Karten und Bilder; was gleichzeitig ins Bild kommt, erscheint versetzt
+  io(document.querySelectorAll('.mk-anim'),el=>el.classList.add('in'),.4);
+  const rv=[...document.querySelectorAll('.sh h2,.sh .sh-txt,.vi-txt,.vi-img,.pv-row > *,.facts > div,.stat,.quote-row > *,.dec4 > *,.voices,.bigquote,.flowvid .fv-dev,.flowvid figcaption,.feat-txt,.feat-img,.ba,.result li,.cols4 li,.learn li,.next li,.amap,.af-ins,.ba3-item,.pop,.chain li')];
+  document.querySelectorAll('.feat').forEach((f,i)=>{const img=f.querySelector('.feat-img'); if(img) img.classList.add(i%2?'rv-l':'rv-r');});
+  rv.forEach(el=>el.classList.add('rv'));
+  if(!reduce){
+    const ro=new IntersectionObserver(es=>{
+      es.filter(e=>e.isIntersecting).map(e=>e.target)
+        .sort((a,b)=>a.compareDocumentPosition(b)&Node.DOCUMENT_POSITION_FOLLOWING?-1:1)
+        .forEach((el,i)=>{el.style.transitionDelay=Math.min(i,5)*110+'ms'; el.classList.add('in'); ro.unobserve(el); el.addEventListener('transitionend',()=>{el.style.transitionDelay='';},{once:true});});
+    },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+    rv.forEach(el=>ro.observe(el));
+  } else rv.forEach(el=>el.classList.add('in'));
+  // Stufenwahl
+  const S=[{n:'1',t:'1 km',l:'Mini version · the smallest step'},{n:'2.5',t:'2.5 km',l:'Half version · half your usual'},{n:'5',t:'5 km',l:'Full version · like before the break'}];
+  const card=document.getElementById('uiStufe');
+  if(card){
+    const num=card.querySelector('#stNum'), sr=card.querySelector('#stSr'), lbl=card.querySelector('#stLbl'), bars=[...card.querySelectorAll('.st-bars span')], btns=[...card.querySelectorAll('.seg button')];
+    const set=(i,focus)=>{num.replaceChildren(PixelFont.svgFor(S[i].n));sr.textContent=S[i].t;lbl.textContent=S[i].l;
+      bars.forEach((b,k)=>b.classList.toggle('on',k===i));btns.forEach((b,k)=>{b.setAttribute('aria-checked',k===i);b.tabIndex=k===i?0:-1;});if(focus)btns[i].focus();};
+    btns.forEach((b,k)=>{b.addEventListener('click',()=>set(k));b.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();set((k+1)%3,true);}if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();set((k+2)%3,true);}});});
+    set(1);
+  }
+  // Hero: Komponenten schweben leicht mit der Maus
+  const hero=document.getElementById('hero');
+  if(hero&&!reduce){const fl=[...hero.querySelectorAll('.float')];let tx=0,ty=0,cx=0,cy=0;
+    hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();tx=(e.clientX-r.left)/r.width-.5;ty=(e.clientY-r.top)/r.height-.5;});
+    hero.addEventListener('pointerleave',()=>{tx=0;ty=0;});
+    (function f(){cx+=(tx-cx)*.08;cy+=(ty-cy)*.08;const sy=Math.min(1,scrollY/innerHeight);
+      fl.forEach(el=>{const d=+el.dataset.depth;el.style.transform=`translate(${(cx*d).toFixed(1)}px,${(cy*d-sy*d*2).toFixed(1)}px)`;});requestAnimationFrame(f);})();}
+  // Showreel-Karte erst nach dem ersten Bildschirm zeigen
+  const dock=document.getElementById('reelOpen');
+  if(hero&&dock){dock.classList.add('hide');new IntersectionObserver(es=>es.forEach(e=>dock.classList.toggle('hide',e.isIntersecting)),{threshold:.35}).observe(hero);}
+  // Hi-Fi-Video: läuft nur sichtbar, bei weniger Bewegung erst auf Klick; Pause-Knopf
+  const fv=document.querySelector('#flowvid video'), fb=document.getElementById('fvBtn');
+  if(fv&&fb){
+    const rm=matchMedia('(prefers-reduced-motion: reduce)').matches; let paused=rm, vis=false;
+    const sync=()=>{fb.setAttribute('aria-label',paused?'Play video':'Pause video');fb.classList.toggle('is-paused',paused);if(vis&&!paused){fv.play().catch(()=>{});}else fv.pause();};
+    const toggle=()=>{paused=!paused;sync();};
+    fb.addEventListener('click',toggle); fv.addEventListener('click',toggle);   // Tippen aufs Video pausiert wie in jedem Player
+    new IntersectionObserver(es=>es.forEach(e=>{vis=e.isIntersecting;sync();}),{threshold:.3}).observe(fv);
+    sync();
+  }
+  // Schalter zum Ausprobieren
+  document.querySelectorAll('.tgl').forEach(b=>b.addEventListener('click',()=>b.setAttribute('aria-checked',b.getAttribute('aria-checked')!=='true')));
+  // Heute: Haken
+  const fk=document.getElementById('uiFokus');
+  if(fk){const b=fk.querySelector('.chk');b.addEventListener('click',()=>{const on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);fk.classList.toggle('done',on);});}
+})();
+</script>
+<script>
+
+/* Bilder bekommen Farbe, sobald sie im Blick sind (für Geräte ohne Maus und beim Scrollen) */
+(function(){
+  const figs=document.querySelectorAll('.apps2 > figure'); if(!figs.length) return;
+  const o=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('colored',e.intersectionRatio>.55)),{threshold:[0,.55,1]});
+  figs.forEach(f=>o.observe(f));
+})();
+
+/* Demo-Video im Fenster */
+(function(){
+  const dlg=document.getElementById('demoDlg'); if(!dlg) return;
+  const vid=document.getElementById('demoVid'), pause=document.getElementById('demoPause'), close=document.getElementById('demoClose');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches; let paused=false;
+  const setP=()=>{pause.textContent=paused?'( play )':'( pause )';pause.setAttribute('aria-pressed',String(paused));paused?vid.pause():vid.play().catch(()=>{});};
+  document.querySelectorAll('[data-demo]').forEach(b=>b.addEventListener('click',()=>{if(window.Sound)Sound.tick();dlg.showModal();vid.currentTime=0;paused=reduce;setP();}));
+  pause.addEventListener('click',()=>{paused=!paused;setP();});
+  close.addEventListener('click',()=>dlg.close());
+  dlg.addEventListener('close',()=>vid.pause());
+  dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
+})();
+/* Farbkreis dreht sich mit dem Scrollen */
+(function(){
+  const w=document.querySelector('.wheel-g'); if(!w||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const box=w.closest('li, .bt');
+  const upd=()=>{const r=box.getBoundingClientRect(); if(r.bottom<0||r.top>innerHeight) return;
+    const p=(innerHeight-r.top)/(innerHeight+r.height); w.style.setProperty('--rot',(p*300-60).toFixed(1)+'deg');};
+  addEventListener('scroll',upd,{passive:true}); upd();
+})();
+
+/* Fünf Routinen: ohne Fall-Animation (ruhig) */
+</script>
+</body>
+</html>

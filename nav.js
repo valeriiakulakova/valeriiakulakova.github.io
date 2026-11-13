@@ -81,6 +81,7 @@
       const md = document.querySelector('meta[name="description"]'), nd = doc.querySelector('meta[name="description"]');
       if (md && nd) md.setAttribute('content', nd.getAttribute('content'));
       document.documentElement.className = doc.documentElement.className;
+      document.documentElement.lang = doc.documentElement.lang || 'de';   // Sprache der neuen Seite (de / en) für Vorlesen und Ton-/Sprach-Schalter
       const headScripts = [...doc.head.querySelectorAll('script')].filter(s => !s.src);
       const body = document.adoptNode(doc.body);
       document.body.replaceWith(body);

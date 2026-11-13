@@ -265,10 +265,12 @@
   // Ton-Schalter als kleine Pille unten links, auf allen Seiten gleich.
   // Wird einmal gebaut und nach einem Seitenwechsel nur in die neue Seite umgehängt (bindToggles).
   // Balken bewegen sich, wenn der Ton an ist; aus: ruhige Punkte und „ton aus“ (zwei Merkmale, nicht nur Farbe).
-  let pill = null, pillText = null;
+  let pill = null, pillText = null, dock = null, lang = null;
+  const isEn = () => (document.documentElement.lang || '').slice(0, 2) === 'en';
   function buildPill() {
+    dock = document.createElement('div'); dock.className = 'dock-l';
     pill = document.createElement('button');
-    pill.type = 'button'; pill.className = 'snd'; pill.setAttribute('role', 'switch'); pill.setAttribute('aria-label', 'Ton');
+    pill.type = 'button'; pill.className = 'snd'; pill.setAttribute('role', 'switch');
     pill.innerHTML = '<span class="snd-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="snd-t"></span>';
     pillText = pill.querySelector('.snd-t');
     pill.addEventListener('click', () => {
@@ -279,16 +281,37 @@
     });
     listen(window, 'click', () => { later(() => { firstGesture = false; }, 0); }, { passive: true });
     labels.push(() => {
-      const txt = on ? 'ton an' : 'ton aus';
+      const en = isEn();
+      pill.setAttribute('aria-label', en ? 'Sound' : 'Ton');
+      const txt = en ? (on ? 'sound on' : 'sound off') : (on ? 'ton an' : 'ton aus');
       if (pillText.textContent !== txt) pillText.textContent = txt;   // nur ändern, wenn nötig (Safari verwirft sonst Klicks)
       pill.setAttribute('aria-checked', on);
       pill.classList.toggle('on', on);
     });
+    // Sprach-Schalter „de / en“ direkt neben dem Ton: Link zur gleichen Seite in der anderen Sprache.
+    // Aktive Sprache: hell und unterstrichen, die andere gedämpft (zwei Merkmale, nicht nur Farbe).
+    lang = document.createElement('a'); lang.className = 'lang';
+    lang.innerHTML = '<span data-l="de">de</span><span class="lang-sl" aria-hidden="true">/</span><span data-l="en">en</span>';
+    // Abschnitt (#…) beim Wechsel mitnehmen
+    lang.addEventListener('click', () => { const u = new URL(lang.href); u.hash = location.hash; lang.href = u.href; });
+    labels.push(() => {
+      const en = isEn();
+      const file = (location.pathname.split('/').pop() || 'index.html');
+      const base = file.replace(/-en\.html$/, '.html');
+      // Impressum und Datenschutz gibt es nur auf Deutsch: „en“ führt dort zur englischen Startseite
+      const enFile = /^(impressum|datenschutz)\.html$/.test(base) ? 'index-en.html' : base.replace(/\.html$/, '-en.html');
+      const href = en ? base : enFile;
+      if (lang.getAttribute('href') !== href) lang.setAttribute('href', href);
+      lang.setAttribute('hreflang', en ? 'de' : 'en'); lang.setAttribute('lang', en ? 'de' : 'en');
+      lang.setAttribute('aria-label', en ? 'Deutsche Version' : 'English version');
+      lang.querySelectorAll('[data-l]').forEach(s => { const cur = (s.dataset.l === 'en') === en; s.classList.toggle('cur', cur); });
+    });
+    dock.append(pill, lang);
   }
   Sound.bindToggles = function () {
     if (!document.body) return;
     if (!pill) buildPill();
-    if (pill.parentNode !== document.body) document.body.appendChild(pill);
+    if (dock.parentNode !== document.body) document.body.appendChild(dock);
     // alte Schalter oben in der Navigation, falls eine Seite sie noch hat, ausblenden
     document.querySelectorAll('[data-sound-toggle]').forEach(b => b.remove());
     refresh();
