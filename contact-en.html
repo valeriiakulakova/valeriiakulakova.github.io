@@ -80,7 +80,7 @@
     try { await navigator.clipboard.writeText(btn.dataset.copy); ok=true; } catch(e) {}
     txt.textContent = ok ? '( copied ✓ )' : '( copy )';
     btn.classList.toggle('done', ok);
-    msg.textContent = ok ? 'Email address copied.' : 'Couldn’t copy. Please select the address instead.';
+    msg.textContent = ok ? 'Email address copied.' : 'Couldn’t copy. Select the address and copy it manually.';
     if (ok && window.Sound) Sound.tick();
     clearTimeout(btn._t);
     btn._t = setTimeout(() => { txt.textContent='( copy )'; btn.classList.remove('done'); msg.textContent=''; }, 2400);
