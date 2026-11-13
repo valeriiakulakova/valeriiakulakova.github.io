@@ -288,25 +288,26 @@
       pill.setAttribute('aria-checked', on);
       pill.classList.toggle('on', on);
     });
-    // Sprach-Schalter „de / en“ direkt neben dem Ton: Link zur gleichen Seite in der anderen Sprache.
-    // Aktive Sprache: hell und unterstrichen, die andere gedämpft (zwei Merkmale, nicht nur Farbe).
-    lang = document.createElement('a'); lang.className = 'lang';
-    lang.innerHTML = '<span data-l="de">de</span><span class="lang-sl" aria-hidden="true">/</span><span data-l="en">en</span>';
-    // Abschnitt (#…) beim Wechsel mitnehmen
-    lang.addEventListener('click', () => { const u = new URL(lang.href); u.hash = location.hash; lang.href = u.href; });
+    // Sprach-Schalter „de en“ links in derselben Leiste: aktive Sprache als Text mit orangem Punkt,
+    // die andere als Link zur gleichen Seite in der anderen Sprache (Abschnitt #… wird mitgenommen).
+    lang = document.createElement('span'); lang.className = 'lang'; lang.setAttribute('role', 'group');
+    lang.addEventListener('click', e => { const a = e.target.closest('a'); if (!a) return; const u = new URL(a.href); u.hash = location.hash; a.href = u.href; });
+    let langKey = '';
     labels.push(() => {
       const en = isEn();
       const file = (location.pathname.split('/').pop() || 'index.html');
       const base = file.replace(/-en\.html$/, '.html');
       // Impressum und Datenschutz gibt es nur auf Deutsch: „en“ führt dort zur englischen Startseite
       const enFile = /^(impressum|datenschutz)\.html$/.test(base) ? 'index-en.html' : base.replace(/\.html$/, '-en.html');
-      const href = en ? base : enFile;
-      if (lang.getAttribute('href') !== href) lang.setAttribute('href', href);
-      lang.setAttribute('hreflang', en ? 'de' : 'en'); lang.setAttribute('lang', en ? 'de' : 'en');
-      lang.setAttribute('aria-label', en ? 'Deutsche Version' : 'English version');
-      lang.querySelectorAll('[data-l]').forEach(s => { const cur = (s.dataset.l === 'en') === en; s.classList.toggle('cur', cur); });
+      const key = (en ? 'en' : 'de') + base;
+      if (key === langKey) return; langKey = key;   // nur neu bauen, wenn sich Seite oder Sprache ändert
+      lang.setAttribute('aria-label', en ? 'Language' : 'Sprache');
+      const cur = (code, label) => '<span class="cur" lang="' + code + '" aria-current="true" title="' + label + '">' + code + '</span>';
+      const link = (code, href, label) => '<a href="' + href + '" hreflang="' + code + '" lang="' + code + '" aria-label="' + label + '">' + code + '</a>';
+      lang.innerHTML = en ? link('de', base, 'Deutsche Version') + cur('en', 'English')
+                          : cur('de', 'Deutsch') + link('en', enFile, 'English version');
     });
-    dock.append(pill, lang);
+    dock.append(lang, pill);
   }
   Sound.bindToggles = function () {
     if (!document.body) return;

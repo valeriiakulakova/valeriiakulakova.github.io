@@ -20,6 +20,8 @@
   --color-accent-dot:#ff5a1f;      /* oranger Punkt (Zeiger, Ton-Balken) */
   --snd-bg:rgba(14,15,18,.78);     /* Ton-Pille: dunkle Fläche auf allen Seiten */
   --snd-text:#eceae6;
+  --snd-inner:rgba(255,255,255,.09);  /* Ton-Pille innerhalb der Sprach-/Ton-Leiste */
+  --snd-on-text:#0e0f12;           /* dunkle Schrift auf oranger Ton-Pille (Kontrast ca. 6:1) */
   --surface-light:#c9cacd;
   /* Akzente: Ordner-Hellblau und Orange */
   --color-accent:#ff5a1f;
@@ -409,6 +411,8 @@ body.page-case .dock{position:fixed;z-index:40;right:16px;bottom:16px;background
 body.page-case .dock.hide{opacity:0;transform:translateY(20px);pointer-events:none;visibility:hidden}
 body.page-case .dock .mini-lab{padding:0 4px}
 body.page-case .dock:hover .stage,body.page-case .dock:focus-visible .stage{box-shadow:0 0 0 2px var(--rs-ink)}
+/* Handy: Showreel-Karte über der Sprach-/Ton-Leiste, damit sich beide nicht überdecken */
+@media (max-width:600px){body.page-case .dock{bottom:calc(clamp(12px,2vw,28px) + 60px)}}
 body.page-case .stage{position:relative;display:block;width:100%;aspect-ratio:16/9;border-radius:var(--rs-r-card);overflow:hidden;background:var(--color-stage);perspective:1600px;container-type:size}
 body.page-case .stage.small{width:220px;border-radius:var(--rs-r-small)}
 body.page-case .stage.big{max-height:76svh}
@@ -1217,20 +1221,22 @@ body.page-home header nav .sound:hover{text-decoration:none;color:var(--color-te
 /* Nach einem Seitenwechsel bekommt der Inhalt den Fokus (für Tastatur und Screenreader), ohne sichtbaren Rahmen */
 [data-softfocus]:focus{outline:none}
 
-/* ---------- Ton-Pille unten links (alle Seiten) ---------- */
-.dock-l{position:fixed;z-index:60;left:clamp(12px,2vw,28px);bottom:clamp(12px,2vw,28px);display:flex;align-items:center;gap:8px}
-.snd{position:relative;display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 16px 0 14px;border:0;border-radius:999px;background:var(--snd-bg);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--snd-text);font-family:var(--font-mono);font-size:.8rem;cursor:pointer}
-.snd:focus-visible{outline:2px solid var(--snd-text);outline-offset:3px}
-/* Sprach-Schalter neben dem Ton: gleiche Pille; aktive Sprache hell + unterstrichen, andere gedämpft */
-.dock-l .lang{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border-radius:999px;background:var(--snd-bg);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--snd-text);font-family:var(--font-mono);font-size:.8rem;text-decoration:none}
-.dock-l .lang span{opacity:.62}
-.dock-l .lang .cur{opacity:1;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
-.dock-l .lang .lang-sl{opacity:.4}
-.dock-l .lang:hover span:not(.cur):not(.lang-sl){opacity:1}
-.dock-l .lang:focus-visible{outline:2px solid var(--snd-text);outline-offset:3px}
+/* ---------- Sprache + Ton unten links (alle Seiten): eine gemeinsame Pille ----------
+   links „de en“, aktive Sprache hell mit orangem Pixel-Quadrat darunter (zwei Merkmale), andere gedämpft und klickbar;
+   rechts darin eine eigene kleine Pille für den Ton: aus = grau, an = orange Fläche mit dunkler Schrift und tanzenden Balken */
+.dock-l{position:fixed;z-index:60;left:clamp(12px,2vw,28px);bottom:clamp(12px,2vw,28px);display:flex;align-items:center;gap:4px;padding:4px;border-radius:999px;background:var(--snd-bg);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--snd-text);font-family:var(--font-mono);font-size:.8rem}
+.dock-l .lang{display:flex;align-items:center;gap:2px;padding:0 4px 0 6px}
+.dock-l .lang > *{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:36px;min-height:40px;padding:0 6px;border-radius:999px;color:inherit;text-decoration:none}
+.dock-l .lang a{opacity:.62}
+.dock-l .lang a:hover{opacity:1}
+.dock-l .lang .cur::after{content:"";position:absolute;left:50%;bottom:5px;width:4px;height:4px;margin-left:-2px;background:var(--color-accent-dot)}
+.dock-l .lang a:focus-visible{opacity:1;outline:2px solid var(--snd-text);outline-offset:-2px}
+.snd{position:relative;display:inline-flex;align-items:center;gap:10px;min-height:40px;padding:0 16px 0 14px;border:0;border-radius:999px;background:var(--snd-inner);color:inherit;font:inherit;cursor:pointer}
+.snd:focus-visible{outline:2px solid var(--snd-text);outline-offset:2px}
+.snd.on{background:var(--color-accent);color:var(--snd-on-text)}
 .snd-eq{display:inline-flex;align-items:center;gap:2px;height:14px}
 .snd-eq i{width:2px;height:3px;border-radius:1px;background:currentColor;opacity:.7}
-.snd.on .snd-eq i{background:var(--color-accent-dot);opacity:1;animation:snd-eq .9s ease-in-out infinite}
+.snd.on .snd-eq i{background:currentColor;opacity:1;animation:snd-eq .9s ease-in-out infinite}
 .snd.on .snd-eq i:nth-child(2){animation-delay:-.3s}.snd.on .snd-eq i:nth-child(3){animation-delay:-.6s}.snd.on .snd-eq i:nth-child(4){animation-delay:-.15s}
 @keyframes snd-eq{0%,100%{height:3px}50%{height:14px}}
 @media (prefers-reduced-motion:reduce){.snd.on .snd-eq i{animation:none;height:10px}}
