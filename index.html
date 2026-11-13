@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Valeriia Kulakova · product builder</title>
 <meta name="description" content="Valeriia Kulakova, Product Builder für UX/UI aus München.">
-<link rel="stylesheet" href="style.css?v=1fff7dd8">
+<link rel="stylesheet" href="style.css?v=4eac2a82">
 <script src="nav.js?v=debee6c0"></script>
 <script src="cursor.js?v=5340a399"></script>
 </head>
@@ -22,29 +22,21 @@
     <main class="intro" id="intro">
       <h1><span data-pixel>Valeriia</span> <span data-pixel>Kulakova</span></h1>
       <div class="claim">
-        <p class="claim-txt">Ich verstehe beide Seiten: die Menschen, die ein Produkt nutzen, und das Team, das es baut.</p>
-        <p class="claim-role">Product Builder · UX/UI · KI</p>
+        <p class="claim-txt">AI Product Builder mit Hintergrund in Softwareentwicklung und agiler Produktarbeit.</p>
+        <p class="claim-role">Product Thinking und UX/UI. Ich arbeite mit KI-Tools in Research, Design und Code.</p>
       </div>
     </main>
     <div class="hint" id="hint" aria-hidden="true">( scrollen ↓ )</div>
 
-    <!-- 2 · Das Porträt wird zu „DESIGN + CODE + AI“, darunter ein Code-Fenster -->
+    <!-- 2 · Das Porträt wird zu „DESIGN + CODE + AI“, darunter ein Code-Fenster (nur Code, kein Text-Reiter) -->
     <section class="beat beat-code" id="who" aria-labelledby="who-title">
       <h2 class="sr" id="who-title">design + code + ai</h2>
       <div class="codewin">
         <div class="codewin-bar">
           <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
           <span class="codewin-file" aria-hidden="true">valeriia.js</span>
-          <div class="tabs" role="tablist" aria-label="Ansicht">
-            <button role="tab" id="tab-code" aria-selected="true" aria-controls="view-code">code</button>
-            <button role="tab" id="tab-text" aria-selected="false" aria-controls="view-text" tabindex="-1">text</button>
-          </div>
         </div>
-        <pre class="code" id="view-code" role="tabpanel" aria-labelledby="tab-code"><code id="codeOut"></code></pre>
-        <div class="plain" id="view-text" role="tabpanel" aria-labelledby="tab-text" hidden lang="de">
-          <p class="plain-lead">Als Entwicklerin habe ich gebaut, als Scrum Master Teams begleitet, als Proxy Product Owner priorisiert.</p>
-          <p>Jetzt gestalte ich auch selbst. So kann ich eine Idee vom Nutzerproblem bis zum fertigen Screen begleiten.</p>
-        </div>
+        <pre class="code" id="view-code"><code id="codeOut"></code></pre>
       </div>
     </section>
 
@@ -238,16 +230,6 @@
     (function tick(){ if(id!==typing) return; n+=3; renderCode(n); if(n%2) Sound.key(); if(n<TOTAL) setTimeout(tick,12); else typedDone=true; })();
   }
 
-  // Umschalter code / text
-  const tabs=[document.getElementById('tab-code'),document.getElementById('tab-text')];
-  const views=[document.getElementById('view-code'),document.getElementById('view-text')];
-  function select(i){
-    tabs.forEach((t,k)=>{t.setAttribute('aria-selected',k===i);t.tabIndex=k===i?0:-1;views[k].hidden=k!==i;});
-  }
-  tabs.forEach((t,i)=>{
-    t.addEventListener('click',()=>{select(i);Sound.tick();});
-    t.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const j=1-i;select(j);tabs[j].focus();}});
-  });
 
   document.querySelectorAll('.folder').forEach(a=>a.addEventListener('pointerenter',()=>Sound.hover()));
   document.querySelectorAll('.folder').forEach(a=>a.addEventListener('click',e=>{
