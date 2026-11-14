@@ -85,7 +85,7 @@ body.page-projects{
   --pj-veil:rgba(14,15,18,.38);
   --pj-on-image:#ffffff;
   --pj-step-muted:rgba(255,255,255,.78);   /* offene Schritte auf dem unscharfen Bild */
-  --pj-card-w:min(500px,40vw,calc((100svh - 340px) * .8));   /* Bild, Name und Pillen passen auf einen Bildschirm */
+  --pj-card-w:min(520px,40vw,calc((100svh - 290px) * .8));   /* beide Bilder ganz auf einem Bildschirm */
   color-scheme:dark;
 }
 body.page-case{
@@ -392,6 +392,7 @@ body.page-projects .pj-line{position:relative;width:min(1180px,100%);height:1px;
 body.page-projects .pj-line i{position:absolute;left:0;top:-1px;height:3px;width:50%;background:var(--color-text);transition:transform .45s var(--ease)}
 /* Aufdecken (beide Karten gleich): Bild wird unscharf, in der Mitte Text und Stand in Schritten */
 body.page-projects .pj-soon{cursor:default}
+body.page-projects .pj-veil-n{font-family:var(--font-sans);font-size:clamp(1.6rem,2.4vw,2.2rem);font-weight:500;letter-spacing:-.01em}
 body.page-projects .pj-veil-t{font-size:1rem}
 body.page-projects .pj-steps{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 16px;font-size:.78rem;letter-spacing:.06em;color:var(--pj-step-muted)}
 body.page-projects .pj-step{display:inline-flex;align-items:center;gap:6px}
