@@ -382,7 +382,6 @@ body.page-projects .pj-item.is-active{opacity:1}
 body.page-projects .pj-card{display:flex;flex-direction:column;gap:14px;color:var(--color-text);text-decoration:none;outline:none}
 body.page-projects .pj-media{position:relative;display:block;aspect-ratio:4/5;border-radius:var(--radius-s);overflow:hidden;isolation:isolate;background:#1a1b1d}
 body.page-projects .pj-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:filter .35s var(--ease),transform .5s var(--ease)}
-body.page-projects .pj-ai{position:absolute;left:12px;bottom:12px;z-index:2;padding:4px 10px;border-radius:999px;background:rgba(14,15,18,.6);color:var(--pj-on-image);font-family:var(--font-mono);font-size:.72rem;pointer-events:none}
 body.page-projects .pj-reveal:focus-visible .pj-media{outline:2px solid var(--color-focus);outline-offset:4px}
 body.page-projects .pj-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 body.page-projects .pj-name{font-size:clamp(1.3rem,1.8vw,1.75rem);font-weight:500;letter-spacing:-.01em}
@@ -913,8 +912,6 @@ body.page-case .vi-img img{position:absolute;inset:0;width:100%;height:100%;obje
 body.page-case .vi-tag{position:absolute;color:var(--rs-white);font-family:var(--font-sans);font-weight:300;font-size:clamp(1rem,1.5vw,1.4rem);text-shadow:0 1px 12px rgba(14,15,18,.35)}
 body.page-case .vi-c{left:50%;top:50%;translate:-50% -50%;padding:14px 40px;border:1px solid rgba(255,255,255,.55);border-radius:999px}
 body.page-case .vi-l{left:var(--space-3);bottom:var(--space-3)}
-/* Sichtbarer Hinweis auf KI-Bilder (EU AI Act, Art. 50) */
-body.page-case .vi-ai{position:absolute;left:var(--space-3);bottom:var(--space-3);margin:0;padding:4px 10px;border-radius:999px;background:rgba(14,15,18,.6);color:var(--rs-white);font-family:var(--font-mono);font-size:var(--text-label)}
 body.page-case .vi-r{right:var(--space-3);bottom:var(--space-3)}
 @media (max-width:900px){
 body.page-case .vi-grid{grid-template-columns:1fr}
