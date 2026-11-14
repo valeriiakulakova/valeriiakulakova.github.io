@@ -84,6 +84,7 @@ body.page-projects{
   --pj-badge:#0e0f12;
   --pj-veil:rgba(14,15,18,.38);
   --pj-on-image:#ffffff;
+  --pj-step-muted:rgba(255,255,255,.78);   /* offene Schritte auf dem unscharfen Bild */
   --pj-card-w:min(500px,40vw,calc((100svh - 340px) * .8));   /* Bild, Name und Pillen passen auf einen Bildschirm */
   color-scheme:dark;
 }
@@ -381,41 +382,34 @@ body.page-projects .pj-item.is-active{opacity:1}
 body.page-projects .pj-card{display:flex;flex-direction:column;gap:14px;color:var(--color-text);text-decoration:none;outline:none}
 body.page-projects .pj-media{position:relative;display:block;aspect-ratio:4/5;border-radius:var(--radius-s);overflow:hidden;isolation:isolate;background:#1a1b1d}
 body.page-projects .pj-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:filter .35s var(--ease),transform .5s var(--ease)}
-body.page-projects .pj-item.is-active a.pj-card .pj-media img{transform:scale(1.015)}
-body.page-projects .pj-px{position:absolute;inset:0;width:100%;height:100%;z-index:1;opacity:0}
-body.page-projects .px-on .pj-px{opacity:1}
-body.page-projects .pj-go{position:absolute;left:50%;top:50%;z-index:4;width:60px;height:60px;margin:-30px 0 0 -30px;border-radius:50%;background:var(--pj-badge);display:grid;place-items:center;opacity:0}
-body.page-projects .pj-go svg{width:22px;height:22px;fill:var(--color-accent);shape-rendering:crispEdges}
-body.page-projects .px-on .pj-go{opacity:1}
-body.page-projects a.pj-card:focus-visible .pj-media,body.page-projects .pj-soon:focus-visible .pj-media{outline:2px solid var(--color-focus);outline-offset:4px}
+body.page-projects .pj-reveal:focus-visible .pj-media{outline:2px solid var(--color-focus);outline-offset:4px}
 body.page-projects .pj-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 body.page-projects .pj-name{font-size:clamp(1.3rem,1.8vw,1.75rem);font-weight:500;letter-spacing:-.01em}
 body.page-projects .pj-pills{display:flex;gap:8px;flex-wrap:wrap}
 body.page-projects .pj-pills span{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border:1px solid var(--pj-pill-line);border-radius:999px;color:var(--color-text)}
-body.page-projects .pj-desc{font-size:.95rem;line-height:1.45;color:var(--color-muted);max-width:44ch}
 body.page-projects a.pj-card:hover .pj-name{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1px}
 body.page-projects .pj-line{position:relative;width:min(1180px,100%);height:1px;background:var(--color-line)}
 body.page-projects .pj-line i{position:absolute;left:0;top:-1px;height:3px;width:50%;background:var(--color-text);transition:transform .45s var(--ease)}
-/* „Demnächst“: Bild wird unscharf, in der Mitte Text und Pixel-Ladebalken */
+/* Aufdecken (beide Karten gleich): Bild wird unscharf, in der Mitte Text und Stand in Schritten */
 body.page-projects .pj-soon{cursor:default}
+body.page-projects .pj-veil-t{font-size:1rem}
+body.page-projects .pj-steps{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 16px;font-size:.78rem;letter-spacing:.06em;color:var(--pj-step-muted)}
+body.page-projects .pj-step{display:inline-flex;align-items:center;gap:6px}
+body.page-projects .pj-step i{width:9px;height:9px;border:1.5px solid var(--pj-on-image)}
+body.page-projects .pj-step.done{color:var(--pj-on-image)}
+body.page-projects .pj-step.done i{background:var(--pj-on-image)}
+body.page-projects .pj-step.now{color:var(--pj-on-image)}
+body.page-projects .pj-step.now i{background:var(--color-accent);border-color:var(--color-accent)}
 body.page-projects .pj-veil{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:var(--pj-veil);color:var(--pj-on-image);font-family:var(--font-mono);font-size:.95rem;letter-spacing:.08em;opacity:0;transition:opacity .3s var(--ease)}
-body.page-projects .pj-load{display:flex;gap:4px}
-body.page-projects .pj-load i{width:8px;height:8px;background:var(--pj-on-image);opacity:.25}
-body.page-projects .pj-soon:hover img,body.page-projects .pj-soon:focus-visible img,body.page-projects .pj-soon.soon-on img{filter:blur(12px) saturate(.85);transform:scale(1.06)}
-body.page-projects .pj-soon:hover .pj-veil,body.page-projects .pj-soon:focus-visible .pj-veil,body.page-projects .pj-soon.soon-on .pj-veil{opacity:1}
-body.page-projects .pj-soon:hover .pj-load i,body.page-projects .pj-soon:focus-visible .pj-load i,body.page-projects .pj-soon.soon-on .pj-load i{animation:pj-load 1.5s steps(1) infinite}
-body.page-projects .pj-load i:nth-child(2){animation-delay:.3s!important}
-body.page-projects .pj-load i:nth-child(3){animation-delay:.6s!important}
-body.page-projects .pj-load i:nth-child(4){animation-delay:.9s!important}
-body.page-projects .pj-load i:nth-child(5){animation-delay:1.2s!important}
-@keyframes pj-load{0%,60%{opacity:1}61%,100%{opacity:.25}}
+body.page-projects .pj-reveal:hover img,body.page-projects .pj-reveal:focus-visible img,body.page-projects .pj-reveal.soon-on img{filter:blur(12px) saturate(.85);transform:scale(1.06)}
+body.page-projects .pj-reveal:hover .pj-veil,body.page-projects .pj-reveal:focus-visible .pj-veil,body.page-projects .pj-reveal.soon-on .pj-veil{opacity:1}
+@keyframes pj-blink{0%{opacity:1}50%{opacity:.3}}
+@media (prefers-reduced-motion:no-preference){body.page-projects .pj-reveal:hover .pj-step.now i,body.page-projects .pj-reveal.soon-on .pj-step.now i{animation:pj-blink 1s steps(2) infinite}}
 body.page-projects .legal a{color:var(--color-muted)}
 body.page-projects .legal a:hover{color:var(--color-text)}
 @media (prefers-reduced-motion:reduce){
   body.page-projects .pj-item,body.page-projects .pj-media img,body.page-projects .pj-veil,body.page-projects .pj-line i{transition:none}
-  body.page-projects .pj-load i{animation:none!important}
-  body.page-projects .pj-load i:nth-child(-n+3){opacity:1}
-}
+    }
 /* Ohne Maus gibt es kein Dimmen: beide Projekte sind gleich hell */
 @media (hover:none){body.page-projects .pj-item{opacity:1}}
 @media (max-width:760px){

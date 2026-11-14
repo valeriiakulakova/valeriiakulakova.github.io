@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Projects · Valeriia Kulakova</title>
 <meta name="description" content="Projects by Valeriia Kulakova, product builder based in Munich: ReSway as a case study, sync. in progress.">
-<link rel="stylesheet" href="style.css?v=bea0a8b0">
+<link rel="stylesheet" href="style.css?v=8dbc882a">
 <script src="nav.js?v=debee6c0"></script>
 <script src="cursor.js?v=5340a399"></script>
 </head>
@@ -28,31 +28,47 @@
   </div>
 
   <ul class="pj-row">
+    <!-- Beide Karten gleich: beim Darüberfahren oder Antippen wird das Bild unscharf und zeigt den Stand -->
     <li class="pj-item is-active">
-      <a class="pj-card" href="case-resway-en.html">
+      <a class="pj-card pj-reveal" href="case-resway-en.html" aria-describedby="pjResStand">
         <span class="pj-media">
-          <img src="media/projekte/cover-resway.jpg" width="1200" height="1500" decoding="async" alt="ReSway on an iPhone: the “Today” screen with the “Running · Restart · 1 km” card.">
-          <canvas class="pj-px" aria-hidden="true"></canvas>
-          <span class="pj-go" aria-hidden="true"><svg viewBox="0 0 7 7"><path d="M3 0h1v1H3zM4 1h1v1H4zM5 2h1v1H5zM0 3h7v1H0zM5 4h1v1H5zM4 5h1v1H4zM3 6h1v1H3z"/></svg></span>
+          <img src="media/projekte/cover-resway.jpg" width="1200" height="1500" decoding="async" alt="ReSway on an iPhone: the “Today” screen with the “Running · Restart · 1 km” card, next to a “Restart week · goal reached” card.">
+          <span class="pj-veil" id="pjResStand">
+            <span class="pj-veil-t">( view case → )</span>
+            <span class="pj-steps">
+              <span class="pj-step done"><i aria-hidden="true"></i>research</span>
+              <span class="pj-step done"><i aria-hidden="true"></i>design</span>
+              <span class="pj-step done"><i aria-hidden="true"></i>test</span>
+              <span class="pj-step"><i aria-hidden="true"></i>launch</span>
+            </span>
+            <span class="sr">Status: research, design and testing done, launch still to come.</span>
+          </span>
         </span>
         <span class="pj-meta">
           <span class="pj-name">ReSway</span>
-          <span class="pj-pills"><span>case 01</span><span>ux/ui</span><span>ai</span></span>
+          <span class="pj-pills"><span>routine app</span><span>ux/ui case</span></span>
         </span>
-        <span class="pj-desc">A routine app for getting back on track after a break, without pressure.</span>
       </a>
     </li>
     <li class="pj-item">
-      <article class="pj-card pj-soon" tabindex="0" aria-labelledby="pjSync" aria-describedby="pjSoon">
+      <article class="pj-card pj-reveal pj-soon" tabindex="0" aria-labelledby="pjSync" aria-describedby="pjSoon">
         <span class="pj-media">
-          <img src="media/projekte/cover-sync.jpg" width="1200" height="1500" decoding="async" alt="sync. on an iPhone: the overview with brunch, a movie night and the New Year’s Eve party, next to a “New Year’s Eve party · 8 guests” card.">
-          <span class="pj-veil" id="pjSoon"><span class="pj-soon-t">( coming soon )</span><span class="pj-load" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span>
+          <img src="media/projekte/cover-sync.jpg" width="1200" height="1500" decoding="async" alt="sync. on an iPhone: the “What’s next?” overview with brunch, a movie night and New Year’s Eve, next to a “New Year’s Eve · 8 guests” card.">
+          <span class="pj-veil" id="pjSoon">
+            <span class="pj-veil-t">( coming soon )</span>
+            <span class="pj-steps">
+              <span class="pj-step done"><i aria-hidden="true"></i>concept</span>
+              <span class="pj-step done"><i aria-hidden="true"></i>prototype</span>
+              <span class="pj-step now"><i aria-hidden="true"></i>build</span>
+              <span class="pj-step"><i aria-hidden="true"></i>test</span>
+            </span>
+            <span class="sr">Status: concept and prototype done, build in progress, testing still to come.</span>
+          </span>
         </span>
         <span class="pj-meta">
           <span class="pj-name" id="pjSync">sync.</span>
-          <span class="pj-pills"><span>in progress</span><span>app</span><span>ai</span></span>
+          <span class="pj-pills"><span>social calendar</span><span>in progress</span></span>
         </span>
-        <span class="pj-desc">A shared calendar for friends. First version for New Year’s Eve, built with AI.</span>
       </article>
     </li>
   </ul>
@@ -83,27 +99,7 @@
   addEventListener('keydown',e=>{ if(e.target.closest('input,textarea')) return; if(e.key==='ArrowRight') setActive(active+1,true); if(e.key==='ArrowLeft') setActive(active-1,true); });
   setActive(0);
 
-  /* ReSway: beim Darüberfahren verpixelt das Bild in drei schnellen Stufen; beim Verlassen sofort wieder normal */
-  const STEPS=[8,14,20];
-  document.querySelectorAll('.page-projects a.pj-card').forEach(card=>{
-    const img=card.querySelector('img'), cv=card.querySelector('.pj-px'), media=card.querySelector('.pj-media');
-    if(!img||!cv) return;
-    const small=document.createElement('canvas'); let timers=[];
-    function draw(block){
-      if(!img.complete||!img.naturalWidth) return;
-      const w=media.clientWidth, h=media.clientHeight, dpr=Math.min(devicePixelRatio||1,2);
-      cv.width=Math.round(w*dpr); cv.height=Math.round(h*dpr);
-      const bw=Math.ceil(w/block), bh=Math.ceil(h/block); small.width=bw; small.height=bh;
-      small.getContext('2d').drawImage(img,0,0,bw,bh);
-      const c=cv.getContext('2d'); c.imageSmoothingEnabled=false; c.clearRect(0,0,cv.width,cv.height);
-      c.drawImage(small,0,0,bw,bh,0,0,bw*block*dpr,bh*block*dpr);
-    }
-    function on(){ timers.forEach(clearTimeout); timers=[]; card.classList.add('px-on'); if(reduce){ draw(STEPS[2]); return; } STEPS.forEach((b,i)=>timers.push(setTimeout(()=>draw(b),i*70))); }
-    function off(){ timers.forEach(clearTimeout); timers=[]; card.classList.remove('px-on'); }
-    card.addEventListener('pointerenter',e=>{ if(e.pointerType!=='touch') on(); });
-    card.addEventListener('pointerleave',off); card.addEventListener('focus',on); card.addEventListener('blur',off);
-  });
-  // sync.: auf dem Handy per Antippen „demnächst“ zeigen
+  // Ohne Maus: Karte ohne Link per Antippen aufdecken
   document.querySelectorAll('.page-projects .pj-soon').forEach(c=>c.addEventListener('click',()=>c.classList.toggle('soon-on')));
 })();
 </script>
