@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Projects · Valeriia Kulakova</title>
 <meta name="description" content="Projects by Valeriia Kulakova, product builder based in Munich: ReSway as a case study, sync. in progress.">
-<link rel="stylesheet" href="style.css?v=19055fd2">
+<link rel="stylesheet" href="style.css?v=8adbe83c">
 <script src="nav.js?v=debee6c0"></script>
 <script src="cursor.js?v=5340a399"></script>
 </head>
@@ -18,53 +18,33 @@
 </header>
 
 <main id="inhalt">
-  <div class="pj-head">
-    <h1><span data-pixel>Projects</span></h1>
-    <p class="pj-sub">One case study done, one in progress.</p>
-  </div>
+  <h1 class="sr">Projects</h1>
+  <p class="pj-count" aria-hidden="true"><i></i>( projects ) <span>{02}</span></p>
 
-  <ul class="pj-grid">
-    <!-- ReSway: Fläche in Lime, die Figur schläft; beim Darüberfahren wacht sie auf und folgt der Maus -->
+  <ul class="pj-row">
+    <!-- Kleine Karten. Beim Darüberfahren verpixelt das Bild, beim Verlassen ist es sofort wieder normal. -->
     <li class="pj-item">
-      <a class="pj-card pj-resway" href="case-resway-en.html" id="pjResway">
-        <span class="pj-media pj-film">
-          <span class="pj-wm" aria-hidden="true"><svg class="wm" aria-hidden="true" focusable="false" viewBox="0 0 742 240" fill="none" xmlns="http://www.w3.org/2000/svg"><g><path d="M12.1 190L12 90H36.4L36.5 98.9C39.9 95.3 43.9667 92.4667 48.7 90.4C53.4333 88.2667 58.5333 87.2 64 87.2C67.6667 87.2 71.3333 87.7333 75 88.8L65.4 113.4C62.8667 112.4 60.3333 111.9 57.8 111.9C53.8667 111.9 50.2667 112.867 47 114.8C43.8 116.667 41.2333 119.233 39.3 122.5C37.4333 125.7 36.5 129.267 36.5 133.2V190H12.1ZM125.531 192.6C116.331 192.6 107.931 190.233 100.331 185.5C92.7979 180.767 86.7646 174.4 82.2313 166.4C77.7646 158.4 75.5313 149.567 75.5313 139.9C75.5313 132.633 76.8313 125.833 79.4313 119.5C82.0313 113.1 85.5979 107.5 90.1313 102.7C94.7313 97.8333 100.065 94.0333 106.131 91.3C112.198 88.5667 118.665 87.2 125.531 87.2C133.331 87.2 140.465 88.8667 146.931 92.2C153.465 95.4667 158.998 99.9667 163.531 105.7C168.065 111.433 171.365 117.967 173.431 125.3C175.498 132.633 175.965 140.3 174.831 148.3H101.731C102.665 152.033 104.198 155.4 106.331 158.4C108.465 161.333 111.165 163.7 114.431 165.5C117.698 167.233 121.398 168.133 125.531 168.2C129.798 168.267 133.665 167.267 137.131 165.2C140.665 163.067 143.598 160.2 145.931 156.6L170.831 162.4C166.765 171.267 160.698 178.533 152.631 184.2C144.565 189.8 135.531 192.6 125.531 192.6ZM100.931 130H150.131C149.398 126 147.831 122.4 145.431 119.2C143.098 115.933 140.198 113.333 136.731 111.4C133.265 109.467 129.531 108.5 125.531 108.5C121.531 108.5 117.831 109.467 114.431 111.4C111.031 113.267 108.131 115.833 105.731 119.1C103.398 122.3 101.798 125.933 100.931 130ZM221.383 191.8C216.183 191.467 211.149 190.433 206.283 188.7C201.483 186.9 197.216 184.467 193.483 181.4C189.749 178.333 186.883 174.667 184.883 170.4L205.483 161.6C206.283 162.933 207.583 164.367 209.383 165.9C211.183 167.367 213.316 168.6 215.783 169.6C218.316 170.6 221.083 171.1 224.083 171.1C226.616 171.1 229.016 170.767 231.283 170.1C233.616 169.367 235.483 168.267 236.883 166.8C238.349 165.333 239.083 163.433 239.083 161.1C239.083 158.633 238.216 156.733 236.483 155.4C234.816 154 232.683 152.967 230.083 152.3C227.549 151.567 225.083 150.9 222.683 150.3C216.349 149.033 210.449 147.067 204.983 144.4C199.583 141.733 195.216 138.3 191.883 134.1C188.616 129.833 186.983 124.7 186.983 118.7C186.983 112.1 188.716 106.4 192.183 101.6C195.716 96.8 200.283 93.1 205.883 90.5C211.549 87.9 217.649 86.6 224.183 86.6C232.116 86.6 239.383 88.2667 245.983 91.6C252.649 94.8667 257.916 99.5 261.783 105.5L242.483 116.9C241.549 115.3 240.249 113.833 238.583 112.5C236.916 111.1 235.016 109.967 232.883 109.1C230.749 108.167 228.516 107.633 226.183 107.5C223.183 107.367 220.449 107.633 217.983 108.3C215.516 108.967 213.516 110.1 211.983 111.7C210.516 113.3 209.783 115.433 209.783 118.1C209.783 120.633 210.783 122.533 212.783 123.8C214.783 125 217.183 125.933 219.983 126.6C222.849 127.267 225.583 128 228.183 128.8C234.049 130.733 239.549 133.1 244.683 135.9C249.883 138.7 254.049 142.133 257.183 146.2C260.316 150.267 261.816 155.133 261.683 160.8C261.683 167.267 259.749 172.933 255.883 177.8C252.016 182.6 247.016 186.267 240.883 188.8C234.816 191.333 228.316 192.333 221.383 191.8Z" fill="currentColor"/><path d="M495.049 89.9293C501.768 89.4249 507.624 94.4626 508.129 101.181C509.553 120.146 504.392 139.021 493.516 154.623C482.641 170.224 466.716 181.596 448.43 186.821C430.144 192.045 410.616 190.802 393.14 183.301C382.594 178.775 373.185 172.136 365.445 163.88C362.807 167.359 359.744 170.531 356.301 173.31C346.661 181.092 334.646 185.336 322.257 185.336C309.869 185.336 297.854 181.092 288.214 173.31C278.574 165.529 271.89 154.679 269.277 142.569C267.856 135.983 272.043 129.491 278.63 128.07C285.216 126.649 291.707 130.835 293.129 137.422C294.565 144.08 298.24 150.045 303.54 154.324C308.84 158.602 315.446 160.936 322.257 160.936C329.069 160.936 335.675 158.602 340.975 154.324C346.276 150.045 349.951 144.08 351.387 137.422L351.498 136.955C352.729 132.165 356.744 128.574 361.676 127.906C366.768 127.217 371.745 129.791 374.125 134.344C380.333 146.221 390.448 155.594 402.763 160.88C415.079 166.165 428.841 167.042 441.727 163.36C454.613 159.678 465.836 151.664 473.5 140.67C481.164 129.675 484.801 116.374 483.798 103.009C483.293 96.2905 488.331 90.434 495.049 89.9293Z" fill="currentColor"/><circle cx="502.161" cy="58.1744" r="14.64" fill="currentColor"/><path d="M599.761 90H624.161V190H599.761L598.661 177.6C595.928 182.067 592.294 185.7 587.761 188.5C583.294 191.233 577.994 192.6 571.861 192.6C564.461 192.6 557.528 191.2 551.061 188.4C544.594 185.6 538.894 181.733 533.961 176.8C529.094 171.867 525.261 166.167 522.461 159.7C519.728 153.233 518.361 146.3 518.361 138.9C518.361 131.767 519.661 125.067 522.261 118.8C524.928 112.533 528.628 107.033 533.361 102.3C538.094 97.5667 543.561 93.8667 549.761 91.2C555.961 88.5333 562.628 87.2 569.761 87.2C576.361 87.2 582.261 88.6667 587.461 91.6C592.728 94.5333 597.194 98.2667 600.861 102.8L599.761 90ZM571.261 169.1C576.461 169.1 581.061 167.8 585.061 165.2C589.061 162.6 592.194 159.1 594.461 154.7C596.728 150.233 597.861 145.333 597.861 140C597.861 134.6 596.728 129.7 594.461 125.3C592.194 120.833 589.028 117.3 584.961 114.7C580.961 112.1 576.394 110.8 571.261 110.8C566.128 110.8 561.428 112.133 557.161 114.8C552.961 117.4 549.594 120.9 547.061 125.3C544.594 129.7 543.361 134.6 543.361 140C543.361 145.4 544.628 150.3 547.161 154.7C549.694 159.1 553.061 162.6 557.261 165.2C561.528 167.8 566.194 169.1 571.261 169.1ZM707.219 90H733.119L678.419 240H652.519L670.619 190L634.619 90H661.319L682.819 156.6L707.219 90Z" fill="currentColor"/></g></svg></span>
-          <svg class="pj-stage" id="pjStage" aria-hidden="true">
-            <path class="pj-body" id="pjBody"/>
-            <g id="pjHead">
-              <circle class="pj-headc" r="24"/>
-              <g id="pjClosed"><rect x="-11" y="-2" width="8" height="2.5" rx="1.25"/><rect x="3" y="-2" width="8" height="2.5" rx="1.25"/></g>
-              <g id="pjOpen"><circle cx="-7" cy="-3" r="3"/><circle cx="7" cy="-3" r="3"/></g>
-              <path class="pj-mouth" id="pjMouth" d="M -8 5 c 5.33 4.67 10.67 4.67 16 0"/>
-            </g>
-            <g id="pjPix"></g>
-          </svg>
+      <a class="pj-card" href="case-resway-en.html">
+        <span class="pj-media">
+          <img src="media/resway/bild/laeufer.jpg" width="1408" height="768" loading="lazy" decoding="async" style="--pos:62% 50%" alt="A runner sitting on steps, checking ReSway on his phone.">
+          <canvas class="pj-px" aria-hidden="true"></canvas>
+          <span class="pj-top"><i class="pj-logo pj-logo-resway" aria-hidden="true"></i><span class="pj-name">ReSway</span></span>
+          <span class="pj-bottom">case 01</span>
+          <span class="pj-go" aria-hidden="true"><svg viewBox="0 0 7 7"><path d="M3 0h1v1H3zM4 1h1v1H4zM5 2h1v1H5zM0 3h7v1H0zM5 4h1v1H5zM4 5h1v1H4zM3 6h1v1H3z"/></svg></span>
         </span>
-        <span class="pj-meta"><span class="pj-name">ReSway</span><span class="pj-tags">( case 01 · ux/ui · ai )</span></span>
         <span class="pj-desc">A routine app for getting back on track after a break, without pressure.</span>
       </a>
     </li>
-
-    <!-- sync.: in Arbeit, noch ohne eigene Seite -->
     <li class="pj-item">
-      <article class="pj-card pj-sync" aria-labelledby="pjSyncName">
-        <span class="pj-media pj-film">
-          <img src="media/sync/sync-titel.jpg" width="992" height="1062" loading="lazy" decoding="async" alt="Cover image for sync.: three friends with a sparkler in a photo-booth style picture, next to calendar widgets showing a “Girls Night” event.">
-          <span class="pj-spark" aria-hidden="true"></span>
-          <span class="pj-band">
-            <span class="pj-band-l">( in progress )</span>
-            <span class="pj-band-t">First version for New Year’s Eve, built with AI.</span>
-            <span class="pj-steps">
-              <span class="pj-step done"><i aria-hidden="true"></i>concept</span>
-              <span class="pj-step done"><i aria-hidden="true"></i>prototype</span>
-              <span class="pj-step now"><i aria-hidden="true"></i>build</span>
-              <span class="pj-step"><i aria-hidden="true"></i>test</span>
-            </span>
-            <span class="sr">Status: concept and prototype done, build in progress, testing still to come.</span>
-          </span>
+      <!-- Noch in Arbeit: beim Darüberfahren oder Antippen wird das Bild unscharf, in der Mitte steht „demnächst“ mit Ladebalken -->
+      <article class="pj-card pj-soon" tabindex="0" aria-labelledby="pjSync" aria-describedby="pjSoon">
+        <span class="pj-media">
+          <img src="media/sync/sync-titel.jpg" width="992" height="1062" loading="lazy" decoding="async" style="--pos:50% 50%" alt="Cover image for sync.: three friends with a sparkler in a photo-booth style picture, next to calendar widgets showing a “Girls Night” event.">
+          <span class="pj-top"><i class="pj-logo pj-logo-sync" aria-hidden="true"></i><span class="pj-name" id="pjSync">sync.</span></span>
+          <span class="pj-bottom">in progress</span>
+          <span class="pj-veil" id="pjSoon"><span class="pj-soon-t">( coming soon )</span><span class="pj-load" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span>
         </span>
-        <span class="pj-meta"><span class="pj-name" id="pjSyncName">sync.</span><span class="pj-tags">( in progress · app · ai )</span></span>
-        <span class="pj-desc">A shared calendar for friends: see who’s meeting when, plan events, split the to-dos.</span>
+        <span class="pj-desc">A shared calendar for friends. First version for New Year’s Eve, built with AI.</span>
         <span class="pj-note">Image: AI-generated</span>
       </article>
     </li>
@@ -76,102 +56,44 @@
 <script src="pixel.js?v=43813e9c"></script>
 <script src="sound.js?v=e8028848"></script>
 <script>
-/* ReSway-Karte: Die Figur schläft. Beim Darüberfahren (oder Fokus) wacht sie auf, folgt der Maus
-   und ruckelt wie ein alter Film (12 Bilder pro Sekunde). Beim Verlassen zerfällt sie in Pixel
-   und liegt danach wieder schlafend da. Ohne Bewegung (prefers-reduced-motion) bleibt sie still. */
+/* Verpixeln beim Darüberfahren: Das Bild wird in drei schnellen Stufen gröber (wie ein Pixel-Raster).
+   Beim Verlassen verschwindet das Raster sofort, ohne Nachlauf. Mit „Bewegung reduzieren“ gibt es nur die letzte Stufe. */
 (function(){
-  const $=id=>document.getElementById(id);
-  const card=$('pjResway'), svg=$('pjStage'), body=$('pjBody'), head=$('pjHead');
-  const eOpen=$('pjOpen'), eClosed=$('pjClosed'), mouth=$('pjMouth'), pix=$('pjPix');
-  if(!card||!svg) return;
-  const media=card.querySelector('.pj-media');
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const NS='http://www.w3.org/2000/svg';
-  let W=0,H=0,GROUND=0,L=220;
-  const N=26, R=54;
-  const Hd={x:0,y:0,a:Math.PI,v:0}; let trail=[], wig=0, wigAmp=0;
-  let state='sleep', t=0, mouse=null, look={x:0,y:0}, lookT={x:0,y:0}, blinkAt=2, blinkT=-1;
-
-  function size(){ W=media.clientWidth; H=media.clientHeight; svg.setAttribute('viewBox',`0 0 ${W} ${H}`); GROUND=H*.8; L=Math.min(240,W*.5); }
-  function resetTrail(){ trail=[]; for(let i=0;i<=60;i++) trail.push({x:Hd.x-Math.cos(Hd.a)*i*L/50,y:Hd.y-Math.sin(Hd.a)*i*L/50}); }
-  function rest(){ Hd.x=W*.42; Hd.y=GROUND; Hd.a=Math.PI; Hd.v=0; wigAmp=0; resetTrail(); state='sleep'; t=0; }
-  function pushTrail(){ const t0=trail[0]; if(Math.hypot(Hd.x-t0.x,Hd.y-t0.y)>1.5) trail.unshift({x:Hd.x,y:Hd.y});
-    let len=0; for(let i=1;i<trail.length;i++){ len+=Math.hypot(trail[i].x-trail[i-1].x,trail[i].y-trail[i-1].y); if(len>L+30){trail.length=i+1;break;} } }
-  function bodyPoints(){ const sp=L/(N-1), out=[{x:Hd.x,y:Hd.y}]; let i=0, need=sp, prev=out[0];
-    while(out.length<N&&i<trail.length){ const c=trail[i]; const d=Math.hypot(c.x-prev.x,c.y-prev.y);
-      if(d>=need&&d>0){ const k=need/d; prev={x:prev.x+(c.x-prev.x)*k,y:prev.y+(c.y-prev.y)*k}; out.push(prev); need=sp; } else { need-=d; prev=c; i++; } }
-    while(out.length<N){ const a=out[out.length-1], b=out[out.length-2]||a; out.push({x:a.x+(a.x-b.x),y:a.y+(a.y-b.y)}); }
-    return out; }
-  function pathOf(p){ let d=`M${p[0].x.toFixed(1)},${p[0].y.toFixed(1)}`;
-    for(let i=0;i<p.length-1;i++){ const a=p[i-1]||p[i], b=p[i], c=p[i+1], e=p[i+2]||c;
-      d+=` C${(b.x+(c.x-a.x)/6).toFixed(1)},${(b.y+(c.y-a.y)/6).toFixed(1)} ${(c.x-(e.x-b.x)/6).toFixed(1)},${(c.y-(e.y-b.y)/6).toFixed(1)} ${c.x.toFixed(1)},${c.y.toFixed(1)}`; }
-    return d; }
-  const wrap=a=>Math.atan2(Math.sin(a),Math.cos(a));
-  function steer(tx,ty,vmax,wiggle,dt,stopDist=26){
-    const dx=tx-Hd.x, dy=ty-Hd.y, dist=Math.hypot(dx,dy);
-    const want=dist<stopDist?0:Math.min(vmax,(dist-stopDist)*3+20);
-    Hd.v+=(want-Hd.v)*Math.min(1,dt*(want<Hd.v?7:4));
-    const delta=dist<1?0:wrap(Math.atan2(dy,dx)-Hd.a), maxTurn=(Hd.v/R)*dt;
-    Hd.a+=Math.max(-maxTurn,Math.min(maxTurn,delta));
-    wigAmp+=((wiggle*Math.min(1,Hd.v/120)*Math.min(1,dist/140))-wigAmp)*Math.min(1,dt*4);
-    wig+=Hd.v*dt/34; const a=Hd.a+Math.sin(wig)*wigAmp;
-    Hd.x+=Math.cos(a)*Hd.v*dt; Hd.y+=Math.sin(a)*Hd.v*dt;
-    const m=28; Hd.x=Math.max(m,Math.min(W-m,Hd.x)); Hd.y=Math.max(m,Math.min(H-m,Hd.y));
-  }
-  function draw(){
-    body.setAttribute('d',pathOf(bodyPoints()));
-    head.setAttribute('transform',`translate(${Hd.x.toFixed(1)} ${Hd.y.toFixed(1)})`);
-    const closed=state==='sleep';
-    eClosed.style.display=closed?'':'none'; eOpen.style.display=closed?'none':'';
-    mouth.style.display=closed?'none':'';
-    eOpen.setAttribute('transform',`translate(${(look.x*2.6).toFixed(2)} ${(look.y*2.6).toFixed(2)}) scale(1 ${blinkT>=0?.15:1})`);
-  }
-  size(); rest(); draw();
-  if(window.ResizeObserver) new ResizeObserver(()=>{ size(); if(state==='sleep'){ rest(); draw(); } }).observe(media);
-  if(reduce) return;
-
-  // In Pixel zerfallen: Körper und Kopf werden zu Quadraten im 8-px-Raster, die nacheinander verschwinden
-  function dissolve(){
-    state='dissolve'; t=0; const cell=8, seen=new Set(), cells=[];
-    const addC=(x,y,kind)=>{ const k=Math.round(x/cell)+','+Math.round(y/cell); if(seen.has(k)) return; seen.add(k); cells.push([Math.round(x/cell)*cell,Math.round(y/cell)*cell,kind]); };
-    const p=bodyPoints();
-    for(let i=0;i<p.length-1;i++) for(let s=0;s<=1;s+=.25){ const x=p[i].x+(p[i+1].x-p[i].x)*s, y=p[i].y+(p[i+1].y-p[i].y)*s; addC(x,y,'b'); addC(x+6,y,'b'); addC(x,y+6,'b'); }
-    for(let dy=-24;dy<=24;dy+=cell) for(let dx=-24;dx<=24;dx+=cell) if(dx*dx+dy*dy<=26*26) addC(Hd.x+dx,Hd.y+dy,Math.hypot(dx,dy)>18?'b':'h');
-    pix.textContent='';
-    body.style.visibility='hidden'; head.style.visibility='hidden';
-    for(const [x,y,kind] of cells){
-      const r=document.createElementNS(NS,'rect'); r.setAttribute('x',x-cell/2); r.setAttribute('y',y-cell/2); r.setAttribute('width',cell); r.setAttribute('height',cell);
-      r.setAttribute('class',kind==='h'?'pj-px-h':'pj-px'); pix.appendChild(r);
-      r.animate([{opacity:1,transform:'translate(0,0)'},{opacity:0,transform:`translate(${(Math.random()-.5)*16}px,${8+Math.random()*16}px)`}],
-        {duration:420,delay:Math.random()*520,easing:'steps(3)',fill:'forwards'});
+  const STEPS=[6,11,16];
+  document.querySelectorAll('.page-projects .pj-card').forEach(card=>{
+    const img=card.querySelector('img'), cv=card.querySelector('.pj-px'), media=card.querySelector('.pj-media');
+    if(!img||!cv) return;
+    const small=document.createElement('canvas');
+    let timers=[];
+    function draw(block){
+      if(!img.complete||!img.naturalWidth) return;
+      const w=media.clientWidth, h=media.clientHeight, dpr=Math.min(devicePixelRatio||1,2);
+      cv.width=Math.round(w*dpr); cv.height=Math.round(h*dpr);
+      const iw=img.naturalWidth, ih=img.naturalHeight, s=Math.max(w/iw,h/ih), dw=iw*s, dh=ih*s;
+      const pos=(getComputedStyle(img).objectPosition||'50% 50%').split(' ').map(v=>parseFloat(v)/100);
+      const ox=(w-dw)*(isNaN(pos[0])?.5:pos[0]), oy=(h-dh)*(isNaN(pos[1])?.5:pos[1]);
+      const bw=Math.ceil(w/block), bh=Math.ceil(h/block);
+      small.width=bw; small.height=bh;
+      const sc=small.getContext('2d'); sc.imageSmoothingEnabled=true;
+      sc.drawImage(img,ox/block,oy/block,dw/block,dh/block);
+      const c=cv.getContext('2d'); c.imageSmoothingEnabled=false;
+      c.clearRect(0,0,cv.width,cv.height);
+      c.drawImage(small,0,0,bw,bh,0,0,bw*block*dpr,bh*block*dpr);
     }
-    setTimeout(()=>{ pix.textContent=''; rest(); draw(); body.style.visibility=''; head.style.visibility='';
-      svg.animate([{opacity:0},{opacity:1}],{duration:500,easing:'steps(4)'}); },1300);
-  }
-
-  card.addEventListener('pointermove',e=>{ if(e.pointerType==='touch') return; const r=media.getBoundingClientRect(); mouse={x:e.clientX-r.left,y:e.clientY-r.top}; });
-  function wake(){ if(state==='dissolve') return; card.classList.add('on'); if(state==='sleep'){ state='wake'; t=0; } }
-  function sleep(){ card.classList.remove('on'); mouse=null; if(state!=='sleep'&&state!=='dissolve') dissolve(); }
-  card.addEventListener('pointerenter',e=>{ if(e.pointerType!=='touch') wake(); });
-  card.addEventListener('pointerleave',sleep);
-  card.addEventListener('focus',wake); card.addEventListener('blur',sleep);
-
-  let last=performance.now(), acc=0;
-  function loop(now){
-    const dt=Math.min(.05,(now-last)/1000); last=now; t+=dt;
-    if(state!=='sleep'&&state!=='dissolve'){
-      const fx=Math.cos(Hd.a), fy=Math.sin(Hd.a);
-      if(state==='wake'){ steer(Hd.x,Hd.y-10,40,0,dt); lookT={x:0,y:-.6}; if(t>.35) state='move'; }
-      else if(mouse){ steer(mouse.x,mouse.y,420,.45,dt,30); const dx=mouse.x-Hd.x, dy=mouse.y-Hd.y, m=Math.hypot(dx,dy)||1; lookT={x:dx/m,y:dy/m}; }
-      else { const tx=W*.5+Math.cos(t*.9)*W*.28, ty=H*.6+Math.sin(t*1.3)*H*.14; steer(tx,ty,160,.5,dt,10); lookT={x:fx,y:fy}; }
-      pushTrail();
-      blinkAt-=dt; if(blinkAt<=0){ blinkT=0; blinkAt=2+Math.random()*3; } if(blinkT>=0){ blinkT+=dt; if(blinkT>.12) blinkT=-1; }
-      look.x+=(lookT.x-look.x)*Math.min(1,dt*10); look.y+=(lookT.y-look.y)*Math.min(1,dt*10);
-      acc+=dt; if(acc>=1/12){ acc=0; draw(); }        // alter Film: nur 12 Bilder pro Sekunde
+    function on(){
+      timers.forEach(clearTimeout); timers=[];
+      card.classList.add('px-on');
+      if(reduce){ draw(STEPS[STEPS.length-1]); return; }
+      STEPS.forEach((b,i)=>timers.push(setTimeout(()=>draw(b),i*70)));
     }
-    requestAnimationFrame(loop);
-  }
-  requestAnimationFrame(loop);
+    function off(){ timers.forEach(clearTimeout); timers=[]; card.classList.remove('px-on'); }
+    card.addEventListener('pointerenter',e=>{ if(e.pointerType!=='touch') on(); });
+    card.addEventListener('pointerleave',off);
+    if(card.matches('a')){ card.addEventListener('focus',on); card.addEventListener('blur',off); }
+  });
+  // „Demnächst“-Karte: auf dem Handy per Antippen ein- und ausblenden
+  document.querySelectorAll('.page-projects .pj-soon').forEach(c=>c.addEventListener('click',()=>c.classList.toggle('soon-on')));
 })();
 </script>
 </body>
