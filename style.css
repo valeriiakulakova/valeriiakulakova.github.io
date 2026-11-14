@@ -72,6 +72,18 @@ body.page-about{
   --entry-gap:clamp(22vh,28vh,36vh);
   color-scheme:light;
 }
+body.page-projects{
+  /* Projektkarten: Lime und Tinte aus dem ReSway-Designsystem, dunkles Band wie alte Filmtitel */
+  --pj-lime:#edff8c;
+  --pj-ink:#303030;
+  --pj-head:#f7f7f7;
+  --pj-band-bg:rgba(14,15,18,.86);
+  --pj-band-text:#eceae6;
+  --pj-band-muted:#b9bbc1;          /* auf dem Band ca. 9:1 */
+  --pj-spark:rgba(255,196,110,.75);
+  --pj-vignette:rgba(14,15,18,.55);
+  --pj-scratch:rgba(255,255,255,.16);
+}
 body.page-case{
   /* Der Case nutzt das Designsystem von ReSway (Figma · Designsystem) */
   --rs-ink:#303030;
@@ -346,6 +358,79 @@ body.page-about header{background:var(--color-bg);padding:6px var(--gutter)}
 body.page-about header nav{gap:0;font-size:.68rem}
 body.page-about header nav a,body.page-about header nav .sound{padding:0 1px}
 body.page-about .cv,body.page-about .contact{background:none}
+}
+
+/* ---------- 4a · Projekte: Liste der Projekte, beim Darüberfahren läuft ein alter Film ---------- */
+body.page-projects main{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:clamp(96px,14vh,140px) var(--gutter) var(--space-5)}
+body.page-projects .pj-head{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--space-3);flex-wrap:wrap;margin-bottom:var(--space-4)}
+body.page-projects .pj-head h1{height:clamp(44px,7.5vw,104px);line-height:0}
+body.page-projects .pj-sub{font-family:var(--font-mono);font-size:.9rem;color:var(--color-muted);max-width:32ch;text-align:right}
+body.page-projects .pj-grid{list-style:none;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(32px,4vw,56px)}
+body.page-projects .pj-card{display:flex;flex-direction:column;color:var(--color-text);text-decoration:none}
+body.page-projects a.pj-card:focus-visible{outline:none}
+body.page-projects a.pj-card:focus-visible .pj-media{outline:3px solid var(--color-focus);outline-offset:4px}
+body.page-projects .pj-media{position:relative;display:block;aspect-ratio:992/1062;border-radius:var(--radius-m);overflow:hidden;isolation:isolate}
+body.page-projects .pj-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+/* Filmkorn liegt immer leicht auf der Fläche, beim Darüberfahren stärker */
+body.page-projects .pj-film::after{content:"";position:absolute;inset:-20%;z-index:3;pointer-events:none;background-image:var(--grain);opacity:.28;mix-blend-mode:multiply}
+body.page-projects .pj-film::before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0;box-shadow:inset 0 0 120px var(--pj-vignette);
+  background:repeating-linear-gradient(90deg,transparent 0 37%,var(--pj-scratch) 37% 37.25%,transparent 37.25% 71%,var(--pj-scratch) 71% 71.15%,transparent 71.15% 100%)}
+body.page-projects .pj-meta{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-top:16px}
+body.page-projects .pj-name{font-size:clamp(1.6rem,2.4vw,2.3rem);font-weight:500;letter-spacing:-.02em;line-height:1.1}
+body.page-projects .pj-tags{font-family:var(--font-mono);font-size:.85rem;color:var(--color-muted)}
+body.page-projects .pj-desc{margin-top:6px;max-width:46ch;font-size:var(--text-body)}
+body.page-projects .pj-note{margin-top:6px;font-family:var(--font-mono);font-size:.75rem;color:var(--color-muted)}
+body.page-projects a.pj-card:hover .pj-name{text-decoration:underline;text-underline-offset:6px}
+/* ReSway: Lime-Fläche mit Wortmarke und Figur */
+body.page-projects .pj-resway .pj-media{background:var(--pj-lime)}
+body.page-projects .pj-wm{position:absolute;left:6%;top:6%;width:46%;z-index:1;color:var(--pj-ink);line-height:0}
+body.page-projects .pj-wm svg{width:100%;height:auto;display:block}
+body.page-projects .pj-stage{position:absolute;inset:0;width:100%;height:100%;z-index:2;overflow:visible}
+body.page-projects .pj-body{fill:none;stroke:var(--pj-ink);stroke-width:16;stroke-linecap:round;stroke-linejoin:round}
+body.page-projects .pj-headc{fill:var(--pj-head);stroke:var(--pj-ink);stroke-width:5}
+body.page-projects #pjClosed rect,body.page-projects #pjOpen circle{fill:var(--pj-ink)}
+body.page-projects .pj-mouth{fill:none;stroke:var(--pj-ink);stroke-width:2.5;stroke-linecap:round}
+body.page-projects .pj-px{fill:var(--pj-ink)}
+body.page-projects .pj-px-h{fill:var(--pj-head);stroke:var(--pj-ink);stroke-width:1}
+/* sync.: Bild, Funkenschein der Wunderkerze, Band mit Stand */
+body.page-projects .pj-spark{position:absolute;left:57%;top:72%;width:22%;aspect-ratio:1;translate:-50% -50%;z-index:2;pointer-events:none;border-radius:50%;
+  background:radial-gradient(circle,var(--pj-spark) 0%,transparent 65%);mix-blend-mode:screen;opacity:0}
+body.page-projects .pj-band{position:absolute;left:12px;right:12px;bottom:12px;z-index:4;display:flex;flex-direction:column;gap:6px;padding:14px 16px;border-radius:12px;
+  background:var(--pj-band-bg);color:var(--pj-band-text);font-family:var(--font-mono);font-size:.82rem;line-height:1.4;
+  transform:translateY(calc(100% + 16px));transition:transform .45s var(--ease)}
+body.page-projects .pj-band-l{color:var(--pj-band-muted)}
+body.page-projects .pj-band-t{font-family:var(--font-sans);font-size:1rem}
+body.page-projects .pj-steps{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:4px;color:var(--pj-band-muted)}
+body.page-projects .pj-step{display:inline-flex;align-items:center;gap:6px}
+body.page-projects .pj-step i{width:10px;height:10px;border:1.5px solid var(--pj-band-text)}
+body.page-projects .pj-step.done{color:var(--pj-band-text)}
+body.page-projects .pj-step.done i{background:var(--pj-band-text)}
+body.page-projects .pj-step.now{color:var(--pj-band-text)}
+body.page-projects .pj-step.now i{background:var(--color-accent);border-color:var(--color-accent)}
+body.page-projects .pj-sync:hover .pj-band,body.page-projects .pj-sync:focus-within .pj-band{transform:none}
+/* Alter Film: Flackern, Wackeln, Kratzer, stärkeres Korn (nur mit Maus und ohne „Bewegung reduzieren“) */
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  body.page-projects .pj-resway.on .pj-film,body.page-projects .pj-sync:hover .pj-film{animation:pj-flicker .18s steps(2) infinite}
+  body.page-projects .pj-resway.on .pj-film::after,body.page-projects .pj-sync:hover .pj-film::after{opacity:.5;animation:pj-grain .25s steps(3) infinite}
+  body.page-projects .pj-resway.on .pj-film::before,body.page-projects .pj-sync:hover .pj-film::before{opacity:1;animation:pj-scratch .5s steps(4) infinite}
+  body.page-projects .pj-sync:hover img{animation:pj-jitter .33s steps(4) infinite}
+  body.page-projects .pj-sync:hover .pj-spark{animation:pj-spark .2s steps(3) infinite}
+  body.page-projects .pj-step.now i{animation:pj-blink 1s steps(2) infinite}
+}
+@keyframes pj-flicker{0%{filter:brightness(1) contrast(1)}50%{filter:brightness(1.07) contrast(1.08)}}
+@keyframes pj-grain{0%{transform:translate(0,0)}33%{transform:translate(-4%,3%)}66%{transform:translate(3%,-5%)}}
+@keyframes pj-scratch{0%{background-position:0 0}25%{background-position:12% 0}50%{background-position:-7% 0}75%{background-position:21% 0}}
+@keyframes pj-jitter{0%{transform:translate(0,0) scale(1.02)}25%{transform:translate(1px,-1px) scale(1.02)}50%{transform:translate(-1px,1px) scale(1.02)}75%{transform:translate(0,1px) scale(1.02)}}
+@keyframes pj-spark{0%{opacity:.35}50%{opacity:.85}}
+@keyframes pj-blink{0%{opacity:1}50%{opacity:.25}}
+/* Ohne Maus (Handy, Tablet): Band mit Stand ist immer sichtbar */
+@media (hover:none){
+  body.page-projects .pj-band{transform:none;padding:10px 12px;font-size:.75rem}
+  body.page-projects .pj-band-t{display:none}   /* der Satz steht ohnehin unter dem Bild; das Band verdeckt sonst die Gesichter */
+}
+@media (max-width:760px){
+  body.page-projects .pj-grid{grid-template-columns:1fr}
+  body.page-projects .pj-sub{text-align:left}
 }
 
 /* ---------- 4b · Kontakt: „HIRE ME“ in der Mitte, Linien zu den Kontaktwegen ---------- */
